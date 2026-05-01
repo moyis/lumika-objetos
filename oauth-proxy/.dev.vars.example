@@ -1,0 +1,4 @@
+OAUTH_CLIENT_ID=your_github_oauth_app_client_id
+OAUTH_CLIENT_SECRET=your_github_oauth_app_client_secret
+STATE_SECRET=generate_a_long_random_string_here
+ALLOWED_ORIGIN=https://yoursite.com
