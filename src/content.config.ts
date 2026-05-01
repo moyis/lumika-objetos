@@ -13,13 +13,7 @@ const products = defineCollection({
       currency: z.literal('ARS'),
       stock: z.number().int().nonnegative().default(0),
       featured: z.boolean().default(false),
-      images: z
-        .array(
-          z.object({
-            image: image(),
-          }),
-        )
-        .default([]),
+      images: z.array(image()).default([]),
       date: z.coerce.date(),
     }),
 });
