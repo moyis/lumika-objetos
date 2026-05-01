@@ -23,7 +23,7 @@ collections:
         pattern: true
       - label: Out of stock
         field: stock
-        pattern: 0
+        pattern: "^0$"
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Slug, name: slug, widget: string, hint: "URL segment, lowercase, dashes" }
