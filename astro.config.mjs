@@ -21,7 +21,7 @@ export default defineConfig({
       PUBLIC_INSTAGRAM_HANDLE: envField.string({
         context: 'client',
         access: 'public',
-        default: 'lumikaobjetos',
+        default: 'lumika.objetos',
       }),
       PUBLIC_CONTACT_EMAIL: envField.string({
         context: 'client',
@@ -30,5 +30,5 @@ export default defineConfig({
       }),
     },
   },
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: 'custom', prerenderEnvironment: 'node' }),
 });
