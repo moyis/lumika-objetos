@@ -1,0 +1,93 @@
+---
+import { PRODUCT_TAGS } from '../lib/productTags';
+
+const labels: Record<string, string> = {
+  velas: 'Velas',
+  resina: 'Resina',
+  nuevo: 'Nuevo',
+  'edicion-limitada': 'Edición limitada',
+};
+---
+<div
+  data-tag-chips
+  class="sticky top-[65px] z-30 bg-[var(--color-cream)] border-b-2 border-[var(--color-ink)] py-3"
+>
+  <div class="max-w-[1400px] mx-auto px-5 flex gap-2 overflow-x-auto">
+    <button
+      type="button"
+      data-tag="__all"
+      class="chip border-2 border-[var(--color-ink)] rounded-full px-4 py-1.5 label whitespace-nowrap"
+    >Todo</button>
+    {PRODUCT_TAGS.map((tag) => (
+      <button
+        type="button"
+        data-tag={tag}
+        class="chip border-2 border-[var(--color-ink)] rounded-full px-4 py-1.5 label whitespace-nowrap"
+      >{labels[tag]}</button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .chip[data-active="true"] {
+    background: var(--color-ink);
+    color: var(--color-cream);
+  }
+</style>
+
+<script>
+  type TagState = Set<string>;
+
+  function readTagsFromUrl(): TagState {
+    const params = new URLSearchParams(window.location.search);
+    return new Set(params.getAll('tag'));
+  }
+
+  function writeTagsToUrl(tags: TagState) {
+    const params = new URLSearchParams();
+    [...tags].forEach((t) => params.append('tag', t));
+    const qs = params.toString();
+    const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+    history.replaceState({}, '', url);
+  }
+
+  function applyFilter(tags: TagState) {
+    const cards = document.querySelectorAll<HTMLElement>('[data-product-tags]');
+    cards.forEach((card) => {
+      const cardTags = (card.dataset.productTags ?? '').split(',').filter(Boolean);
+      const visible = tags.size === 0 || [...tags].every((t) => cardTags.includes(t));
+      card.style.display = visible ? '' : 'none';
+    });
+    const empty = document.querySelector<HTMLElement>('[data-empty-state]');
+    if (empty) {
+      const anyVisible = [...cards].some((c) => c.style.display !== 'none');
+      empty.style.display = anyVisible ? 'none' : '';
+    }
+    document.querySelectorAll<HTMLElement>('.chip').forEach((btn) => {
+      const t = btn.dataset.tag ?? '';
+      btn.dataset.active = String(t === '__all' ? tags.size === 0 : tags.has(t));
+    });
+  }
+
+  function setup() {
+    const tags = readTagsFromUrl();
+    applyFilter(tags);
+    document.querySelectorAll<HTMLElement>('.chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const t = btn.dataset.tag ?? '';
+        if (t === '__all') {
+          tags.clear();
+        } else if (tags.has(t)) {
+          tags.delete(t);
+        } else {
+          tags.add(t);
+        }
+        writeTagsToUrl(tags);
+        applyFilter(tags);
+      });
+    });
+  }
+
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>

@@ -1,0 +1,29 @@
+---
+interface Props {
+  items: string[];
+  speedSeconds?: number;
+}
+const { items, speedSeconds = 30 } = Astro.props;
+const looped = [...items, ...items];
+---
+<div class="marquee w-full overflow-hidden bg-[var(--color-ink)] text-[var(--color-cream)] py-3 border-y-2 border-[var(--color-ink)]">
+  <div
+    class="marquee-track flex gap-12 whitespace-nowrap label"
+    style={`animation: lk-marquee ${speedSeconds}s linear infinite;`}
+  >
+    {looped.map((item) => (
+      <span class="shrink-0">{item}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  @keyframes lk-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    width: max-content;
+    padding-left: 3rem;
+  }
+</style>

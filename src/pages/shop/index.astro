@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import TagChips from '../../components/TagChips.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import { sortProducts } from '../../lib/filterProducts';
+
+const all = await getCollection('products');
+const sorted = sortProducts(all);
+---
+<Layout title="Tienda">
+  <section class="max-w-[1400px] mx-auto px-5 pt-10 pb-6">
+    <span class="label">Tienda · {sorted.length} {sorted.length === 1 ? 'pieza' : 'piezas'}</span>
+    <h1 class="display-2 mt-4">Todos los objetos.</h1>
+  </section>
+
+  <TagChips />
+
+  <section class="max-w-[1400px] mx-auto px-5 py-10">
+    <ProductGrid products={sorted} cols={4} />
+  </section>
+</Layout>

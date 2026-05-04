@@ -1,0 +1,75 @@
+---
+import Wordmark from './Wordmark.astro';
+import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
+import { whatsappLink, instagramLink } from '../lib/buyLinks';
+
+const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
+const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
+---
+<div
+  data-mobile-menu
+  class="fixed inset-0 z-50 bg-[var(--color-cream)] hidden flex-col p-6"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú principal"
+>
+  <div class="flex items-center justify-between mb-12">
+    <Wordmark size="sm" />
+    <button
+      type="button"
+      class="p-2 label"
+      aria-label="Cerrar menú"
+      data-mobile-menu-close
+    >Cerrar ✕</button>
+  </div>
+
+  <nav class="flex flex-col gap-6 text-5xl font-[var(--font-display)] leading-none">
+    <a href="/" data-mobile-menu-link>Inicio</a>
+    <a href="/shop" data-mobile-menu-link>Tienda</a>
+    <a href="/about" data-mobile-menu-link>Sobre</a>
+    <a href="/contact" data-mobile-menu-link>Contacto</a>
+  </nav>
+
+  <div class="mt-auto pt-12 border-t-2 border-[var(--color-ink)]">
+    <div class="flex gap-3 mb-4">
+      <span class="block w-6 h-6 rounded-full bg-[var(--color-pink)]"></span>
+      <span class="block w-6 h-6 rounded-full bg-[var(--color-blue)]"></span>
+      <span class="block w-6 h-6 rounded-full bg-[var(--color-blush)]"></span>
+    </div>
+    <div class="flex gap-4 label">
+      <a href={wa} target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href={ig} target="_blank" rel="noopener">Instagram ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setup() {
+    const menu = document.querySelector('[data-mobile-menu]') as HTMLElement | null;
+    const trigger = document.querySelector('[data-mobile-menu-trigger]');
+    const closeBtn = document.querySelector('[data-mobile-menu-close]');
+    const links = document.querySelectorAll('[data-mobile-menu-link]');
+    if (!menu || !trigger || !closeBtn) return;
+
+    const open = () => {
+      menu.classList.remove('hidden');
+      menu.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    };
+    const close = () => {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    links.forEach((l) => l.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) close();
+    });
+  }
+
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>

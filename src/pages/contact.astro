@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER, PUBLIC_CONTACT_EMAIL } from 'astro:env/client';
+import { whatsappLink, instagramLink, emailLink } from '../lib/buyLinks';
+
+const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
+const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
+const mail = emailLink(PUBLIC_CONTACT_EMAIL);
+---
+<Layout title="Contacto">
+  <section class="max-w-[1400px] mx-auto px-5 py-16">
+    <span class="label">Contacto</span>
+    <h1 class="display-1 mt-6">Hablemos.</h1>
+
+    <div class="grid gap-5 md:grid-cols-3 mt-12">
+      <a
+        href={wa}
+        target="_blank"
+        rel="noopener"
+        class="block rounded-xl bg-[var(--color-blue)] text-[var(--color-cream)] p-8 hover:opacity-90 transition-opacity"
+      >
+        <div class="label opacity-80">Más rápido</div>
+        <div class="display-2 mt-2">WhatsApp</div>
+        <div class="mt-6 label opacity-80">Abrir chat ↗</div>
+      </a>
+
+      <a
+        href={ig}
+        target="_blank"
+        rel="noopener"
+        class="block rounded-xl bg-[var(--color-pink)] text-[var(--color-cream)] p-8 hover:opacity-90 transition-opacity"
+      >
+        <div class="label opacity-80">Stories y novedades</div>
+        <div class="display-2 mt-2">Instagram</div>
+        <div class="mt-6 label opacity-80">@{PUBLIC_INSTAGRAM_HANDLE} ↗</div>
+      </a>
+
+      <a
+        href={mail}
+        class="block rounded-xl bg-[var(--color-blush)] text-[var(--color-ink)] p-8 hover:opacity-90 transition-opacity"
+      >
+        <div class="label opacity-80">Pedidos largos</div>
+        <div class="display-2 mt-2">Email</div>
+        <div class="mt-6 label opacity-80">{PUBLIC_CONTACT_EMAIL} ↗</div>
+      </a>
+    </div>
+
+    <div class="mt-16 max-w-[60ch]">
+      <h2 class="h2">¿Querés algo único en resina?</h2>
+      <p class="mt-4 text-lg leading-relaxed">
+        Escribinos por WhatsApp con la idea — colores, medidas, referencias. Te
+        decimos si es viable y te pasamos un presupuesto antes de empezar.
+      </p>
+    </div>
+  </section>
+</Layout>

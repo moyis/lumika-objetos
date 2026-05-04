@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import PriceDisplay from './PriceDisplay.astro';
+
+interface Props {
+  product: CollectionEntry<'products'>;
+}
+const { product } = Astro.props;
+const { title, slug, subtitle, price, stock, tags, images } = product.data;
+const cover = images[0];
+const soldOut = stock === 0;
+---
+<a
+  href={`/shop/${slug}`}
+  data-product-tags={tags.join(',')}
+  class="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] rounded-md"
+>
+  <div class="relative aspect-[4/5] overflow-hidden rounded-md bg-[var(--color-blush)]">
+    {cover && (
+      <Image
+        src={cover}
+        alt={title}
+        widths={[400, 800, 1200]}
+        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+        class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+        loading="lazy"
+      />
+    )}
+    {soldOut && (
+      <span class="absolute top-3 left-3 bg-[var(--color-ink)] text-[var(--color-cream)] label px-2 py-1 rounded">
+        Agotado
+      </span>
+    )}
+  </div>
+  <div class="pt-3">
+    <h3 class="text-lg leading-tight font-[var(--font-display)] wavy-underline inline">{title}</h3>
+    {subtitle && <p class="label opacity-70 mt-1">{subtitle}</p>}
+    <p class="mt-1.5"><PriceDisplay value={price} size="sm" /></p>
+  </div>
+</a>

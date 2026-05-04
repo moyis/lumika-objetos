@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  images: ImageMetadata[];
+  alt: string;
+}
+const { images, alt } = Astro.props;
+const [hero, ...rest] = images;
+---
+{hero && (
+  <div class="space-y-4">
+    <Image
+      src={hero}
+      alt={alt}
+      widths={[800, 1200, 2000]}
+      sizes="(min-width: 1024px) 60vw, 100vw"
+      class="w-full aspect-[4/5] object-cover rounded-md"
+    />
+    {rest.length > 0 && (
+      <div class="grid grid-cols-2 gap-4">
+        {rest.map((img, i) => (
+          <Image
+            src={img}
+            alt={`${alt} — vista ${i + 2}`}
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 30vw, 50vw"
+            class="w-full aspect-square object-cover rounded-md"
+            loading="lazy"
+          />
+        ))}
+      </div>
+    )}
+  </div>
+)}

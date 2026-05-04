@@ -1,0 +1,17 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { size = 'md', class: className = '' } = Astro.props;
+const sizes = {
+  sm: 'text-base',
+  md: 'text-xl',
+  lg: 'text-3xl',
+};
+---
+<a href="/" aria-label="Lumika Objetos — Inicio" class={`block ${className}`}>
+  <span class={`${sizes[size]} font-[var(--font-display)] tracking-tight leading-none`}>
+    Lumika Objetos
+  </span>
+</a>

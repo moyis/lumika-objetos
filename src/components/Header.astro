@@ -1,0 +1,44 @@
+---
+import Wordmark from './Wordmark.astro';
+import MobileMenu from './MobileMenu.astro';
+import { PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
+
+const navLinks = [
+  { href: '/shop', label: 'Tienda' },
+  { href: '/about', label: 'Sobre' },
+  { href: '/contact', label: 'Contacto' },
+];
+---
+<header class="sticky top-0 z-40 bg-[var(--color-cream)] border-b-2 border-[var(--color-ink)]">
+  <div class="max-w-[1400px] mx-auto flex items-center justify-between px-5 py-4">
+    <Wordmark size="md" />
+
+    <nav class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="label hover:text-[var(--color-blue)] transition-colors"
+        >{link.label}</a>
+      ))}
+      <a
+        href={`https://instagram.com/${PUBLIC_INSTAGRAM_HANDLE}`}
+        target="_blank"
+        rel="noopener"
+        class="label hover:text-[var(--color-pink)] transition-colors"
+      >IG ↗</a>
+    </nav>
+
+    <button
+      type="button"
+      class="md:hidden inline-flex flex-col gap-1.5 p-2"
+      aria-label="Abrir menú"
+      data-mobile-menu-trigger
+    >
+      <span class="w-6 h-0.5 bg-[var(--color-ink)]"></span>
+      <span class="w-6 h-0.5 bg-[var(--color-ink)]"></span>
+      <span class="w-6 h-0.5 bg-[var(--color-ink)]"></span>
+    </button>
+  </div>
+</header>
+
+<MobileMenu />

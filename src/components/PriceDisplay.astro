@@ -1,0 +1,16 @@
+---
+import { formatPrice } from '../lib/formatPrice';
+
+interface Props {
+  value: number;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { value, size = 'md', class: className = '' } = Astro.props;
+const sizes = {
+  sm: 'text-sm font-medium',
+  md: 'text-base font-semibold',
+  lg: 'text-2xl font-bold',
+};
+---
+<span class={`${sizes[size]} tabular-nums ${className}`}>{formatPrice(value)}</span>

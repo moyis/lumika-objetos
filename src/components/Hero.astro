@@ -1,0 +1,33 @@
+---
+const year = new Date().getFullYear();
+---
+<section class="relative border-b-2 border-[var(--color-ink)]">
+  <div class="max-w-[1400px] mx-auto px-5 py-10 md:py-16">
+    <div class="flex justify-between label">
+      <span>Vol. 01 · {year}</span>
+      <span>Buenos Aires</span>
+    </div>
+
+    <h1 class="display-1 mt-8 md:mt-12">
+      Velas <em class="italic text-[var(--color-blue)]">+</em><br />
+      <span class="wavy-underline">resina</span>.
+    </h1>
+
+    <p class="mt-8 max-w-[44ch] text-base md:text-lg leading-relaxed">
+      Objetos hechos a mano, en ediciones chicas. Velas de soja, accesorios de resina,
+      piezas únicas pensadas y vertidas en Buenos Aires.
+    </p>
+
+    <div class="mt-8 flex items-center gap-4">
+      <a
+        href="/shop"
+        class="inline-flex items-center gap-2 rounded-full bg-[var(--color-blue)] text-[var(--color-cream)] px-6 py-3 font-semibold tracking-wide hover:opacity-90 transition-opacity"
+      >Ver tienda →</a>
+      <div class="hidden md:flex gap-2">
+        <span class="block w-6 h-6 rounded-full bg-[var(--color-pink)]"></span>
+        <span class="block w-6 h-6 rounded-full bg-[var(--color-blue)]"></span>
+        <span class="block w-6 h-6 rounded-full bg-[var(--color-blush)]"></span>
+      </div>
+    </div>
+  </div>
+</section>

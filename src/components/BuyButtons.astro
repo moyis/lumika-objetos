@@ -1,0 +1,34 @@
+---
+import { PUBLIC_WHATSAPP_NUMBER, PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
+import { whatsappLink, instagramLink } from '../lib/buyLinks';
+
+interface Props {
+  productTitle: string;
+  disabled?: boolean;
+}
+const { productTitle, disabled = false } = Astro.props;
+const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, productTitle);
+const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
+---
+<div class="flex flex-col sm:flex-row gap-3 mt-6">
+  <a
+    href={disabled ? undefined : wa}
+    aria-disabled={disabled}
+    rel="noopener"
+    target="_blank"
+    class={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold tracking-wide
+      ${disabled
+        ? 'bg-[var(--color-ink)]/30 text-[var(--color-cream)] cursor-not-allowed pointer-events-none'
+        : 'bg-[var(--color-blue)] text-[var(--color-cream)] hover:opacity-90 transition-opacity'}`}
+  >
+    {disabled ? 'Agotado' : 'Pedir por WhatsApp'}
+  </a>
+  <a
+    href={ig}
+    rel="noopener"
+    target="_blank"
+    class="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold tracking-wide border-2 border-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
+  >
+    Instagram
+  </a>
+</div>

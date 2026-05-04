@@ -1,0 +1,58 @@
+---
+import Marquee from './Marquee.astro';
+import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
+import { whatsappLink, instagramLink } from '../lib/buyLinks';
+
+const year = new Date().getFullYear();
+const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
+const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
+---
+<Marquee
+  items={[
+    '★ HECHO A MANO',
+    '★ SOY 100%',
+    '★ RESINA',
+    '★ BUENOS AIRES',
+  ]}
+/>
+
+<footer class="bg-[var(--color-ink)] text-[var(--color-cream)]">
+  <div class="max-w-[1400px] mx-auto px-5 py-12 grid gap-10 md:grid-cols-4">
+    <div>
+      <div class="text-2xl font-[var(--font-display)] leading-none">Lumika Objetos</div>
+      <p class="text-sm mt-3 opacity-80 max-w-[24ch]">Velas de soja y accesorios de resina, hechos a mano.</p>
+    </div>
+
+    <div>
+      <h4 class="label mb-3">Tienda</h4>
+      <ul class="flex flex-col gap-2 text-sm">
+        <li><a href="/shop">Todos los objetos</a></li>
+        <li><a href="/shop?tag=velas">Velas</a></li>
+        <li><a href="/shop?tag=resina">Resina</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="label mb-3">Lumika</h4>
+      <ul class="flex flex-col gap-2 text-sm">
+        <li><a href="/about">Sobre nosotros</a></li>
+        <li><a href="/contact">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="label mb-3">Seguinos</h4>
+      <ul class="flex flex-col gap-2 text-sm">
+        <li><a href={ig} target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a href={wa} target="_blank" rel="noopener">WhatsApp ↗</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-[var(--color-cream)]/20">
+    <div class="max-w-[1400px] mx-auto px-5 py-4 label opacity-70 flex justify-between">
+      <span>© {year} Lumika Objetos</span>
+      <span>Buenos Aires</span>
+    </div>
+  </div>
+</footer>
