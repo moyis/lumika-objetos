@@ -1,17 +1,24 @@
 ---
+import WordmarkBlue from '../assets/logos/wordmark-blue.svg';
 interface Props {
   size?: 'sm' | 'md' | 'lg';
   class?: string;
+  color?: string;
 }
-const { size = 'md', class: className = '' } = Astro.props;
-const sizes = {
-  sm: 'text-base',
-  md: 'text-xl',
-  lg: 'text-3xl',
+const { size = 'md', class: className = '', color } = Astro.props;
+const heights = {
+  sm: 'h-6',
+  md: 'h-10',
+  lg: 'h-14',
 };
+const style = color ? `--c-1: ${color};` : undefined;
 ---
+
 <a href="/" aria-label="Lumika Objetos — Inicio" class={`block ${className}`}>
-  <span class={`${sizes[size]} font-[var(--font-display)] tracking-tight leading-none`}>
-    Lumika Objetos
-  </span>
+  <WordmarkBlue
+    role="img"
+    aria-label="Lumika Objetos"
+    class={`${heights[size]} w-auto`}
+    style={style}
+  />
 </a>

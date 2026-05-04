@@ -1,0 +1,28 @@
+---
+import IsotypePink from '../assets/logos/isotype-pink.svg';
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  color?: string;
+  secondary?: string;
+}
+const { size = 'md', class: className = '', color, secondary } = Astro.props;
+const heights = {
+  sm: 'h-8',
+  md: 'h-12',
+  lg: 'h-16',
+};
+const styleParts: string[] = [];
+if (color) styleParts.push(`--c-1: ${color}`);
+if (secondary) styleParts.push(`--c-2: ${secondary}`);
+const style = styleParts.length ? styleParts.join('; ') + ';' : undefined;
+---
+
+<a href="/" aria-label="Lumika Objetos — Inicio" class={`block ${className}`}>
+  <IsotypePink
+    role="img"
+    aria-label="Lumika Objetos"
+    class={`${heights[size]} w-auto`}
+    style={style}
+  />
+</a>

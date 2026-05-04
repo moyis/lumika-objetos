@@ -16,10 +16,11 @@ interface Props {
 }
 const {
   title,
-  description = 'Velas de soja y accesorios de resina, hechos a mano en Buenos Aires.',
+  description = 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
 } = Astro.props;
 const fullTitle = title === 'Lumika Objetos' ? title : `${title} · Lumika Objetos`;
 ---
+
 <!doctype html>
 <html lang="es-AR">
   <head>
@@ -31,7 +32,7 @@ const fullTitle = title === 'Lumika Objetos' ? title : `${title} · Lumika Objet
     <title>{fullTitle}</title>
     <ClientRouter />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="flex min-h-screen flex-col">
     <Header />
     <main class="flex-1">
       <slot />

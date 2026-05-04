@@ -1,1 +1,77 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0a0a0a;
+  --color-cream: #fff8d9;
+  --color-blue: #2f5bff;
+  --color-pink: #ff4fb4;
+  --color-blush: #f6c7d1;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .wavy-underline {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 10' preserveAspectRatio='none'><path d='M0 5 Q 4 0 8 5 T 16 5 T 24 5 T 32 5' fill='none' stroke='%23ff4fb4' stroke-width='1.4' stroke-linecap='round'/></svg>");
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+    background-size: 0.6em 0.14em;
+    padding-bottom: 0;
+    text-decoration: none;
+  }
+  .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+  .display-1 {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 12vw, 168px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+  .display-2 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  .h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}

@@ -13,12 +13,17 @@ const gridClass = {
   4: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
 }[cols];
 ---
+
 <div data-empty-state class="py-24 text-center" style={products.length === 0 ? '' : 'display:none'}>
   <p class="text-3xl font-[var(--font-display)]">Nada acá todavía.</p>
-  <a href="/shop" class="label inline-block mt-4 underline">Limpiar filtros</a>
+  <a href="/shop" class="label mt-4 inline-block underline">Limpiar filtros</a>
 </div>
-{products.length > 0 && (
-  <div class={`grid ${gridClass} gap-6 md:gap-10`}>
-    {products.map((p) => <ProductCard product={p} />)}
-  </div>
-)}
+{
+  products.length > 0 && (
+    <div class={`grid ${gridClass} gap-6 md:gap-10`}>
+      {products.map((p) => (
+        <ProductCard product={p} />
+      ))}
+    </div>
+  )
+}

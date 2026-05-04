@@ -1,42 +1,48 @@
 ---
-import Wordmark from './Wordmark.astro';
+import Isotype from './Isotype.astro';
 import MobileMenu from './MobileMenu.astro';
-import { PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
+import { PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
+import { whatsappLink } from '../lib/buyLinks';
 
 const navLinks = [
   { href: '/shop', label: 'Tienda' },
-  { href: '/about', label: 'Sobre' },
+  { href: '/about', label: 'Sobre nosotras' },
   { href: '/contact', label: 'Contacto' },
 ];
----
-<header class="sticky top-0 z-40 bg-[var(--color-cream)] border-b-2 border-[var(--color-ink)]">
-  <div class="max-w-[1400px] mx-auto flex items-center justify-between px-5 py-4">
-    <Wordmark size="md" />
 
-    <nav class="hidden md:flex items-center gap-8">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="label hover:text-[var(--color-blue)] transition-colors"
-        >{link.label}</a>
-      ))}
+const customOrderWa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'una pieza a medida');
+---
+
+<header class="sticky top-0 z-40 border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
+  <div class="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4">
+    <Isotype size="lg" />
+
+    <nav class="hidden items-center gap-8 md:flex">
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="label transition-colors hover:text-[var(--color-blue)]">
+            {link.label}
+          </a>
+        ))
+      }
       <a
-        href={`https://instagram.com/${PUBLIC_INSTAGRAM_HANDLE}`}
+        href={customOrderWa}
         target="_blank"
         rel="noopener"
-        class="label hover:text-[var(--color-pink)] transition-colors"
-      >IG ↗</a>
+        class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--color-ink)] px-5 py-2 font-semibold tracking-wide text-[var(--color-ink)] transition-colors hover:border-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-[var(--color-cream)]"
+        >Pedido a medida ↗</a
+      >
     </nav>
 
     <button
       type="button"
-      class="md:hidden inline-flex flex-col gap-1.5 p-2"
+      class="inline-flex flex-col gap-1.5 p-2 md:hidden"
       aria-label="Abrir menú"
       data-mobile-menu-trigger
     >
-      <span class="w-6 h-0.5 bg-[var(--color-ink)]"></span>
-      <span class="w-6 h-0.5 bg-[var(--color-ink)]"></span>
-      <span class="w-6 h-0.5 bg-[var(--color-ink)]"></span>
+      <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
+      <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
+      <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
     </button>
   </div>
 </header>

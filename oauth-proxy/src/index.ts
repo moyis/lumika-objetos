@@ -83,7 +83,11 @@ async function handleCallback(req: Request, url: URL, env: Env): Promise<Respons
   return renderResult({ token: data.access_token, provider: 'github' }, 'success', env);
 }
 
-function renderResult(payload: Record<string, unknown>, status: 'success' | 'error', env: Env): Response {
+function renderResult(
+  payload: Record<string, unknown>,
+  status: 'success' | 'error',
+  env: Env,
+): Response {
   const safePayload = JSON.stringify(payload).replace(/</g, '\\u003c');
   const targetOrigin = env.ALLOWED_ORIGIN ? JSON.stringify(env.ALLOWED_ORIGIN) : `'*'`;
   const html = `<!DOCTYPE html>

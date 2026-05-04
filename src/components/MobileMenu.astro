@@ -4,39 +4,47 @@ import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/clien
 import { whatsappLink, instagramLink } from '../lib/buyLinks';
 
 const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
+const customOrderWa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'una pieza a medida');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 ---
+
 <div
   data-mobile-menu
-  class="fixed inset-0 z-50 bg-[var(--color-cream)] hidden flex-col p-6"
+  class="fixed inset-0 z-50 hidden flex-col bg-[var(--color-cream)] p-6"
   role="dialog"
   aria-modal="true"
   aria-label="Menú principal"
 >
-  <div class="flex items-center justify-between mb-12">
+  <div class="mb-12 flex items-center justify-between">
     <Wordmark size="sm" />
-    <button
-      type="button"
-      class="p-2 label"
-      aria-label="Cerrar menú"
-      data-mobile-menu-close
-    >Cerrar ✕</button>
+    <button type="button" class="label p-2" aria-label="Cerrar menú" data-mobile-menu-close
+      >Cerrar ✕</button
+    >
   </div>
 
-  <nav class="flex flex-col gap-6 text-5xl font-[var(--font-display)] leading-none">
+  <nav class="flex flex-col gap-6 text-5xl leading-none font-[var(--font-display)]">
     <a href="/" data-mobile-menu-link>Inicio</a>
     <a href="/shop" data-mobile-menu-link>Tienda</a>
-    <a href="/about" data-mobile-menu-link>Sobre</a>
+    <a href="/about" data-mobile-menu-link>Sobre nosotras</a>
     <a href="/contact" data-mobile-menu-link>Contacto</a>
   </nav>
 
-  <div class="mt-auto pt-12 border-t-2 border-[var(--color-ink)]">
-    <div class="flex gap-3 mb-4">
-      <span class="block w-6 h-6 rounded-full bg-[var(--color-pink)]"></span>
-      <span class="block w-6 h-6 rounded-full bg-[var(--color-blue)]"></span>
-      <span class="block w-6 h-6 rounded-full bg-[var(--color-blush)]"></span>
+  <a
+    href={customOrderWa}
+    target="_blank"
+    rel="noopener"
+    data-mobile-menu-link
+    class="mt-8 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--color-ink)] px-6 py-3 font-semibold tracking-wide text-[var(--color-ink)] transition-colors hover:border-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-[var(--color-cream)]"
+    >Pedido a medida ↗</a
+  >
+
+  <div class="mt-auto border-t-2 border-[var(--color-ink)] pt-12">
+    <div class="mb-4 flex gap-3">
+      <span class="block h-6 w-6 rounded-full bg-[var(--color-pink)]"></span>
+      <span class="block h-6 w-6 rounded-full bg-[var(--color-blue)]"></span>
+      <span class="block h-6 w-6 rounded-full bg-[var(--color-blush)]"></span>
     </div>
-    <div class="flex gap-4 label">
+    <div class="label flex gap-4">
       <a href={wa} target="_blank" rel="noopener">WhatsApp ↗</a>
       <a href={ig} target="_blank" rel="noopener">Instagram ↗</a>
     </div>

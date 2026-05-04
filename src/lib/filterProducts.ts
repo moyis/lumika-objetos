@@ -3,14 +3,9 @@ import { PRODUCT_TAGS, type ProductTag } from './productTags';
 
 type Product = CollectionEntry<'products'>;
 
-export function filterProductsByTags(
-  products: Product[],
-  selectedTags: ProductTag[],
-): Product[] {
+export function filterProductsByTags(products: Product[], selectedTags: ProductTag[]): Product[] {
   if (selectedTags.length === 0) return products;
-  return products.filter((p) =>
-    selectedTags.every((tag) => p.data.tags.includes(tag)),
-  );
+  return products.filter((p) => selectedTags.every((tag) => p.data.tags.includes(tag)));
 }
 
 export function parseTagsFromQuery(query: URLSearchParams): ProductTag[] {

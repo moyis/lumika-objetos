@@ -1,29 +1,62 @@
 ---
+import Star from '../assets/logos/star.svg';
 interface Props {
   items: string[];
   speedSeconds?: number;
+  repeat?: number;
 }
-const { items, speedSeconds = 30 } = Astro.props;
-const looped = [...items, ...items];
+const { items, speedSeconds, repeat = 8 } = Astro.props;
+const duration = speedSeconds ?? Math.max(120, items.length * repeat * 6);
+const repeated = Array.from({ length: repeat }, () => items).flat();
 ---
-<div class="marquee w-full overflow-hidden bg-[var(--color-ink)] text-[var(--color-cream)] py-3 border-y-2 border-[var(--color-ink)]">
+
+<div
+  class="marquee w-full overflow-hidden border-y-2 border-[var(--color-ink)] bg-[var(--color-ink)] py-3 text-[var(--color-cream)]"
+>
   <div
-    class="marquee-track flex gap-12 whitespace-nowrap label"
-    style={`animation: lk-marquee ${speedSeconds}s linear infinite;`}
+    class="marquee-track label flex w-max whitespace-nowrap"
+    style={`animation-duration: ${duration}s;`}
   >
-    {looped.map((item) => (
-      <span class="shrink-0">{item}</span>
-    ))}
+    <ul class="m-0 flex shrink-0 list-none gap-6 p-0 pr-6">
+      {
+        repeated.map((item) => (
+          <li class="inline-flex items-center gap-6">
+            {item}
+            <Star class="h-4 w-auto shrink-0" aria-hidden="true" />
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="m-0 flex shrink-0 list-none gap-6 p-0 pr-6" aria-hidden="true">
+      {
+        repeated.map((item) => (
+          <li class="inline-flex items-center gap-6">
+            {item}
+            <Star class="h-4 w-auto shrink-0" aria-hidden="true" />
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </div>
 
-<style>
+<style is:global>
   @keyframes lk-marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
   .marquee-track {
-    width: max-content;
-    padding-left: 3rem;
+    animation-name: lk-marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none !important;
+    }
   }
 </style>

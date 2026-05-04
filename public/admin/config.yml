@@ -41,6 +41,14 @@ collections:
         options: [ARS]
       - { label: Stock, name: stock, widget: number, value_type: int, min: 0, default: 0 }
       - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "One-line teaser shown under the title" }
+      - label: Tags
+        name: tags
+        widget: select
+        multiple: true
+        required: false
+        options: [velas, resina, nuevo, edicion-limitada]
+        default: []
       - label: Images
         name: images
         widget: list

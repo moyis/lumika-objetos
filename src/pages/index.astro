@@ -1,17 +1,43 @@
 ---
-import '../styles/global.css';
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import Star from '../assets/logos/star.svg';
+import { sortProducts } from '../lib/filterProducts';
+
+const all = await getCollection('products');
+const sorted = sortProducts(all);
+const featured = sorted.filter((p) => p.data.featured);
+const featuredRow = (featured.length >= 3 ? featured : sorted).slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Lumika Objetos">
+  <Hero />
+
+  <section class="mx-auto max-w-[1400px] px-5 py-16">
+    <div class="mb-8 flex items-end justify-between">
+      <h2 class="display-2 inline-flex items-center gap-3">
+        <Star class="h-[0.9em] w-auto shrink-0" aria-hidden="true" /> Destacados
+      </h2>
+      <a href="/shop" class="label hover:text-[var(--color-blue)]">Ver todo →</a>
+    </div>
+    <ProductGrid products={featuredRow} cols={3} />
+  </section>
+
+  <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-blush)]/40">
+    <div class="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-16 md:grid-cols-2">
+      <h2 class="display-2">
+        Hecho a mano,<br />
+        <em class="text-[var(--color-blue)] italic">con tiempo.</em>
+      </h2>
+      <div>
+        <p class="max-w-[52ch] text-base leading-relaxed md:text-lg">
+          Cada pieza pasa por las manos. Sin moldes en serie, sin atajos. Las velas se vierten una
+          por una; la resina se mezcla y se cuela sin apuro.
+        </p>
+        <a href="/about" class="label mt-6 inline-block underline">Sobre Lumika →</a>
+      </div>
+    </div>
+  </section>
+</Layout>

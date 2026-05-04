@@ -1,0 +1,7 @@
+dist
+.astro
+node_modules
+.wrangler
+public/admin
+bun.lock
+worker-configuration.d.ts

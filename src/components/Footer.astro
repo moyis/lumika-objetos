@@ -2,25 +2,22 @@
 import Marquee from './Marquee.astro';
 import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
 import { whatsappLink, instagramLink } from '../lib/buyLinks';
+import Wordmark from './Wordmark.astro';
 
 const year = new Date().getFullYear();
 const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 ---
-<Marquee
-  items={[
-    '★ HECHO A MANO',
-    '★ SOY 100%',
-    '★ RESINA',
-    '★ BUENOS AIRES',
-  ]}
-/>
+
+<Marquee items={['HECHO A MANO', 'SOJA 100%', 'RESINA', 'MAR DEL PLATA']} />
 
 <footer class="bg-[var(--color-ink)] text-[var(--color-cream)]">
-  <div class="max-w-[1400px] mx-auto px-5 py-12 grid gap-10 md:grid-cols-4">
+  <div class="mx-auto grid max-w-[1400px] gap-10 px-5 py-12 md:grid-cols-4">
     <div>
-      <div class="text-2xl font-[var(--font-display)] leading-none">Lumika Objetos</div>
-      <p class="text-sm mt-3 opacity-80 max-w-[24ch]">Velas de soja y accesorios de resina, hechos a mano.</p>
+      <Wordmark size="lg" color="var(--color-cream)" />
+      <p class="mt-3 max-w-[24ch] text-sm opacity-80">
+        Velas de soja y accesorios de resina, hechos a mano.
+      </p>
     </div>
 
     <div>
@@ -50,9 +47,9 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
   </div>
 
   <div class="border-t border-[var(--color-cream)]/20">
-    <div class="max-w-[1400px] mx-auto px-5 py-4 label opacity-70 flex justify-between">
+    <div class="label mx-auto flex max-w-[1400px] justify-between px-5 py-4 opacity-70">
       <span>© {year} Lumika Objetos</span>
-      <span>Buenos Aires</span>
+      <span>Mar del Plata</span>
     </div>
   </div>
 </footer>
