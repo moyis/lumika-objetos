@@ -1,18 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import Star from '../assets/logos/star.svg';
 import { sortProducts } from '../lib/filterProducts';
+import handmadeImage from '../assets/images/vela-postre.webp';
 
 const all = await getCollection('products');
 const sorted = sortProducts(all);
 const featured = sorted.filter((p) => p.data.featured);
 const featuredRow = (featured.length >= 3 ? featured : sorted).slice(0, 3);
+const ogImage = featuredRow[0]?.data.images[0];
 ---
 
-<Layout title="Lumika Objetos">
+<Layout title="Lumika Objetos" image={ogImage}>
   <Hero />
 
   <section class="mx-auto max-w-[1400px] px-5 py-16">
@@ -27,12 +30,19 @@ const featuredRow = (featured.length >= 3 ? featured : sorted).slice(0, 3);
 
   <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-blush)]/40">
     <div class="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-16 md:grid-cols-2">
-      <h2 class="display-2">
-        Hecho a mano,<br />
-        <em class="text-[var(--color-blue)] italic">con tiempo.</em>
-      </h2>
+      <Image
+        src={handmadeImage}
+        alt="Vela de soja con forma de postre"
+        widths={[480, 720, 960]}
+        sizes="(min-width: 768px) 45vw, 100vw"
+        class="aspect-[5/4] w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
+      />
       <div>
-        <p class="max-w-[52ch] text-base leading-relaxed md:text-lg">
+        <h2 class="display-2">
+          Hecho a mano,<br />
+          <em class="text-[var(--color-blue)] italic">con tiempo.</em>
+        </h2>
+        <p class="mt-6 max-w-[52ch] text-base leading-relaxed md:text-lg">
           Cada pieza pasa por las manos. Sin moldes en serie, sin atajos. Las velas se vierten una
           por una; la resina se mezcla y se cuela sin apuro.
         </p>

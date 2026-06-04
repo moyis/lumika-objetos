@@ -7,8 +7,8 @@
   --color-pink: #ff4fb4;
   --color-blush: #f6c7d1;
 
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Poppins', system-ui, sans-serif;
+  --font-display: var(--font-stropica), Georgia, serif;
+  --font-body: var(--font-poppins), system-ui, sans-serif;
 }
 
 @layer base {

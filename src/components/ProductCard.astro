@@ -22,7 +22,7 @@ const soldOut = stock === 0;
       cover && (
         <Image
           src={cover}
-          alt={title}
+          alt={subtitle ? `${title} — ${subtitle}` : title}
           widths={[400, 800, 1200]}
           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
           class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
@@ -41,7 +41,7 @@ const soldOut = stock === 0;
   </div>
   <div class="pt-3">
     <h3
-      class="wavy-underline inline text-lg leading-tight font-[var(--font-display)]"
+      class="wavy-underline inline text-2xl leading-tight font-[var(--font-display)] md:text-3xl"
       transition:name={`product-title-${slug}`}
     >
       {title}

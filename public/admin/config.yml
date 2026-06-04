@@ -5,54 +5,56 @@ backend:
   base_url: https://lumika-decap-oauth.faustomoya-99.workers.dev
   auth_endpoint: auth
 
+locale: es
+
 media_folder: src/assets/products
 public_folder: ../../assets/products
 
 collections:
   - name: products
-    label: Products
-    label_singular: Product
+    label: Productos
+    label_singular: Producto
     folder: src/content/products
     create: true
     slug: "{{slug}}"
     summary: "{{title}} — {{currency}} {{price}}"
     sortable_fields: [title, price, date, stock]
     view_filters:
-      - label: Featured
+      - label: Destacados
         field: featured
         pattern: true
-      - label: Out of stock
+      - label: Sin stock
         field: stock
         pattern: "^0$"
     fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string, hint: "URL segment, lowercase, dashes" }
+      - { label: Título, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: "Segmento URL, minúsculas, guiones" }
       - { label: SKU, name: sku, widget: string, required: false }
-      - label: Price
+      - label: Precio
         name: price
         widget: number
         value_type: float
         min: 0
         step: 0.01
-      - label: Currency
+      - label: Moneda
         name: currency
         widget: select
         default: ARS
         options: [ARS]
       - { label: Stock, name: stock, widget: number, value_type: int, min: 0, default: 0 }
-      - { label: Featured, name: featured, widget: boolean, default: false }
-      - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "One-line teaser shown under the title" }
-      - label: Tags
+      - { label: Destacado, name: featured, widget: boolean, default: false }
+      - { label: Subtítulo, name: subtitle, widget: string, required: false, hint: "Frase corta debajo del título" }
+      - label: Etiquetas
         name: tags
         widget: select
         multiple: true
         required: false
         options: [velas, resina, nuevo, edicion-limitada]
         default: []
-      - label: Images
+      - label: Imágenes
         name: images
         widget: list
         summary: "{{fields.image}}"
-        field: { label: Image, name: image, widget: image }
-      - { label: Created, name: date, widget: datetime }
-      - { label: Description, name: body, widget: markdown }
+        field: { label: Imagen, name: image, widget: image }
+      - { label: Creado, name: date, widget: datetime }
+      - { label: Descripción, name: body, widget: markdown }

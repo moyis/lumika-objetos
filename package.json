@@ -19,8 +19,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.3.0",
-    "@fontsource/dm-serif-display": "^5.2.8",
-    "@fontsource/poppins": "^5.2.7",
+    "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.2.1",
     "tailwindcss": "^4.2.4"

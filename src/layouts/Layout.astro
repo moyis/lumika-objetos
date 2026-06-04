@@ -1,24 +1,31 @@
 ---
-import '@fontsource/dm-serif-display/400.css';
-import '@fontsource/dm-serif-display/400-italic.css';
-import '@fontsource/poppins/400.css';
-import '@fontsource/poppins/500.css';
-import '@fontsource/poppins/600.css';
-import '@fontsource/poppins/700.css';
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
+import { Font, getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import brandOgImage from '../assets/products/lampara.jpg';
 
 interface Props {
   title: string;
   description?: string;
+  image?: ImageMetadata;
 }
 const {
   title,
   description = 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
+  image,
 } = Astro.props;
 const fullTitle = title === 'Lumika Objetos' ? title : `${title} · Lumika Objetos`;
+
+const ogImage = await getImage({
+  src: image ?? brandOgImage,
+  width: 1200,
+  height: 630,
+  format: 'jpeg',
+  fit: 'cover',
+});
+const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -27,10 +34,50 @@ const fullTitle = title === 'Lumika Objetos' ? title : `${title} · Lumika Objet
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <Font cssVariable="--font-stropica" preload />
+    <Font cssVariable="--font-poppins" preload />
     <title>{fullTitle}</title>
-    <ClientRouter />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lumika Objetos" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {
+      Astro.url.pathname === '/' && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Lumika Objetos',
+            url: Astro.site?.toString(),
+            logo: ogImageUrl,
+            description:
+              'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
+            founder: [
+              { '@type': 'Person', name: 'Abril Argüello' },
+              { '@type': 'Person', name: 'Mailen Smiraglia' },
+            ],
+            sameAs: ['https://instagram.com/lumika.objetos'],
+          })}
+        />
+      )
+    }
   </head>
   <body class="flex min-h-screen flex-col">
     <Header />

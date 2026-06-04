@@ -10,9 +10,32 @@ import { whatsappLink, instagramLink, emailLink } from '../lib/buyLinks';
 const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 const mail = emailLink(PUBLIC_CONTACT_EMAIL);
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const imageUrl = new URL('/favicon.svg', Astro.site).toString();
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Lumika Objetos',
+  description: 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
+  url: canonicalUrl,
+  image: imageUrl,
+  telephone: `+${PUBLIC_WHATSAPP_NUMBER}`,
+  email: PUBLIC_CONTACT_EMAIL,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Mar del Plata',
+    addressRegion: 'Buenos Aires',
+    addressCountry: 'AR',
+  },
+  areaServed: 'AR',
+  sameAs: [`https://instagram.com/${PUBLIC_INSTAGRAM_HANDLE}`],
+};
 ---
 
 <Layout title="Contacto">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   <section class="mx-auto max-w-[1400px] px-5 py-16">
     <span class="label">Contacto</span>
     <h1 class="display-1 mt-6">Hablemos.</h1>
