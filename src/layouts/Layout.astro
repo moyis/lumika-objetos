@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { Font, getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import brandOgImage from '../assets/products/lampara.jpg';
+import brandOgImage from '../assets/images/vella-y-llaveros.webp';
 
 interface Props {
   title: string;
@@ -70,8 +70,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
             description:
               'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
             founder: [
-              { '@type': 'Person', name: 'Abril Argüello' },
-              { '@type': 'Person', name: 'Mailen Smiraglia' },
+              { '@type': 'Person', name: 'Abril' },
+              { '@type': 'Person', name: 'Mailen' },
             ],
             sameAs: ['https://instagram.com/lumika.objetos'],
           })}

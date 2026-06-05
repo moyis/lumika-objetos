@@ -29,20 +29,22 @@ const ogImage = featuredRow[0]?.data.images[0];
   </section>
 
   <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-blush)]/40">
-    <div class="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-16 md:grid-cols-2">
+    <div class="grid items-stretch md:grid-cols-[8fr_5fr]">
       <Image
         src={handmadeImage}
         alt="Vela de soja con forma de postre"
-        widths={[480, 720, 960]}
-        sizes="(min-width: 768px) 45vw, 100vw"
-        class="aspect-[5/4] w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
+        widths={[720, 1080, 1600]}
+        sizes="(min-width: 768px) 62vw, 100vw"
+        class="aspect-[4/3] h-full w-full object-cover md:aspect-auto md:min-h-[480px]"
       />
-      <div>
+      <div
+        class="flex flex-col justify-center px-5 py-12 md:py-20 md:pl-10 md:pr-[max(1.25rem,calc((100vw-1400px)/2))]"
+      >
         <h2 class="display-2">
           Hecho a mano,<br />
           <em class="text-[var(--color-blue)] italic">con tiempo.</em>
         </h2>
-        <p class="mt-6 max-w-[52ch] text-base leading-relaxed md:text-lg">
+        <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
           Cada pieza pasa por las manos. Sin moldes en serie, sin atajos. Las velas se vierten una
           por una; la resina se mezcla y se cuela sin apuro.
         </p>
