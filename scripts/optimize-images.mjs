@@ -7,6 +7,8 @@
 // Idempotent: images already within MAX_WIDTH are skipped. Astro still generates
 // the responsive variants from these (now reasonable) sources.
 
+/* global console */
+
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 import sharp from 'sharp';
@@ -56,11 +58,11 @@ for (const dir of DIRS) {
     resized += 1;
     const before = (input.length / 1024) | 0;
     const after = (output.length / 1024) | 0;
-    console.log(`  ${path}: ${meta.width}px ${before}K -> ${MAX_WIDTH}px ${after}K`);
+    console.warn(`  ${path}: ${meta.width}px ${before}K -> ${MAX_WIDTH}px ${after}K`);
   }
 }
 
-console.log(
+console.warn(
   resized > 0
     ? `[optimize-images] resized ${resized} oversized source image(s)`
     : '[optimize-images] all source images within bounds',

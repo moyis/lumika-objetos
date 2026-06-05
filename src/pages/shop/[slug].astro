@@ -42,7 +42,8 @@ const category =
 
 const isCandle = tags.includes('velas');
 const isResin = tags.includes('resina');
-const material = isCandle && !isResin ? 'Cera de soja' : isResin && !isCandle ? 'Resina' : undefined;
+const material =
+  isCandle && !isResin ? 'Cera de soja' : isResin && !isCandle ? 'Resina' : undefined;
 
 const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
   .toISOString()
@@ -113,13 +114,9 @@ const breadcrumbJsonLd = {
 };
 ---
 
-<Layout
-  title={title}
-  description={metaDescription}
-  image={images[0]}
->
-  <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+<Layout title={title} description={metaDescription} image={images[0]}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
   <div class="label mx-auto max-w-[1400px] px-5 pt-6">
     <a href="/shop">Tienda</a>

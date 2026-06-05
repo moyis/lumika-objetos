@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { Font, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import brandOgImage from '../assets/images/vella-y-llaveros.webp';
@@ -65,6 +66,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     {
       Astro.url.pathname === '/' && (
         <script
+          is:inline
           type="application/ld+json"
           set:html={JSON.stringify({
             '@context': 'https://schema.org',
@@ -81,6 +83,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     {
       Astro.url.pathname === '/' && (
         <script
+          is:inline
           type="application/ld+json"
           set:html={JSON.stringify({
             '@context': 'https://schema.org',
@@ -88,8 +91,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
             name: 'Lumika Objetos',
             url: Astro.site?.toString(),
             logo: ogImageUrl,
-            description:
-              'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
+            description: 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
             founder: [
               { '@type': 'Person', name: 'Abril' },
               { '@type': 'Person', name: 'Mailen' },
