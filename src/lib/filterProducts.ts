@@ -15,10 +15,5 @@ export function parseTagsFromQuery(query: URLSearchParams): ProductTag[] {
 }
 
 export function sortProducts(products: Product[]): Product[] {
-  return [...products].sort((a, b) => {
-    const aOut = a.data.stock === 0 ? 1 : 0;
-    const bOut = b.data.stock === 0 ? 1 : 0;
-    if (aOut !== bOut) return aOut - bOut;
-    return b.data.date.getTime() - a.data.date.getTime();
-  });
+  return [...products].sort((a, b) => a.data.title.localeCompare(b.data.title, 'es'));
 }
