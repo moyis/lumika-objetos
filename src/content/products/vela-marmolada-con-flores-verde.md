@@ -1,6 +1,6 @@
 ---
 title: Vela Marmolada con flores - Verde
-slug: vela-marmol-flores- verde
+slug: vela-marmol-flores-verde
 price: 12000
 currency: ARS
 stock: 2
