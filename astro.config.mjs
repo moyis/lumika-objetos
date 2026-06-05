@@ -10,6 +10,12 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://lumika-objetos.faustomoya-99.workers.dev',
+  build: {
+    // Inline CSS into each page so styles apply during HTML parse instead of
+    // arriving via a render-blocking <link>. Removes the flash-of-unstyled
+    // content (images painting at intrinsic size) on refresh.
+    inlineStylesheets: 'always',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
