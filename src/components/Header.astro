@@ -1,16 +1,12 @@
 ---
 import Isotype from './Isotype.astro';
 import MobileMenu from './MobileMenu.astro';
-import { PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
-import { whatsappLink } from '../lib/buyLinks';
 
 const navLinks = [
   { href: '/shop', label: 'Tienda' },
   { href: '/about', label: 'Sobre nosotras' },
   { href: '/contact', label: 'Contacto' },
 ];
-
-const customOrderWa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'una pieza a medida');
 ---
 
 <header class="sticky top-0 z-40 border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
@@ -25,13 +21,6 @@ const customOrderWa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'una pieza a medida')
           </a>
         ))
       }
-      <a
-        href={customOrderWa}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--color-ink)] px-5 py-2 font-semibold tracking-wide text-[var(--color-ink)] transition-colors hover:border-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-[var(--color-cream)]"
-        >Pedido a medida ↗</a
-      >
     </nav>
 
     <button

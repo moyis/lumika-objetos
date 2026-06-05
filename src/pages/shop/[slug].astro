@@ -17,7 +17,7 @@ export const getStaticPaths = (async () => {
 
 const { product } = Astro.props;
 const { Content } = await render(product);
-const { title, slug, subtitle, price, stock, tags, images } = product.data;
+const { title, slug, subtitle, price, stock, tags, images, fragrances } = product.data;
 const soldOut = stock === 0;
 const primaryTag = tags[0];
 
@@ -144,7 +144,7 @@ const breadcrumbJsonLd = {
         }
       </div>
 
-      <BuyButtons productTitle={title} disabled={soldOut} />
+      <BuyButtons productTitle={title} disabled={soldOut} fragrances={fragrances} />
 
       <div class="prose prose-neutral mt-8 max-w-none text-base leading-relaxed">
         <Content />

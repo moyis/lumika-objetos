@@ -19,7 +19,7 @@ const [hero, ...rest] = images;
         alt={alt}
         widths={[800, 1200, 2000]}
         sizes="(min-width: 1024px) 60vw, 100vw"
-        class="aspect-[4/5] w-full rounded-md object-cover"
+        class="aspect-[4/5] w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
         transition:name={`product-image-${slug}`}
       />
       {rest.length > 0 && (
@@ -30,7 +30,7 @@ const [hero, ...rest] = images;
               alt={`${alt} — detalle ${i + 2}`}
               widths={[400, 800]}
               sizes="(min-width: 1024px) 30vw, 50vw"
-              class="aspect-square w-full rounded-md object-cover"
+              class="aspect-square w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
               loading="lazy"
             />
           ))}

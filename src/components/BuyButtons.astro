@@ -5,15 +5,48 @@ import { whatsappLink, instagramLink } from '../lib/buyLinks';
 interface Props {
   productTitle: string;
   disabled?: boolean;
+  fragrances?: string[];
 }
-const { productTitle, disabled = false } = Astro.props;
+const { productTitle, disabled = false, fragrances = [] } = Astro.props;
+const hasFragrances = !disabled && fragrances.length > 0;
 const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, productTitle);
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 ---
 
+{
+  hasFragrances && (
+    <fieldset class="mt-6" data-fragrance-group>
+      <legend class="label mb-2">Fragancia</legend>
+      <div class="flex flex-wrap gap-2">
+        {fragrances.map((f, i) => (
+          <label class="cursor-pointer">
+            <input
+              type="radio"
+              name="fragrance"
+              value={f}
+              checked={i === 0}
+              class="peer sr-only"
+            />
+            <span class="label inline-block rounded-full border-2 border-[var(--color-ink)] px-4 py-2 transition-colors hover:border-[var(--color-blush)] peer-checked:border-[var(--color-blush)] peer-checked:bg-[var(--color-blush)] peer-checked:text-[var(--color-ink)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--color-blush)] peer-focus-visible:ring-offset-2">
+              {f}
+            </span>
+          </label>
+        ))}
+      </div>
+      <p data-fragrance-hint class="label mt-2 hidden text-[var(--color-pink)]">
+        Elegí una fragancia para continuar
+      </p>
+    </fieldset>
+  )
+}
+
 <div class="mt-6 flex flex-col gap-3 sm:flex-row">
   <a
     href={disabled ? undefined : wa}
+    data-buy-wa
+    data-wa-number={PUBLIC_WHATSAPP_NUMBER}
+    data-product-title={productTitle}
+    data-requires-fragrance={hasFragrances ? 'true' : 'false'}
     aria-disabled={disabled}
     rel="noopener"
     target="_blank"
@@ -30,8 +63,54 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
     href={ig}
     rel="noopener"
     target="_blank"
-    class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--color-ink)] px-6 py-3 font-semibold tracking-wide transition-colors hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)]"
+    class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-pink)] px-6 py-3 font-semibold tracking-wide text-[var(--color-cream)] transition-opacity hover:opacity-90"
   >
-    Instagram
+    Pedir por Instagram
   </a>
 </div>
+
+<script>
+  function setupBuyButtons() {
+    const link = document.querySelector('[data-buy-wa]') as HTMLAnchorElement | null;
+    if (!link || link.dataset.requiresFragrance !== 'true') return;
+
+    const radios = document.querySelectorAll<HTMLInputElement>('input[name="fragrance"]');
+    const hint = document.querySelector('[data-fragrance-hint]') as HTMLElement | null;
+    const number = link.dataset.waNumber ?? '';
+    const title = link.dataset.productTitle ?? '';
+
+    const selected = () =>
+      document.querySelector<HTMLInputElement>('input[name="fragrance"]:checked')?.value ?? '';
+
+    const build = (fragrance: string) => {
+      const message = fragrance
+        ? `Hola! Me interesa ${title} (Fragancia: ${fragrance})`
+        : `Hola! Me interesa ${title}`;
+      return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+    };
+
+    const sync = () => {
+      link.href = build(selected());
+    };
+
+    radios.forEach((r) =>
+      r.addEventListener('change', () => {
+        sync();
+        if (selected()) hint?.classList.add('hidden');
+      }),
+    );
+
+    link.addEventListener('click', (e) => {
+      if (!selected()) {
+        e.preventDefault();
+        hint?.classList.remove('hidden');
+        radios[0]?.focus();
+      }
+    });
+
+    sync();
+  }
+
+  setupBuyButtons();
+  document.addEventListener('astro:page-load', setupBuyButtons);
+</script>

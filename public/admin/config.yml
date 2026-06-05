@@ -43,6 +43,22 @@ collections:
         options: [ARS]
       - { label: Stock, name: stock, widget: number, value_type: int, min: 0, default: 0 }
       - { label: Destacado, name: featured, widget: boolean, default: false }
+      - label: Fragancias
+        name: fragrances
+        widget: select
+        multiple: true
+        required: false
+        hint: "Esencias disponibles para esta vela"
+        options:
+          - Frutos del bosque
+          - Limón
+          - Chocolate
+          - Océano
+          - Vainilla
+          - Rosas
+          - Tutti frutti
+          - Rosas y vainilla
+        default: []
       - { label: Subtítulo, name: subtitle, widget: string, required: false, hint: "Frase corta debajo del título" }
       - label: Etiquetas
         name: tags

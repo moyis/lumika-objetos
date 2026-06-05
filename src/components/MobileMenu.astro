@@ -4,7 +4,6 @@ import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/clien
 import { whatsappLink, instagramLink } from '../lib/buyLinks';
 
 const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
-const customOrderWa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'una pieza a medida');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 ---
 
@@ -28,15 +27,6 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
     <a href="/about" data-mobile-menu-link>Sobre nosotras</a>
     <a href="/contact" data-mobile-menu-link>Contacto</a>
   </nav>
-
-  <a
-    href={customOrderWa}
-    target="_blank"
-    rel="noopener"
-    data-mobile-menu-link
-    class="mt-8 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--color-ink)] px-6 py-3 font-semibold tracking-wide text-[var(--color-ink)] transition-colors hover:border-[var(--color-blue)] hover:bg-[var(--color-blue)] hover:text-[var(--color-cream)]"
-    >Pedido a medida ↗</a
-  >
 
   <div class="mt-auto border-t-2 border-[var(--color-ink)] pt-12">
     <div class="mb-4 flex gap-3">

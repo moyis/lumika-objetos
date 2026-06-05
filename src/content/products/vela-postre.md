@@ -6,6 +6,8 @@ currency: ARS
 stock: 5
 featured: true
 subtitle: ""
+fragrances:
+  - Frutos del bosque
 tags:
   - velas
 images:

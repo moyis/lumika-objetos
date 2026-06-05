@@ -18,6 +18,7 @@ const products = defineCollection({
       currency: z.literal('ARS'),
       stock: z.number().int().nonnegative().default(0),
       featured: z.boolean().default(false),
+      fragrances: z.array(z.string()).default([]),
       tags: z.array(z.enum(PRODUCT_TAGS)).default([]),
       images: z.array(image()).default([]),
       date: z.coerce.date(),

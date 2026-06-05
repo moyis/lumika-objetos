@@ -5,6 +5,8 @@ price: 15000
 currency: ARS
 stock: 5
 featured: false
+fragrances:
+  - Tutti frutti
 tags:
   - velas
 images:

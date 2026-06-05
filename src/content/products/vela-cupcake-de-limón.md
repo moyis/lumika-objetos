@@ -5,6 +5,8 @@ price: 9000
 currency: ARS
 stock: 10
 featured: false
+fragrances:
+  - Limón
 tags:
   - velas
 images:
