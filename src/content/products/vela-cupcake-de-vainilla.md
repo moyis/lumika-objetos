@@ -1,7 +1,7 @@
 ---
 title: Vela Cupcake de vainilla
 slug: vela-cupcake-vainilla
-price: 8999.99
+price: 9000
 currency: ARS
 stock: 4
 featured: false
