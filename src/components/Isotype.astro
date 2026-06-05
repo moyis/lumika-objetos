@@ -12,10 +12,18 @@ const heights = {
   md: 'h-12',
   lg: 'h-16',
 };
-const styleParts: string[] = [];
+// Inline height (matches the Tailwind class) so the inlined SVG is sized during
+// HTML parse, before the render-blocking CSS loads — avoids a flash of the
+// logo at its intrinsic size on full page navigations.
+const heightRem = {
+  sm: '2rem',
+  md: '3rem',
+  lg: '4rem',
+};
+const styleParts: string[] = [`height: ${heightRem[size]}`, 'width: auto'];
 if (color) styleParts.push(`--c-1: ${color}`);
 if (secondary) styleParts.push(`--c-2: ${secondary}`);
-const style = styleParts.length ? styleParts.join('; ') + ';' : undefined;
+const style = styleParts.join('; ') + ';';
 ---
 
 <a href="/" aria-label="Lumika Objetos — Inicio" class={`block ${className}`}>
