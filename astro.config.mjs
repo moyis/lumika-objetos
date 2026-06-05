@@ -51,7 +51,7 @@ export default defineConfig({
       PUBLIC_CONTACT_EMAIL: envField.string({
         context: 'client',
         access: 'public',
-        default: 'hola@lumikaobjetos.com',
+        default: 'lumikaobjetos@gmail.com',
       }),
     },
   },

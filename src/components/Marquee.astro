@@ -11,7 +11,7 @@ const repeated = Array.from({ length: repeat }, () => items).flat();
 ---
 
 <div
-  class="marquee w-full overflow-hidden border-y-2 border-[var(--color-ink)] bg-[var(--color-ink)] py-3 text-[var(--color-cream)]"
+  class="marquee w-full overflow-hidden border-y-2 border-[var(--color-ink)] bg-[var(--color-blue)] py-3 text-[var(--color-cream)]"
 >
   <div
     class="marquee-track label flex w-max whitespace-nowrap"
@@ -22,7 +22,7 @@ const repeated = Array.from({ length: repeat }, () => items).flat();
         repeated.map((item) => (
           <li class="inline-flex items-center gap-6">
             {item}
-            <Star class="h-4 w-auto shrink-0" aria-hidden="true" />
+            <Star class="h-4 w-auto shrink-0" style="--c-1: var(--color-pink)" aria-hidden="true" />
           </li>
         ))
       }
@@ -32,7 +32,7 @@ const repeated = Array.from({ length: repeat }, () => items).flat();
         repeated.map((item) => (
           <li class="inline-flex items-center gap-6">
             {item}
-            <Star class="h-4 w-auto shrink-0" aria-hidden="true" />
+            <Star class="h-4 w-auto shrink-0" style="--c-1: var(--color-pink)" aria-hidden="true" />
           </li>
         ))
       }

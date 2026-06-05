@@ -24,28 +24,37 @@ const steps = [
 ---
 
 <Layout title="Sobre Lumika">
-  <section class="mx-auto max-w-[1100px] px-5 py-16">
-    <span class="label">Sobre Lumika</span>
-    <h1 class="display-1 mt-6">
-      Objetos de mano,<br />
-      <em class="text-[var(--color-blue)] italic">con tiempo.</em>
-    </h1>
-    <p class="mt-8 max-w-[60ch] text-lg leading-relaxed">
-      Lumika Objetos es un estudio chico en Mar del Plata. Hacemos velas de soja y accesorios de
-      resina, en ediciones cortas y a mano. Cada pieza es única — los pequeños desniveles, las
-      burbujas, el color que cambia un poco entre tandas, son parte.
-    </p>
+  <section class="relative overflow-hidden border-b-2 border-[var(--color-ink)]">
+    <div class="grid items-stretch md:grid-cols-[minmax(0,5fr)_8fr]">
+      <div
+        class="order-last flex flex-col justify-center px-5 py-12 md:order-first md:py-20 md:pr-10 md:pl-[max(1.25rem,calc((100vw-1400px)/2))]"
+      >
+        <span class="label">Sobre Lumika</span>
+        <h1 class="display-2 mt-8">
+          Objetos de mano,<br />
+          <em class="text-[var(--color-blue)] italic">con tiempo.</em>
+        </h1>
+        <p class="mt-6 max-w-[40ch] text-base leading-relaxed">
+          Lumika Objetos es un estudio chico en Mar del Plata. Hacemos velas de soja y accesorios de
+          resina, en ediciones cortas y a mano. Cada pieza es única — los pequeños desniveles, las
+          burbujas, el color que cambia un poco entre tandas, son parte.
+        </p>
+      </div>
 
-    <Image
-      src={introImage}
-      alt="Vela Lumika con accesorios de resina"
-      widths={[600, 900, 1200]}
-      sizes="(min-width: 768px) 1100px, 100vw"
-      class="mt-12 aspect-[16/9] w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
-    />
+      <div class="order-first md:order-last">
+        <Image
+          src={introImage}
+          alt="Vela Lumika con accesorios de resina"
+          widths={[720, 1080, 1600]}
+          sizes="(min-width: 768px) 62vw, 100vw"
+          class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[560px]"
+          loading="eager"
+        />
+      </div>
+    </div>
   </section>
 
-  <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-blush)]/40">
+  <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
     <div class="mx-auto grid max-w-[1400px] gap-10 px-5 py-16 md:grid-cols-3">
       {
         steps.map((s) => (
@@ -59,27 +68,29 @@ const steps = [
     </div>
   </section>
 
-  <section class="mx-auto max-w-[1100px] px-5 py-16">
-    <div class="grid items-center gap-10 md:grid-cols-2">
-      <div>
+  <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
+    <div class="grid items-stretch md:grid-cols-[8fr_5fr]">
+      <Image
+        src={studioImage}
+        alt="Vela Lumika de limón con aritos de resina"
+        widths={[720, 1080, 1600]}
+        sizes="(min-width: 768px) 62vw, 100vw"
+        class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[480px]"
+      />
+      <div
+        class="flex flex-col justify-center px-5 py-12 md:py-20 md:pl-10 md:pr-[max(1.25rem,calc((100vw-1400px)/2))]"
+      >
         <h2 class="display-2">Quiénes somos.</h2>
-        <p class="mt-6 max-w-[60ch] text-lg leading-relaxed">
+        <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
           Dos manos, una mesa, mucha luz. Cada tanda lleva el ritmo de quien la hace. Si tenés una
           idea para una pieza única en resina, hablanos.
         </p>
         <a
           href="/contact"
-          class="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--color-blue)] px-6 py-3 font-semibold tracking-wide text-[var(--color-cream)]"
+          class="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-blue)] px-6 py-3 font-semibold tracking-wide text-[var(--color-cream)]"
           >Hablemos →</a
         >
       </div>
-      <Image
-        src={studioImage}
-        alt="Vela Lumika de limón con aritos de resina"
-        widths={[400, 600, 800]}
-        sizes="(min-width: 768px) 45vw, 100vw"
-        class="aspect-square w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
-      />
     </div>
   </section>
 

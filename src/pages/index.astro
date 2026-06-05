@@ -17,7 +17,8 @@ const ogImage = featured[0]?.data.images[0];
 <Layout title="Lumika Objetos" image={ogImage}>
   <Hero />
 
-  <section class="mx-auto max-w-[1400px] px-5 py-16">
+  <section class="bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-[1400px] px-5 py-16">
     <div class="mb-8 flex items-end justify-between">
       <h2 class="display-2 inline-flex items-center gap-3">
         <Star class="h-[0.9em] w-auto shrink-0" aria-hidden="true" /> Destacados
@@ -25,9 +26,10 @@ const ogImage = featured[0]?.data.images[0];
       <a href="/shop" class="label hover:text-[var(--color-blue)]">Ver todo →</a>
     </div>
     <ProductGrid products={featured} cols={3} />
+    </div>
   </section>
 
-  <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-blush)]/40">
+  <section class="border-y-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
     <div class="grid items-stretch md:grid-cols-[8fr_5fr]">
       <Image
         src={handmadeImage}
