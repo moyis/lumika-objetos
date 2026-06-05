@@ -16,20 +16,37 @@ const imageUrl = new URL('/favicon.svg', Astro.site).toString();
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['Store', 'LocalBusiness'],
   name: 'Lumika Objetos',
   description: 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
   url: canonicalUrl,
   image: imageUrl,
   telephone: `+${PUBLIC_WHATSAPP_NUMBER}`,
   email: PUBLIC_CONTACT_EMAIL,
+  priceRange: '$$',
+  currenciesAccepted: 'ARS',
+  paymentAccepted: 'Efectivo, Transferencia',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Mar del Plata',
     addressRegion: 'Buenos Aires',
     addressCountry: 'AR',
   },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -38.0055,
+    longitude: -57.5426,
+  },
   areaServed: 'AR',
+  knowsLanguage: 'es-AR',
+  makesOffer: {
+    '@type': 'OfferCatalog',
+    name: 'Catálogo Lumika Objetos',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Velas de soja artesanales' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Accesorios de resina' } },
+    ],
+  },
   sameAs: [`https://instagram.com/${PUBLIC_INSTAGRAM_HANDLE}`],
 };
 ---

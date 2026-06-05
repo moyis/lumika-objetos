@@ -10,7 +10,11 @@ const sorted = sortProducts(all);
 const ogImage = sorted[0]?.data.images[0];
 ---
 
-<Layout title="Tienda" image={ogImage}>
+<Layout
+  title="Tienda"
+  description="Tienda de velas de soja artesanales y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas."
+  image={ogImage}
+>
   <section class="mx-auto max-w-[1400px] px-5 pt-10 pb-6">
     <span class="label">Tienda · {sorted.length} {sorted.length === 1 ? 'pieza' : 'piezas'}</span>
     <h1 class="display-2 mt-4">Todos los objetos.</h1>

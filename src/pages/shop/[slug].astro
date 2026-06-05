@@ -32,6 +32,20 @@ const ogDescription = bodyText
   : (subtitle ?? `${title} — Lumika Objetos`);
 const primaryTag = tags[0];
 
+// Prefer the curated subtitle for the social/meta description; fall back to body text.
+const metaDescription = subtitle?.trim() ? subtitle : ogDescription;
+
+const category =
+  primaryTag === 'velas' ? 'Velas' : primaryTag === 'resina' ? 'Resina' : 'Objetos artesanales';
+
+const isCandle = tags.includes('velas');
+const isResin = tags.includes('resina');
+const material = isCandle && !isResin ? 'Cera de soja' : isResin && !isCandle ? 'Resina' : undefined;
+
+const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+  .toISOString()
+  .split('T')[0];
+
 const all = await getCollection('products');
 const related = all
   .filter(
@@ -53,14 +67,18 @@ const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: title,
-  description: subtitle ?? title,
+  description: ogDescription,
   image: images.map((img) => new URL(img.src, Astro.site).toString()),
   sku: product.data.sku ?? slug,
   brand: { '@type': 'Brand', name: 'Lumika Objetos' },
+  itemCondition: 'https://schema.org/NewCondition',
+  category,
+  ...(material ? { material } : {}),
   offers: {
     '@type': 'Offer',
     priceCurrency: 'ARS',
     price,
+    priceValidUntil,
     availability: soldOut ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
     url: canonicalUrl,
   },
@@ -95,7 +113,7 @@ const breadcrumbJsonLd = {
 
 <Layout
   title={title}
-  description={ogDescription}
+  description={metaDescription}
   image={images[0]}
 >
   <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />

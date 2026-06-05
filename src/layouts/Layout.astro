@@ -13,10 +13,13 @@ interface Props {
 }
 const {
   title,
-  description = 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
+  description = 'Velas de soja y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas. Compra por WhatsApp.',
   image,
 } = Astro.props;
-const fullTitle = title === 'Lumika Objetos' ? title : `${title} · Lumika Objetos`;
+const fullTitle =
+  title === 'Lumika Objetos'
+    ? 'Lumika Objetos - Velas de soja y resina artesanal - Mar del Plata'
+    : `${title} · Lumika Objetos`;
 
 const ogImage = await getImage({
   src: image ?? brandOgImage,
@@ -38,6 +41,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#fff8d9" />
     <Font cssVariable="--font-stropica" preload />
     <Font cssVariable="--font-poppins" preload />
     <ClientRouter />
@@ -52,7 +57,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:alt" content={fullTitle} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />

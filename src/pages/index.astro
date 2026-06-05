@@ -14,7 +14,11 @@ const featured = sorted.filter((p) => p.data.featured);
 const ogImage = featured[0]?.data.images[0];
 ---
 
-<Layout title="Lumika Objetos" image={ogImage}>
+<Layout
+  title="Lumika Objetos"
+  description="Velas de soja artesanales y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas. Compra por WhatsApp."
+  image={ogImage}
+>
   <Hero />
 
   <section class="bg-[var(--color-cream)]">
