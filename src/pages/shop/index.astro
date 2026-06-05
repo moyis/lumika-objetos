@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import TagChips from '../../components/TagChips.astro';
@@ -38,6 +40,7 @@ const itemListJsonLd = {
   <TagChips />
 
   <section class="mx-auto max-w-[1400px] px-5 py-10">
+    <h2 class="sr-only">Productos</h2>
     <ProductGrid products={sorted} cols={4} priority />
   </section>
 </Layout>

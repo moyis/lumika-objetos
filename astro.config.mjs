@@ -55,6 +55,12 @@ export default defineConfig({
       }),
     },
   },
-  adapter: cloudflare({ imageService: 'compile', prerenderEnvironment: 'node' }),
+  image: {
+    // Use Astro's sharp service so the (prerendered) build actually resizes
+    // images to the requested widths. The Cloudflare 'compile' service only
+    // re-encodes at full resolution, which shipped oversized variants.
+    service: { entrypoint: 'astro/assets/services/sharp' },
+  },
+  adapter: cloudflare({ imageService: 'custom', prerenderEnvironment: 'node' }),
   integrations: [sitemap({ filter: (page) => !page.includes('/admin') })],
 });

@@ -33,7 +33,8 @@ const soldOut = stock === 0;
           src={cover}
           alt={subtitle ? `${title} — ${subtitle}` : title}
           formats={['avif', 'webp']}
-          widths={[320, 480, 768, 1024]}
+          widths={[240, 360, 540, 768]}
+          quality={55}
           sizes={sizes}
           pictureAttributes={{ class: 'contents' }}
           class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"

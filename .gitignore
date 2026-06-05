@@ -36,3 +36,4 @@ pnpm-debug.log*
 
 # unlighthouse scan artifacts
 .unlighthouse*/
+.lhq/
