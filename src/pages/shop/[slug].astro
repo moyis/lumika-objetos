@@ -19,6 +19,17 @@ const { product } = Astro.props;
 const { Content } = await render(product);
 const { title, slug, subtitle, price, stock, tags, images, fragrances } = product.data;
 const soldOut = stock === 0;
+
+const bodyText = product.body
+  ?.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  .replace(/[#*_>`~]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+const ogDescription = bodyText
+  ? bodyText.length > 160
+    ? `${bodyText.slice(0, 157).trimEnd()}…`
+    : bodyText
+  : (subtitle ?? `${title} — Lumika Objetos`);
 const primaryTag = tags[0];
 
 const all = await getCollection('products');
@@ -84,7 +95,7 @@ const breadcrumbJsonLd = {
 
 <Layout
   title={title}
-  description={subtitle ?? `${title} — Lumika Objetos`}
+  description={ogDescription}
   image={images[0]}
 >
   <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
