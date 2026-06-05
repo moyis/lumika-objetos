@@ -33,3 +33,6 @@ pnpm-debug.log*
 .superpowers/
 .gstack/
 .claude/
+
+# unlighthouse scan artifacts
+.unlighthouse*/
