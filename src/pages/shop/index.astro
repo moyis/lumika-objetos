@@ -8,6 +8,19 @@ import { sortProducts } from '../../lib/filterProducts';
 const all = await getCollection('products');
 const sorted = sortProducts(all);
 const ogImage = sorted[0]?.data.images[0];
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Tienda Lumika Objetos',
+  numberOfItems: sorted.length,
+  itemListElement: sorted.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: new URL(`/shop/${p.data.slug}`, Astro.site).toString(),
+    name: p.data.title,
+  })),
+};
 ---
 
 <Layout
@@ -15,6 +28,8 @@ const ogImage = sorted[0]?.data.images[0];
   description="Tienda de velas de soja artesanales y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas."
   image={ogImage}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(itemListJsonLd)} />
+
   <section class="mx-auto max-w-[1400px] px-5 pt-10 pb-6">
     <span class="label">Tienda · {sorted.length} {sorted.length === 1 ? 'pieza' : 'piezas'}</span>
     <h1 class="display-2 mt-4">Todos los objetos.</h1>
@@ -23,6 +38,6 @@ const ogImage = sorted[0]?.data.images[0];
   <TagChips />
 
   <section class="mx-auto max-w-[1400px] px-5 py-10">
-    <ProductGrid products={sorted} cols={4} />
+    <ProductGrid products={sorted} cols={4} priority />
   </section>
 </Layout>

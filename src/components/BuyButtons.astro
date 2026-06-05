@@ -1,6 +1,6 @@
 ---
 import { PUBLIC_WHATSAPP_NUMBER, PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
-import { whatsappLink, instagramLink } from '../lib/buyLinks';
+import { whatsappLink, instagramDmLink, orderMessage } from '../lib/buyLinks';
 
 interface Props {
   productTitle: string;
@@ -9,8 +9,11 @@ interface Props {
 }
 const { productTitle, disabled = false, fragrances = [] } = Astro.props;
 const hasFragrances = !disabled && fragrances.length > 0;
-const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, productTitle);
-const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
+const wa = whatsappLink(
+  PUBLIC_WHATSAPP_NUMBER,
+  orderMessage(productTitle, hasFragrances ? fragrances[0] : undefined),
+);
+const ig = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
 ---
 
 {
@@ -61,6 +64,9 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
   </a>
   <a
     href={ig}
+    data-buy-ig
+    data-product-title={productTitle}
+    data-requires-fragrance={hasFragrances ? 'true' : 'false'}
     rel="noopener"
     target="_blank"
     class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-pink)] px-6 py-3 font-semibold tracking-wide text-[var(--color-cream)] transition-opacity hover:opacity-90"
@@ -69,42 +75,64 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
   </a>
 </div>
 
+<p data-ig-copied class="label mt-3 hidden text-[var(--color-blue)]">
+  Mensaje copiado ✓ — pegalo en el chat de Instagram
+</p>
+
 <script>
   function setupBuyButtons() {
-    const link = document.querySelector('[data-buy-wa]') as HTMLAnchorElement | null;
-    if (!link || link.dataset.requiresFragrance !== 'true') return;
+    const wa = document.querySelector('[data-buy-wa]') as HTMLAnchorElement | null;
+    const ig = document.querySelector('[data-buy-ig]') as HTMLAnchorElement | null;
+    if (!wa && !ig) return;
+
+    const ref = wa ?? ig!;
+    const title = ref.dataset.productTitle ?? '';
+    const number = wa?.dataset.waNumber ?? '';
+    const requiresFragrance = ref.dataset.requiresFragrance === 'true';
 
     const radios = document.querySelectorAll<HTMLInputElement>('input[name="fragrance"]');
     const hint = document.querySelector('[data-fragrance-hint]') as HTMLElement | null;
-    const number = link.dataset.waNumber ?? '';
-    const title = link.dataset.productTitle ?? '';
+    const copied = document.querySelector('[data-ig-copied]') as HTMLElement | null;
 
     const selected = () =>
       document.querySelector<HTMLInputElement>('input[name="fragrance"]:checked')?.value ?? '';
 
-    const build = (fragrance: string) => {
-      const message = fragrance
-        ? `Hola! Me interesa ${title} (Fragancia: ${fragrance})`
-        : `Hola! Me interesa ${title}`;
-      return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-    };
+    const message = (fragrance: string) =>
+      fragrance
+        ? `Hola, quiero pedir "${title}" con fragancia "${fragrance}"`
+        : `Hola, quiero pedir "${title}"`;
 
     const sync = () => {
-      link.href = build(selected());
+      if (wa) wa.href = `https://wa.me/${number}?text=${encodeURIComponent(message(selected()))}`;
     };
 
     radios.forEach((r) =>
       r.addEventListener('change', () => {
         sync();
         if (selected()) hint?.classList.add('hidden');
+        copied?.classList.add('hidden');
       }),
     );
 
-    link.addEventListener('click', (e) => {
-      if (!selected()) {
+    const guardFragrance = (e: Event) => {
+      if (requiresFragrance && !selected()) {
         e.preventDefault();
         hint?.classList.remove('hidden');
         radios[0]?.focus();
+        return false;
+      }
+      return true;
+    };
+
+    wa?.addEventListener('click', guardFragrance);
+
+    ig?.addEventListener('click', async (e) => {
+      if (!guardFragrance(e)) return;
+      try {
+        await navigator.clipboard.writeText(message(selected()));
+        copied?.classList.remove('hidden');
+      } catch {
+        // Clipboard unavailable (e.g. insecure context) — DM still opens.
       }
     });
 

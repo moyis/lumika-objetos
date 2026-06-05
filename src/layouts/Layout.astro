@@ -70,6 +70,22 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
           type="application/ld+json"
           set:html={JSON.stringify({
             '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Lumika Objetos',
+            url: Astro.site?.toString(),
+            inLanguage: 'es-AR',
+            publisher: { '@type': 'Organization', name: 'Lumika Objetos' },
+          })}
+        />
+      )
+    }
+
+    {
+      Astro.url.pathname === '/' && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'Lumika Objetos',
             url: Astro.site?.toString(),

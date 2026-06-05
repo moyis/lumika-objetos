@@ -1,12 +1,21 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import PriceDisplay from './PriceDisplay.astro';
 
 interface Props {
   product: CollectionEntry<'products'>;
+  // Responsive sizes hint matching the rendered column width. Defaults to a
+  // 3-column layout (used by the related-products grid on product pages).
+  sizes?: string;
+  // Eager-load + high fetch priority for above-the-fold cards (LCP candidate).
+  priority?: boolean;
 }
-const { product } = Astro.props;
+const {
+  product,
+  sizes = '(min-width: 1400px) 450px, (min-width: 768px) 33vw, 50vw',
+  priority = false,
+} = Astro.props;
 const { title, slug, subtitle, price, stock, tags, images } = product.data;
 const cover = images[0];
 const soldOut = stock === 0;
@@ -20,13 +29,16 @@ const soldOut = stock === 0;
   <div class="relative aspect-[4/5] overflow-hidden rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-blush)]">
     {
       cover && (
-        <Image
+        <Picture
           src={cover}
           alt={subtitle ? `${title} — ${subtitle}` : title}
-          widths={[400, 800, 1200]}
-          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+          formats={['avif', 'webp']}
+          widths={[320, 480, 768, 1024]}
+          sizes={sizes}
+          pictureAttributes={{ class: 'contents' }}
           class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchpriority={priority ? 'high' : 'auto'}
           transition:name={`product-image-${slug}`}
         />
       )

@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -9,11 +9,6 @@ interface Props {
 }
 const { images, alt, slug } = Astro.props;
 const [hero, ...rest] = images;
-
-const fullImages = await Promise.all(
-  images.map((img) => getImage({ src: img, width: 2000 })),
-);
-const lightboxSrcs = fullImages.map((img) => img.src);
 ---
 
 {
@@ -25,12 +20,16 @@ const lightboxSrcs = fullImages.map((img) => img.src);
         data-index="0"
         aria-label="Ver imagen en pantalla completa"
       >
-        <Image
+        <Picture
           src={hero}
           alt={alt}
-          widths={[800, 1200, 2000]}
-          sizes="(min-width: 1024px) 60vw, 100vw"
+          formats={['avif', 'webp']}
+          widths={[600, 900, 1280, 1660]}
+          sizes="(min-width: 1400px) 820px, (min-width: 1024px) 60vw, 100vw"
+          pictureAttributes={{ class: 'contents' }}
           class="aspect-[4/5] w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
+          loading="eager"
+          fetchpriority="high"
           transition:name={`product-image-${slug}`}
         />
       </button>
@@ -43,11 +42,13 @@ const lightboxSrcs = fullImages.map((img) => img.src);
               data-index={i + 1}
               aria-label="Ver imagen en pantalla completa"
             >
-              <Image
+              <Picture
                 src={img}
                 alt={`${alt} — detalle ${i + 2}`}
-                widths={[400, 800]}
-                sizes="(min-width: 1024px) 30vw, 50vw"
+                formats={['avif', 'webp']}
+                widths={[300, 450, 820]}
+                sizes="(min-width: 1400px) 400px, (min-width: 1024px) 30vw, 50vw"
+                pictureAttributes={{ class: 'contents' }}
                 class="aspect-square w-full rounded-md border-2 border-[var(--color-ink)] object-cover"
                 loading="lazy"
               />
@@ -78,7 +79,19 @@ const lightboxSrcs = fullImages.map((img) => img.src);
             ‹
           </button>
         )}
-        <img class="lightbox-img max-h-[90vh] max-w-full rounded-md object-contain" alt={alt} />
+        {images.map((img, i) => (
+          <Picture
+            src={img}
+            alt={alt}
+            formats={['avif', 'webp']}
+            widths={[640, 1024, 1600, 2000]}
+            sizes="100vw"
+            pictureAttributes={{ class: 'contents' }}
+            data-lightbox-slide={i}
+            class={`lightbox-img max-h-[90vh] max-w-full rounded-md object-contain${i !== 0 ? ' hidden' : ''}`}
+            loading="lazy"
+          />
+        ))}
         {images.length > 1 && (
           <button
             type="button"
@@ -93,20 +106,20 @@ const lightboxSrcs = fullImages.map((img) => img.src);
   )
 }
 
-<script define:vars={{ lightboxSrcs }}>
+<script>
   document.querySelectorAll('.lightbox-trigger').forEach((trigger) => {
     const lightbox = trigger.closest('.space-y-4')?.querySelector('.lightbox');
     if (!lightbox) return;
 
-    const imgEl = lightbox.querySelector('.lightbox-img');
+    const slides = lightbox.querySelectorAll('[data-lightbox-slide]');
     let current = 0;
 
-    const show = (i) => {
-      current = (i + lightboxSrcs.length) % lightboxSrcs.length;
-      imgEl.src = lightboxSrcs[current];
+    const show = (i: number) => {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((slide, idx) => slide.classList.toggle('hidden', idx !== current));
     };
 
-    const open = (i) => {
+    const open = (i: number) => {
       show(i);
       lightbox.classList.remove('hidden');
       lightbox.classList.add('flex');

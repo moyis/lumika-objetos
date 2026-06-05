@@ -5,12 +5,21 @@ import ProductCard from './ProductCard.astro';
 interface Props {
   products: CollectionEntry<'products'>[];
   cols?: 2 | 3 | 4;
+  // Set when this grid is above the fold so the first card eager-loads (LCP).
+  priority?: boolean;
 }
-const { products, cols = 4 } = Astro.props;
+const { products, cols = 4, priority = false } = Astro.props;
 const gridClass = {
   2: 'grid-cols-2',
   3: 'grid-cols-2 md:grid-cols-3',
   4: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
+}[cols];
+// Image sizes hint per column count so each card requests the resolution it
+// actually renders at (container caps at 1400px). Mirrors gridClass breakpoints.
+const sizes = {
+  2: '(min-width: 1400px) 680px, 50vw',
+  3: '(min-width: 1400px) 450px, (min-width: 768px) 33vw, 50vw',
+  4: '(min-width: 1400px) 330px, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw',
 }[cols];
 ---
 
@@ -21,8 +30,8 @@ const gridClass = {
 {
   products.length > 0 && (
     <div class={`grid ${gridClass} gap-6 md:gap-10`}>
-      {products.map((p) => (
-        <ProductCard product={p} />
+      {products.map((p, i) => (
+        <ProductCard product={p} sizes={sizes} priority={priority && i === 0} />
       ))}
     </div>
   )
