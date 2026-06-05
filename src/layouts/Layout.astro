@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import { Font, getImage } from 'astro:assets';
-import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import brandOgImage from '../assets/images/vella-y-llaveros.webp';
@@ -45,7 +44,6 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="theme-color" content="#fff8d9" />
     <Font cssVariable="--font-stropica" preload />
     <Font cssVariable="--font-poppins" preload />
-    <ClientRouter />
     <title>{fullTitle}</title>
 
     <meta property="og:type" content="website" />

@@ -39,7 +39,6 @@ const soldOut = stock === 0;
           class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
           loading={priority ? 'eager' : 'lazy'}
           fetchpriority={priority ? 'high' : 'auto'}
-          transition:name={`product-image-${slug}`}
         />
       )
     }
@@ -54,12 +53,11 @@ const soldOut = stock === 0;
   <div class="pt-3">
     <h3
       class="wavy-underline inline text-2xl leading-tight font-[var(--font-display)] md:text-3xl"
-      transition:name={`product-title-${slug}`}
     >
       {title}
     </h3>
     {subtitle && <p class="label mt-1 opacity-70">{subtitle}</p>}
-    <p class="mt-1.5" transition:name={`product-price-${slug}`}>
+    <p class="mt-1.5">
       <PriceDisplay value={price} size="sm" />
     </p>
   </div>
