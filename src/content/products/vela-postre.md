@@ -3,9 +3,9 @@ title: Vela Postre
 slug: vela-postre
 price: 19000
 currency: ARS
-stock: 6
+stock: 5
 featured: true
-subtitle: Abla
+subtitle: ""
 tags:
   - velas
 images:
