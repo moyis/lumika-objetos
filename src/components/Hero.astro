@@ -1,8 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import heroImage from '../assets/images/vella-y-llaveros.webp';
-
-const year = new Date().getFullYear();
 ---
 
 <section class="relative overflow-hidden border-b-2 border-[var(--color-ink)]">
@@ -10,14 +8,13 @@ const year = new Date().getFullYear();
     <div
       class="order-last flex flex-col justify-center px-5 py-12 md:order-first md:py-20 md:pr-10 md:pl-[max(1.25rem,calc((100vw-1400px)/2))]"
     >
-      <div class="label flex justify-between">
-        <span>Vol. 01 · {year}</span>
+      <div class="label">
         <span>Mar del Plata</span>
       </div>
 
       <h1 class="display-2 mt-8">
         Velas <em class="text-[var(--color-blue)] italic">&amp;</em><br />
-        <span class="wavy-underline">resina</span>
+        <span class="wavy-underline">Resina</span>
       </h1>
 
       <p class="mt-6 max-w-[40ch] text-base leading-relaxed">

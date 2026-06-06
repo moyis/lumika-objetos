@@ -54,7 +54,9 @@
   .display-2 {
     font-family: var(--font-display);
     font-size: clamp(40px, 7vw, 88px);
-    line-height: 0.95;
+    /* 1.05 (not 0.95) so wrapped headings don't overlap: at <1 the descenders
+       of one line (Q tail, j, p) collide with the caps of the line below. */
+    line-height: 1.05;
     letter-spacing: -0.03em;
   }
   .h2 {
