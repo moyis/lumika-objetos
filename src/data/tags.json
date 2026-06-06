@@ -1,8 +1,12 @@
 {
   "tags": [
-    { "slug": "velas", "label": "Velas" },
-    { "slug": "resina", "label": "Resina" },
-    { "slug": "nuevo", "label": "Nuevo" },
-    { "slug": "edicion-limitada", "label": "Edición limitada" }
+    {
+      "slug": "velas",
+      "label": "Velas"
+    },
+    {
+      "slug": "resina",
+      "label": "Resina"
+    }
   ]
 }
