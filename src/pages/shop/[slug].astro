@@ -8,6 +8,7 @@ import ProductGallery from '../../components/ProductGallery.astro';
 import BuyButtons from '../../components/BuyButtons.astro';
 import PriceDisplay from '../../components/PriceDisplay.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import { TAG_LABELS } from '../../lib/productTags';
 
 export const getStaticPaths = (async () => {
   const all = await getCollection('products');
@@ -56,13 +57,6 @@ const related = all
   )
   .slice(0, 3);
 
-const tagLabel: Record<string, string> = {
-  velas: 'Velas',
-  resina: 'Resina',
-  nuevo: 'Nuevo',
-  'edicion-limitada': 'Edición limitada',
-};
-
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const shopUrl = new URL('/shop', Astro.site).toString();
 
@@ -94,7 +88,7 @@ const breadcrumbItems = [
         {
           '@type': 'ListItem',
           position: 2,
-          name: tagLabel[primaryTag] ?? primaryTag,
+          name: TAG_LABELS[primaryTag] ?? primaryTag,
           item: new URL(`/shop?tag=${primaryTag}`, Astro.site).toString(),
         },
       ]
@@ -124,7 +118,7 @@ const breadcrumbJsonLd = {
       primaryTag && (
         <>
           {' '}
-          / <a href={`/shop?tag=${primaryTag}`}>{tagLabel[primaryTag] ?? primaryTag}</a>
+          / <a href={`/shop?tag=${primaryTag}`}>{TAG_LABELS[primaryTag] ?? primaryTag}</a>
         </>
       )
     }
@@ -146,7 +140,7 @@ const breadcrumbJsonLd = {
                   href={`/shop?tag=${t}`}
                   class="label inline-block rounded-full border border-[var(--color-ink)] px-3 py-1"
                 >
-                  {tagLabel[t] ?? t}
+                  {TAG_LABELS[t] ?? t}
                 </a>
               </li>
             ))}

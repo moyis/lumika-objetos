@@ -45,27 +45,28 @@ collections:
       - { label: Destacado, name: featured, widget: boolean, default: false }
       - label: Fragancias
         name: fragrances
-        widget: select
+        widget: relation
+        collection: settings
+        file: fragrances
+        search_fields: ["fragrances.*"]
+        value_field: "fragrances.*"
+        display_fields: ["fragrances.*"]
         multiple: true
         required: false
-        hint: "Esencias disponibles para esta vela"
-        options:
-          - Frutos del bosque
-          - Limón
-          - Chocolate
-          - Océano
-          - Vainilla
-          - Rosas
-          - Tutti frutti
-          - Rosas y vainilla
+        hint: "Esencias disponibles para esta vela (se editan en Configuración → Fragancias)"
         default: []
       - { label: Subtítulo, name: subtitle, widget: string, required: false, hint: "Frase corta debajo del título" }
       - label: Etiquetas
         name: tags
-        widget: select
+        widget: relation
+        collection: settings
+        file: tags
+        search_fields: ["tags.*.label"]
+        value_field: "tags.*.slug"
+        display_fields: ["tags.*.label"]
         multiple: true
         required: false
-        options: [velas, resina, nuevo, edicion-limitada]
+        hint: "Categorías/etiquetas (se editan en Configuración → Etiquetas)"
         default: []
       - label: Imágenes
         name: images
@@ -74,3 +75,28 @@ collections:
         field: { label: Imagen, name: image, widget: image }
       - { label: Creado, name: date, widget: datetime }
       - { label: Descripción, name: body, widget: markdown }
+
+  - name: settings
+    label: Configuración
+    files:
+      - name: tags
+        label: Etiquetas / Categorías
+        file: src/data/tags.json
+        description: "Etiquetas de producto. También son las categorías que se muestran en el footer."
+        fields:
+          - label: Etiquetas
+            name: tags
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Slug, name: slug, widget: string, hint: "Identificador en minúsculas y sin espacios, ej: edicion-limitada" }
+              - { label: Nombre, name: label, widget: string }
+      - name: fragrances
+        label: Fragancias
+        file: src/data/fragrances.json
+        description: "Esencias disponibles para las velas."
+        fields:
+          - label: Fragancias
+            name: fragrances
+            widget: list
+            field: { label: Fragancia, name: fragrance, widget: string }

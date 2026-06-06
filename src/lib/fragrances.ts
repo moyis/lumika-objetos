@@ -1,12 +1,7 @@
-export const FRAGRANCES = [
-  'Frutos del bosque',
-  'Limón',
-  'Chocolate',
-  'Océano',
-  'Vainilla',
-  'Rosas',
-  'Tutti frutti',
-  'Rosas y vainilla',
-] as const;
+import fragrancesData from '../data/fragrances.json';
 
-export type Fragrance = (typeof FRAGRANCES)[number];
+// Available candle fragrances. Edit them in the admin panel
+// (Configuración → Fragancias), which writes src/data/fragrances.json.
+export const FRAGRANCES: string[] = fragrancesData.fragrances;
+
+export type Fragrance = string;

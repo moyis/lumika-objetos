@@ -1,12 +1,5 @@
 ---
-import { PRODUCT_TAGS } from '../lib/productTags';
-
-const labels: Record<string, string> = {
-  velas: 'Velas',
-  resina: 'Resina',
-  nuevo: 'Nuevo',
-  'edicion-limitada': 'Edición limitada',
-};
+import { TAGS } from '../lib/productTags';
 ---
 
 <div
@@ -21,13 +14,13 @@ const labels: Record<string, string> = {
       >Todo</button
     >
     {
-      PRODUCT_TAGS.map((tag) => (
+      TAGS.map((tag) => (
         <button
           type="button"
-          data-tag={tag}
+          data-tag={tag.slug}
           class="chip label rounded-full border-2 border-[var(--color-ink)] px-4 py-1.5 whitespace-nowrap"
         >
-          {labels[tag]}
+          {tag.label}
         </button>
       ))
     }

@@ -2,6 +2,7 @@
 import Marquee from './Marquee.astro';
 import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
 import { whatsappLink, instagramLink } from '../lib/buyLinks';
+import { TAGS } from '../lib/productTags';
 import Wordmark from './Wordmark.astro';
 
 const year = new Date().getFullYear();
@@ -16,23 +17,26 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
     <div>
       <Wordmark size="lg" color="var(--color-ink)" />
       <p class="mt-3 max-w-[24ch] text-sm opacity-80">
-        Velas de soja y accesorios de resina, hechos a mano.
+        Velas de cera de soja y accesorios de resina, hechos a mano.
       </p>
     </div>
 
     <div>
       <h2 class="label mb-3">Tienda</h2>
       <ul class="flex flex-col gap-2 text-sm">
-        <li><a href="/shop">Todos los objetos</a></li>
-        <li><a href="/shop?tag=velas">Velas</a></li>
-        <li><a href="/shop?tag=resina">Resina</a></li>
+        <li><a href="/shop">Todas las piezas</a></li>
+        {TAGS.map((t) => (
+          <li>
+            <a href={`/shop?tag=${t.slug}`}>{t.label}</a>
+          </li>
+        ))}
       </ul>
     </div>
 
     <div>
       <h2 class="label mb-3">Lumika</h2>
       <ul class="flex flex-col gap-2 text-sm">
-        <li><a href="/about">Sobre nosotros</a></li>
+        <li><a href="/about">Sobre nosotras</a></li>
         <li><a href="/contact">Contacto</a></li>
       </ul>
     </div>
