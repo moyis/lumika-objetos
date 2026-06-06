@@ -1,4 +1,5 @@
 // @ts-check
+/* global process */
 import { defineConfig, envField, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -6,6 +7,14 @@ import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 
 import sitemap from '@astrojs/sitemap';
+
+// The Cloudflare adapter runs `astro dev` inside the workerd runtime, whose
+// sandboxed fs can't read host files (node:fs/promises -> ENOENT on
+// vite/package.json, the sharp image endpoint, etc.), so `astro dev` crashes on
+// every request. The whole site is prerendered, so dev needs none of the worker
+// runtime — skip the adapter during `astro dev` and let Astro serve in plain
+// Node (working <Image>, fonts and HMR). `astro build`/`preview` still use it.
+const isDev = process.argv.includes('dev');
 
 // https://astro.build/config
 export default defineConfig({
@@ -67,6 +76,6 @@ export default defineConfig({
     // re-encodes at full resolution, which shipped oversized variants.
     service: { entrypoint: 'astro/assets/services/sharp' },
   },
-  adapter: cloudflare({ imageService: 'custom', prerenderEnvironment: 'node' }),
+  adapter: isDev ? undefined : cloudflare({ imageService: 'custom', prerenderEnvironment: 'node' }),
   integrations: [sitemap({ filter: (page) => !page.includes('/admin') })],
 });
