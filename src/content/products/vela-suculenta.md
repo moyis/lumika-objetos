@@ -8,7 +8,8 @@ featured: false
 fragrances:
   - Rosas
   - Vainilla
-tags: []
+tags:
+  - velas
 images:
   - ../../assets/products/img_3314.jpg
   - ../../assets/products/img_3311.jpg

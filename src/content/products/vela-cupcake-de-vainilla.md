@@ -6,6 +6,8 @@ price: 9000
 currency: ARS
 stock: 4
 featured: false
+fragrances:
+  - Vainilla
 tags:
   - velas
 images:

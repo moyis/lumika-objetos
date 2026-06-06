@@ -6,6 +6,8 @@ price: 12000
 currency: ARS
 stock: 2
 featured: false
+fragrances:
+  - Rosas y vainilla
 tags:
   - velas
 images:

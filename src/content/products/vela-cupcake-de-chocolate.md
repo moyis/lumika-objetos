@@ -8,7 +8,8 @@ stock: 10
 featured: false
 fragrances:
   - Chocolate
-tags: []
+tags:
+  - velas
 images:
   - ../../assets/products/img_3153.jpg
   - ../../assets/products/img_3141.jpg
