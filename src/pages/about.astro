@@ -9,18 +9,18 @@ import studioImage from '../assets/images/vela-muffin-limon-y-aritos.webp';
 const steps = [
   {
     num: '01',
-    title: 'Diseño',
-    body: 'Cada pieza empieza en papel. Probamos formas, esencias, colores hasta dar con algo que valga la pena verter.',
+    title: 'Color',
+    body: 'Trabajamos con colores vibrantes, acabados brillantes y combinaciones que nacen de la experimentación.',
   },
   {
     num: '02',
-    title: 'Vertido',
-    body: 'Cera de soja calentada al punto justo, o resina mezclada y desgasificada. Una pieza por vez. Sin moldes industriales.',
+    title: 'Brillo',
+    body: 'Forma parte de nuestra imagen, porque nos interesa cómo cambia un objeto cotidiano para hacerlo más vistoso.',
   },
   {
     num: '03',
-    title: 'Curado',
-    body: 'Las velas reposan días para fijar la fragancia. La resina cura sin apuro hasta quedar firme y transparente.',
+    title: 'Personalidad',
+    body: 'Nos gustan las piezas con presencia, con menos miedo de ocupar espacio y no necesitan pasar desapercibidas.',
   },
 ];
 ---
@@ -46,7 +46,7 @@ const steps = [
         <Image
           src={introImage}
           alt="Vela Lumika con accesorios de resina"
-          widths={[720, 1080, 1600]}
+          width={1600}
           sizes="(min-width: 768px) 62vw, 100vw"
           class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[560px]"
           loading="eager"
@@ -74,7 +74,7 @@ const steps = [
       <Image
         src={studioImage}
         alt="Vela Lumika de limón con aritos de resina"
-        widths={[720, 1080, 1600]}
+        width={1600}
         sizes="(min-width: 768px) 62vw, 100vw"
         class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[480px]"
       />
@@ -82,9 +82,14 @@ const steps = [
         class="flex flex-col justify-center px-5 py-12 md:py-20 md:pr-[max(1.25rem,calc((100vw-1400px)/2))] md:pl-10"
       >
         <h2 class="display-2">Quiénes somos.</h2>
-        <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
-          Dos manos, una mesa, mucha luz. Cada tanda lleva el ritmo de quien la hace. Si tenés una
-          idea para una pieza única en resina, hablanos.
+        <p class="mt-4 max-w-[44ch] text-base leading-relaxed md:text-lg">
+          Somos dos amigas que, después de casi dos décadas creando y experimentando juntas, le
+          dimos forma a Lumika. Cada vela y cada pieza de resina lleva esos años de oficio: crear con
+          las manos algo que valga la pena mirar dos veces.
+        </p>
+        <p class="mt-4 max-w-[44ch] text-base leading-relaxed md:text-lg">
+          ¿Tenés una idea en mente? Hacemos piezas personalizadas pensadas para vos. Contanos qué
+          imaginás y la creamos juntas.
         </p>
         <a
           href="/contact"
@@ -99,23 +104,25 @@ const steps = [
     <div class="mx-auto max-w-[1100px] px-5 py-16">
       <span class="label">Quien hace</span>
       <h2 class="display-2 mt-4">Las manos detrás.</h2>
+      <div class="mt-6 max-w-[60ch] space-y-4 text-base leading-relaxed md:text-lg">
+        <p>
+          Lumika nació de una amistad que lleva acompañándonos por casi dos décadas. Emprender juntas es algo que surgió naturalmente.
+        </p>
+      </div>
       <div class="mt-10 grid gap-10 md:grid-cols-2">
         <article>
           <h3 class="h2 mt-5">Abril</h3>
-          <p class="label mt-1 opacity-70">Co-fundadora · Velas</p>
+          <p class="label mt-1 opacity-70">Velas & más</p>
           <p class="mt-4 leading-relaxed">
-            Abril lidera las velas: elige las esencias, prepara la cera de soja y vierte cada vaso a
-            mano, en lotes pequeños. Trabaja en ediciones cortas, cuidando que cada tanda salga del
-            taller de Mar del Plata con su propio carácter.
+            Abril lidera las velas: Suele prestar atención a los detalles y dedicar bastante tiempo a probar distintas posibilidades antes de quedarse con una. Disfruta el proceso de construir algo de a poco, desde una nueva pieza hasta cualquier idea que termine formando parte de Lumika.
+
           </p>
         </article>
         <article>
           <h3 class="h2 mt-5">Mailen</h3>
-          <p class="label mt-1 opacity-70">Co-fundadora · Resina</p>
+          <p class="label mt-1 opacity-70">Resina & más</p>
           <p class="mt-4 leading-relaxed">
-            Mailen lidera la resina: mezcla, colorea y vuelca cada pieza a mano, una por vez. Le
-            gusta el detalle de las ediciones cortas, donde cada accesorio queda único y ninguno
-            sale exactamente igual al anterior.
+            Mailen lidera la resina: Tiene una forma más espontánea de encarar las cosas y una facilidad especial para pasar de la idea a la acción. Su entusiasmo por probar cosas nuevas sigue empujando a Lumika hacia lugares inesperados.
           </p>
         </article>
       </div>

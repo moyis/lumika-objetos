@@ -13,13 +13,11 @@ import handmadeImage from '../assets/images/vela-postre.webp';
 const all = await getCollection('products');
 const sorted = sortProducts(all);
 const featured = sorted.filter((p) => p.data.featured);
-const ogImage = featured[0]?.data.images[0];
 ---
 
 <Layout
   title="Lumika Objetos"
   description="Velas de soja artesanales y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas. Compra por WhatsApp."
-  image={ogImage}
 >
   <Hero />
 
@@ -40,7 +38,7 @@ const ogImage = featured[0]?.data.images[0];
       <Image
         src={handmadeImage}
         alt="Vela de soja con forma de postre"
-        widths={[720, 1080, 1600]}
+        width={1600}
         sizes="(min-width: 768px) 62vw, 100vw"
         class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[480px]"
       />
@@ -49,11 +47,10 @@ const ogImage = featured[0]?.data.images[0];
       >
         <h2 class="display-2">
           Pequeñas piezas,<br />
-          <em class="text-[var(--color-blue)] italic">mucho carácter.</em>
+          <em class="text-[var(--color-blue)] italic">mucha personalidad.</em>
         </h2>
         <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
-          Cada pieza pasa por las manos. Sin moldes en serie, sin atajos. Las velas se vierten una
-          por una; la resina se mezcla y se cuela sin apuro.
+          Creamos objetos que llaman la atención por sus detalles. Los colores, formas y combinaciones transforman objetos cotidianos en piezas que destacan.
         </p>
         <a href="/about" class="label mt-6 inline-block underline">Sobre Lumika →</a>
       </div>

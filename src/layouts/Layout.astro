@@ -4,7 +4,6 @@ import { Font, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import brandOgImage from '../assets/images/vella-y-llaveros.webp';
 
 interface Props {
   title: string;
@@ -18,17 +17,17 @@ const {
 } = Astro.props;
 const fullTitle =
   title === 'Lumika Objetos'
-    ? 'Lumika Objetos - Velas de soja y resina artesanal - Mar del Plata'
+    ? 'Lumika Objetos - Velas de soja y resina - Mar del Plata'
     : `${title} · Lumika Objetos`;
 
-const ogImage = await getImage({
-  src: image ?? brandOgImage,
-  width: 1200,
-  height: 630,
-  format: 'jpeg',
-  fit: 'cover',
-});
-const ogImageUrl = new URL(ogImage.src, Astro.site).toString();
+// Pages with a specific image (products) get a cropped JPEG of it; everything
+// else falls back to the curated 1200x630 brand card at /og-image.png.
+const ogImageUrl = image
+  ? new URL(
+      (await getImage({ src: image, width: 1200, height: 630, format: 'jpeg', fit: 'cover' })).src,
+      Astro.site,
+    ).toString()
+  : new URL('/og-image.png', Astro.site).toString();
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
@@ -44,7 +43,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#fff8d9" />
     <Font cssVariable="--font-stropica" preload />
-    <Font cssVariable="--font-poppins" preload />
+    <Font cssVariable="--font-poppins" />
     <title>{fullTitle}</title>
 
     <meta property="og:type" content="website" />

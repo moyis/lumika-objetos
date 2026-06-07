@@ -14,7 +14,8 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 const mail = emailLink(PUBLIC_CONTACT_EMAIL);
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
-const imageUrl = new URL('/favicon.svg', Astro.site).toString();
+// Schema.org image must be raster (Google ignores SVG): use the brand OG card.
+const imageUrl = new URL('/og-image.png', Astro.site).toString();
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',

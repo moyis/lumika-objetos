@@ -9,7 +9,6 @@ import { sortProducts } from '../../lib/filterProducts';
 
 const all = await getCollection('products');
 const sorted = sortProducts(all);
-const ogImage = sorted[0]?.data.images[0];
 
 const itemListJsonLd = {
   '@context': 'https://schema.org',
@@ -28,7 +27,6 @@ const itemListJsonLd = {
 <Layout
   title="Tienda"
   description="Tienda de velas de soja artesanales y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas."
-  image={ogImage}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(itemListJsonLd)} />
 
