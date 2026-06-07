@@ -3,6 +3,7 @@ export const prerender = true;
 
 import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Star from '../assets/logos/star.svg';
 import introImage from '../assets/images/vela-y-accesorios.webp';
 import studioImage from '../assets/images/vela-muffin-limon-y-aritos.webp';
 
@@ -20,13 +21,6 @@ const values = [
     body: 'Nos gustan las piezas con presencia, con menos miedo de ocupar espacio y no necesitan pasar desapercibidas.',
   },
 ];
-
-// Per-index variation so the three values read as a composed trio, not an
-// identical icon-card row: leading value larger + accented, the others offset
-// down the grid for rhythm.
-const valueTitle = ['display-2', 'h2', 'h2'];
-const valueAccent = ['text-[var(--color-blue)]', '', ''];
-const valueOffset = ['', 'md:mt-16', 'md:mt-8'];
 ---
 
 <Layout title="Sobre Lumika">
@@ -63,12 +57,13 @@ const valueOffset = ['', 'md:mt-16', 'md:mt-8'];
   </section>
 
   <section class="border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
-    <div class="section-y mx-auto grid max-w-[1400px] items-start gap-x-10 gap-y-12 px-5 md:grid-cols-3">
+    <div class="section-y mx-auto grid max-w-[1400px] gap-10 px-5 md:grid-cols-3">
       {
-        values.map((v, i) => (
-          <div class={valueOffset[i]}>
-            <h2 class={`${valueTitle[i]} ${valueAccent[i]}`}>{v.title}</h2>
-            <p class="mt-3 max-w-[34ch] leading-relaxed">{v.body}</p>
+        values.map((v) => (
+          <div>
+            <Star class="h-5 w-auto" style="--c-1: var(--color-pink)" aria-hidden="true" />
+            <h2 class="h2 mt-4">{v.title}</h2>
+            <p class="mt-3 leading-relaxed">{v.body}</p>
           </div>
         ))
       }
