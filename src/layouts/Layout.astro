@@ -9,12 +9,27 @@ interface Props {
   title: string;
   description?: string;
   image?: ImageMetadata;
+  // LCP hero image to preload in <head>. Resolved to its AVIF srcset so the
+  // browser starts fetching it during HTML parse instead of after discovering
+  // the <img> in the body.
+  preloadImage?: ImageMetadata;
+  // Must match the hero <Picture> `sizes` so preload and render share one file.
+  preloadSizes?: string;
 }
 const {
   title,
   description = 'Velas de soja y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas. Compra por WhatsApp.',
   image,
+  preloadImage,
+  preloadSizes,
 } = Astro.props;
+
+// Same format/width/layout as the hero <Picture>, so getImage produces the
+// identical hashed AVIF variants — the preload is a cache hit, not a 2nd fetch.
+const heroPreload =
+  preloadImage && preloadSizes
+    ? await getImage({ src: preloadImage, format: 'avif', width: 1600, sizes: preloadSizes })
+    : null;
 const fullTitle =
   title === 'Lumika Objetos'
     ? 'Velas y decoración en Mar del Plata | Lumika Objetos'
@@ -35,7 +50,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 <html lang="es-AR">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -44,6 +59,18 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="theme-color" content="#fff8d9" />
     <Font cssVariable="--font-stropica" preload />
     <Font cssVariable="--font-poppins" />
+    {
+      heroPreload && (
+        <link
+          rel="preload"
+          as="image"
+          type="image/avif"
+          imagesrcset={heroPreload.srcSet.attribute}
+          imagesizes={preloadSizes}
+          fetchpriority="high"
+        />
+      )
+    }
     <title>{fullTitle}</title>
 
     <meta property="og:type" content="website" />
@@ -102,8 +129,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
     }
   </head>
   <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only rounded-full focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-skip focus:bg-[var(--color-ink)] focus:px-4 focus:py-2 focus:font-semibold focus:text-[var(--color-cream)]"
+      >Saltar al contenido</a
+    >
     <Header />
-    <main class="flex-1">
+    <main id="main" class="flex-1">
       <slot />
     </main>
     <Footer />

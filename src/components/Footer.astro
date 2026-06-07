@@ -23,19 +23,21 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 
     <div>
       <h2 class="label mb-3">Tienda</h2>
-      <ul class="flex flex-col gap-2 text-sm">
+      <ul class="flex flex-col text-sm [&_a]:flex [&_a]:min-h-[44px] [&_a]:items-center [&_a:hover]:underline">
         <li><a href="/shop">Todas las piezas</a></li>
-        {TAGS.map((t) => (
-          <li>
-            <a href={`/shop?tag=${t.slug}`}>{t.label}</a>
-          </li>
-        ))}
+        {
+          TAGS.map((t) => (
+            <li>
+              <a href={`/shop?tag=${t.slug}`}>{t.label}</a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
     <div>
       <h2 class="label mb-3">Lumika</h2>
-      <ul class="flex flex-col gap-2 text-sm">
+      <ul class="flex flex-col text-sm [&_a]:flex [&_a]:min-h-[44px] [&_a]:items-center [&_a:hover]:underline">
         <li><a href="/about">Sobre nosotras</a></li>
         <li><a href="/contact">Contacto</a></li>
       </ul>
@@ -43,7 +45,7 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 
     <div>
       <h2 class="label mb-3">Seguinos</h2>
-      <ul class="flex flex-col gap-2 text-sm">
+      <ul class="flex flex-col text-sm [&_a]:flex [&_a]:min-h-[44px] [&_a]:items-center [&_a:hover]:underline">
         <li><a href={ig} target="_blank" rel="noopener">Instagram ↗</a></li>
         <li><a href={wa} target="_blank" rel="noopener">WhatsApp ↗</a></li>
       </ul>

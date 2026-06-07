@@ -37,3 +37,6 @@ pnpm-debug.log*
 # unlighthouse scan artifacts
 .unlighthouse*/
 .lhq/
+.playwrith-mcp/
+.impeccable/
+

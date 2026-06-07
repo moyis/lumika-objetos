@@ -27,10 +27,5 @@ const style = styleParts.join('; ') + ';';
 ---
 
 <a href="/" aria-label="Lumika Objetos — Inicio" class={`block ${className}`}>
-  <IsotypePink
-    role="img"
-    aria-label="Lumika Objetos"
-    class={`${heights[size]} w-auto`}
-    style={style}
-  />
+  <IsotypePink aria-hidden="true" class={`${heights[size]} w-auto`} style={style} />
 </a>

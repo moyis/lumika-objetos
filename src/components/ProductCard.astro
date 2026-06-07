@@ -26,12 +26,14 @@ const soldOut = stock === 0;
   data-product-tags={tags.join(',')}
   class="group block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]"
 >
-  <div class="relative aspect-[4/5] overflow-hidden rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-blush)]">
+  <div
+    class="relative aspect-[4/5] overflow-hidden rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-blush)]"
+  >
     {
       cover && (
         <Picture
           src={cover}
-          alt={subtitle ? `${title} — ${subtitle}` : title}
+          alt={subtitle ? `${title}, ${subtitle}` : title}
           formats={['avif', 'webp']}
           fallbackFormat="webp"
           width={700}
@@ -53,12 +55,10 @@ const soldOut = stock === 0;
     }
   </div>
   <div class="pt-3">
-    <h3
-      class="wavy-underline inline text-2xl leading-tight font-[var(--font-display)] md:text-3xl"
-    >
+    <h3 class="wavy-underline inline text-2xl leading-tight font-[var(--font-display)] md:text-3xl">
       {title}
     </h3>
-    {subtitle && <p class="label mt-1 opacity-70">{subtitle}</p>}
+    {subtitle && <p class="mt-1 text-sm leading-snug text-[var(--color-ink)]/70">{subtitle}</p>}
     <p class="mt-1.5">
       <PriceDisplay value={price} size="sm" />
     </p>

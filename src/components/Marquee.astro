@@ -5,13 +5,14 @@ interface Props {
   speedSeconds?: number;
   repeat?: number;
 }
-const { items, speedSeconds, repeat = 8 } = Astro.props;
+const { items, speedSeconds, repeat = 6 } = Astro.props;
 const duration = speedSeconds ?? Math.max(120, items.length * repeat * 6);
 const repeated = Array.from({ length: repeat }, () => items).flat();
 ---
 
 <div
   class="marquee w-full overflow-hidden border-y-2 border-[var(--color-ink)] bg-[var(--color-blue)] py-3 text-[var(--color-cream)]"
+  aria-hidden="true"
 >
   <div
     class="marquee-track label flex w-max whitespace-nowrap"

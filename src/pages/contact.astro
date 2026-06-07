@@ -26,47 +26,56 @@ const businessSchema = localBusinessSchema({
 
 <Layout title="Contacto">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
-  <section class="mx-auto max-w-[1400px] px-5 py-16">
-    <span class="label">Contacto</span>
-    <h1 class="display-1 mt-6">Hablemos.</h1>
+  <section class="section-y mx-auto max-w-[1400px] px-5">
+    <h1 class="display-1">Hablemos.</h1>
 
-    <div class="mt-12 grid gap-5 md:grid-cols-3">
+    <div class="mt-12 grid gap-5 md:grid-cols-2 md:grid-rows-2">
       <a
         href={wa}
         target="_blank"
         rel="noopener"
-        class="block rounded-xl bg-[var(--color-blue)] p-8 text-[var(--color-cream)] transition-opacity hover:opacity-90"
+        class="flex flex-col justify-between rounded-2xl bg-[var(--color-blue)] p-8 text-[var(--color-cream)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-cream)] md:row-span-2 md:p-10"
       >
         <div class="label">Más rápido</div>
-        <div class="display-2 mt-2">WhatsApp</div>
-        <div class="label mt-6">Abrir chat ↗</div>
+        <div class="mt-10 flex flex-col md:mt-0 md:flex-1 md:justify-center">
+          <div class="display-2" style="font-size: clamp(3.25rem, 6.5vw, 6rem)">WhatsApp</div>
+          <p class="mt-5 max-w-[34ch] leading-relaxed opacity-90">
+            Te respondemos rápido, casi siempre el mismo día. Contanos qué pieza querés y
+            coordinamos la entrega.
+          </p>
+          <div class="label mt-8">Abrir chat ↗</div>
+        </div>
       </a>
 
       <a
         href={ig}
         target="_blank"
         rel="noopener"
-        class="block rounded-xl bg-[var(--color-blue)] p-8 text-[var(--color-cream)] transition-opacity hover:opacity-90"
+        class="flex flex-col justify-between rounded-2xl bg-[var(--color-pink)] p-8 text-[var(--color-ink)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-cream)]"
       >
         <div class="label">Stories y novedades</div>
-        <div class="display-2 mt-2">Instagram</div>
-        <div class="label mt-6">@{PUBLIC_INSTAGRAM_HANDLE} ↗</div>
+        <div class="mt-10">
+          <div class="display-2">Instagram</div>
+          <div class="label mt-4">@{PUBLIC_INSTAGRAM_HANDLE} ↗</div>
+        </div>
       </a>
 
       <a
         href={mail}
-        class="block rounded-xl bg-[var(--color-blue)] p-8 text-[var(--color-cream)] transition-opacity hover:opacity-90"
+        class="flex flex-col justify-between rounded-2xl border-2 border-[var(--color-ink)] p-8 text-[var(--color-ink)] transition-colors hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-cream)]"
       >
         <div class="label">Pedidos largos</div>
-        <div class="display-2 mt-2">Email</div>
-        <div class="label mt-6">{PUBLIC_CONTACT_EMAIL} ↗</div>
+        <div class="mt-10">
+          <div class="display-2">Email</div>
+          <div class="mt-4 text-sm font-semibold break-all">{PUBLIC_CONTACT_EMAIL} ↗</div>
+        </div>
       </a>
     </div>
 
-    <div class="mt-16 max-w-[60ch]">
+    <div class="mt-12 max-w-[60ch]">
       <h2 class="h2">¿Querés algo único en resina?</h2>
       <p class="mt-4 text-lg leading-relaxed">
-        Escribinos por WhatsApp con la idea — colores, medidas, referencias. Te decimos si es viable
+        Escribinos por WhatsApp con la idea: colores, medidas, referencias. Te decimos si es viable
         y te pasamos un presupuesto antes de empezar.
       </p>
     </div>

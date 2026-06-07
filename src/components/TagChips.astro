@@ -4,13 +4,14 @@ import { TAGS } from '../lib/productTags';
 
 <div
   data-tag-chips
-  class="sticky top-[65px] z-30 border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)] py-3"
+  class="sticky top-[var(--header-h)] z-sticky border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)] py-3"
 >
   <div class="mx-auto flex max-w-[1400px] gap-2 overflow-x-auto px-5">
     <button
       type="button"
       data-tag="__all"
-      class="chip label rounded-full border-2 border-[var(--color-ink)] px-4 py-1.5 whitespace-nowrap"
+      aria-pressed="false"
+      class="chip label inline-flex min-h-[44px] items-center rounded-full border-2 border-[var(--color-ink)] px-4 whitespace-nowrap"
       >Todo</button
     >
     {
@@ -18,7 +19,8 @@ import { TAGS } from '../lib/productTags';
         <button
           type="button"
           data-tag={tag.slug}
-          class="chip label rounded-full border-2 border-[var(--color-ink)] px-4 py-1.5 whitespace-nowrap"
+          aria-pressed="false"
+          class="chip label inline-flex min-h-[44px] items-center rounded-full border-2 border-[var(--color-ink)] px-4 whitespace-nowrap"
         >
           {tag.label}
         </button>
@@ -57,14 +59,20 @@ import { TAGS } from '../lib/productTags';
       const visible = tags.size === 0 || [...tags].every((t) => cardTags.includes(t));
       card.style.display = visible ? '' : 'none';
     });
+    const visibleCount = [...cards].filter((c) => c.style.display !== 'none').length;
     const empty = document.querySelector<HTMLElement>('[data-empty-state]');
-    if (empty) {
-      const anyVisible = [...cards].some((c) => c.style.display !== 'none');
-      empty.style.display = anyVisible ? 'none' : '';
-    }
+    if (empty) empty.style.display = visibleCount > 0 ? 'none' : '';
+
+    // Keep the "Tienda · N piezas" header in sync with the active filter.
+    const countEl = document.querySelector<HTMLElement>('[data-product-count]');
+    const nounEl = document.querySelector<HTMLElement>('[data-product-noun]');
+    if (countEl) countEl.textContent = String(visibleCount);
+    if (nounEl) nounEl.textContent = visibleCount === 1 ? 'pieza' : 'piezas';
     document.querySelectorAll<HTMLElement>('.chip').forEach((btn) => {
       const t = btn.dataset.tag ?? '';
-      btn.dataset.active = String(t === '__all' ? tags.size === 0 : tags.has(t));
+      const active = t === '__all' ? tags.size === 0 : tags.has(t);
+      btn.dataset.active = String(active);
+      btn.setAttribute('aria-pressed', String(active));
     });
   }
 

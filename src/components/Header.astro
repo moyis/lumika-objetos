@@ -8,16 +8,27 @@ const navLinks = [
   { href: '/about', label: 'Sobre nosotras' },
   { href: '/contact', label: 'Contacto' },
 ];
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`);
 ---
 
-<header class="sticky top-0 z-40 border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
+<header class="sticky top-0 z-header border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
   <div class="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4">
     <Isotype size="lg" />
 
     <nav class="hidden items-center gap-8 md:flex">
       {
         navLinks.map((link) => (
-          <a href={link.href} class="label transition-colors hover:text-[var(--color-blue)]">
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+            class:list={[
+              'label py-2 transition-colors hover:text-[var(--color-blue)]',
+              isActive(link.href) && 'text-[var(--color-blue)]',
+            ]}
+          >
             {link.label}
           </a>
         ))
@@ -26,8 +37,11 @@ const navLinks = [
 
     <button
       type="button"
-      class="inline-flex flex-col gap-1.5 p-2 md:hidden"
+      class="inline-flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-1.5 md:hidden"
       aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-haspopup="dialog"
       data-mobile-menu-trigger
     >
       <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>

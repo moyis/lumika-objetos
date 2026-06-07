@@ -2,23 +2,44 @@
 export const prerender = true;
 
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import Star from '../assets/logos/star.svg';
-import { sortProducts } from '../lib/filterProducts';
+import { sortProducts, sortByNewest } from '../lib/filterProducts';
 import { localBusinessSchema } from '../lib/businessSchema';
+import { whatsappLink, instagramDmLink } from '../lib/buyLinks';
 import {
   PUBLIC_INSTAGRAM_HANDLE,
   PUBLIC_WHATSAPP_NUMBER,
   PUBLIC_CONTACT_EMAIL,
 } from 'astro:env/client';
 import handmadeImage from '../assets/images/vela-postre.webp';
+import heroImage from '../assets/images/vella-y-llaveros.webp';
+
+// Single source for the hero image + sizes: Hero renders it, Layout preloads it.
+const heroSizes = '(min-width: 768px) 62vw, 100vw';
 
 const all = await getCollection('products');
 const sorted = sortProducts(all);
-const featured = sorted.filter((p) => p.data.featured);
+
+// Destacados showcase. A 3-column grid looks broken with one or two cards, so
+// prefer flagged products only when there are enough to fill rows; otherwise
+// fall back to the newest pieces. Then trim a lone trailing card so the last
+// row never leaves a single orphan beside empty columns.
+const flagged = sorted.filter((p) => p.data.featured);
+const usingFeatured = flagged.length >= 3;
+const showcaseRaw = (usingFeatured ? flagged : sortByNewest(all)).slice(0, 6);
+const showcase =
+  showcaseRaw.length > 1 && showcaseRaw.length % 3 === 1
+    ? showcaseRaw.slice(0, -1)
+    : showcaseRaw;
+const showcaseHeading = usingFeatured ? 'Destacados' : 'Recién hechas';
+
+// Direct order paths for the closing call-to-action band.
+const waOrder = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola! Quiero hacer un pedido');
+const igOrder = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
 
 // LocalBusiness schema on the homepage — the page most likely to rank for
 // "velas en Mar del Plata" — to reinforce the local-search signal.
@@ -33,9 +54,13 @@ const businessSchema = localBusinessSchema({
 // Q&A targeting "dónde comprar velas / decoración en Mar del Plata". The same
 // list feeds the visible FAQ and the FAQPage schema, so they never drift —
 // and gives AI assistants a directly quotable "where to buy" answer.
-const faqs = [
+// `q` is the keyword-exact question used by the FAQPage schema (for Google/AI);
+// `display`, when present, overrides the on-page text so it reads naturally for
+// a visitor already on the site.
+const faqs: { q: string; display?: string; a: string }[] = [
   {
     q: '¿Dónde comprar velas artesanales y decoración en Mar del Plata?',
+    display: '¿Dónde encuentro las velas y objetos de Lumika?',
     a: `En Lumika Objetos: hacemos velas de cera de soja y objetos de decoración en resina, a mano, en Mar del Plata. Hacés tu pedido por WhatsApp o Instagram (@${PUBLIC_INSTAGRAM_HANDLE}).`,
   },
   {
@@ -43,8 +68,9 @@ const faqs = [
     a: 'Escribinos por WhatsApp o Instagram con la pieza que querés. Te confirmamos disponibilidad y coordinamos la entrega.',
   },
   {
-    q: '¿Hacen piezas personalizadas?',
-    a: 'Sí. Contanos tu idea —colores, medidas, referencias— y creamos piezas únicas en resina pensadas para vos.',
+    q: '¿Hacen piezas personalizadas, souvenirs para eventos o pedidos por mayor?',
+    display: '¿Hacen piezas personalizadas y pedidos para eventos?',
+    a: 'Sí. Creamos piezas únicas en resina a partir de tu idea (colores, medidas, referencias) y también hacemos velas y souvenirs para casamientos, cumpleaños, eventos y regalos corporativos, en lotes y con detalles a tu medida. Como cada pieza es hecha a mano, pedimos algo de anticipación: escribinos por WhatsApp con la fecha y la cantidad y te pasamos un presupuesto.',
   },
   {
     q: '¿Cómo se paga?',
@@ -66,42 +92,48 @@ const faqSchema = {
 <Layout
   title="Lumika Objetos"
   description="Velas artesanales y objetos de decoración en Mar del Plata. Velas de soja y piezas de resina hechas a mano, en ediciones cortas. Compra por WhatsApp."
+  preloadImage={heroImage}
+  preloadSizes={heroSizes}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
-  <Hero />
+  <Hero image={heroImage} sizes={heroSizes} />
 
   <section class="bg-[var(--color-cream)]">
-    <div class="mx-auto max-w-[1400px] px-5 py-16">
+    <div class="section-y mx-auto max-w-[1400px] px-5">
       <div class="mb-8 flex items-end justify-between">
         <h2 class="display-2 inline-flex items-center gap-3">
-          <Star class="h-[0.9em] w-auto shrink-0" aria-hidden="true" /> Destacados
+          <Star class="h-[0.9em] w-auto shrink-0" aria-hidden="true" /> {showcaseHeading}
         </h2>
         <a href="/shop" class="label hover:text-[var(--color-blue)]">Ver todo →</a>
       </div>
-      <ProductGrid products={featured} cols={3} />
+      <ProductGrid products={showcase} cols={3} />
     </div>
   </section>
 
   <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
     <div class="grid items-stretch md:grid-cols-[8fr_5fr]">
-      <Image
+      <Picture
         src={handmadeImage}
         alt="Vela de soja con forma de postre"
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
         width={1600}
         sizes="(min-width: 768px) 62vw, 100vw"
+        pictureAttributes={{ class: 'contents' }}
         class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[480px]"
       />
       <div
-        class="flex flex-col justify-center px-5 py-12 md:py-20 md:pr-[max(1.25rem,calc((100vw-1400px)/2))] md:pl-10"
+        class="flex flex-col justify-center px-5 py-12 md:py-20 md:gutter-r md:pl-10"
       >
         <h2 class="display-2">
           Pequeñas piezas,<br />
           <em class="text-[var(--color-blue)] italic">mucha personalidad.</em>
         </h2>
         <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
-          Creamos objetos de decoración que llaman la atención por sus detalles. Los colores, formas y combinaciones transforman objetos cotidianos en piezas que destacan.
+          Creamos objetos de decoración que llaman la atención por sus detalles. Los colores, formas
+          y combinaciones transforman objetos cotidianos en piezas que destacan.
         </p>
         <a href="/about" class="label mt-6 inline-block underline">Sobre Lumika →</a>
       </div>
@@ -109,18 +141,51 @@ const faqSchema = {
   </section>
 
   <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
-    <div class="mx-auto max-w-[900px] px-5 py-16">
+    <div class="section-y mx-auto max-w-[900px] px-5">
       <h2 class="display-2 mb-8">Preguntas frecuentes</h2>
-      <dl class="space-y-8">
+      <dl class="divide-y-2 divide-[var(--color-ink)] border-y-2 border-[var(--color-ink)]">
         {
           faqs.map((f) => (
-            <div>
-              <dt class="h2">{f.q}</dt>
-              <dd class="mt-2 max-w-[60ch] leading-relaxed">{f.a}</dd>
-            </div>
+            <details class="group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]">
+                <dt class="h2">{f.display ?? f.q}</dt>
+                <span
+                  aria-hidden="true"
+                  class="shrink-0 text-2xl leading-none transition-transform duration-200 group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <dd class="max-w-[60ch] pb-5 leading-relaxed">{f.a}</dd>
+            </details>
           ))
         }
       </dl>
+    </div>
+  </section>
+
+  <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-cream)]">
+    <div class="section-y mx-auto max-w-[820px] px-5 text-center">
+      <h2 class="display-2">¿Te gustó algo? Escribinos.</h2>
+      <p class="mx-auto mt-5 max-w-[46ch] text-base leading-relaxed text-[var(--color-cream)]/85 md:text-lg">
+        Coordinamos tu pedido por WhatsApp o Instagram, directo desde Mar del Plata.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a
+          href={waOrder}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--color-blue)] px-7 py-3 font-semibold tracking-wide text-[var(--color-cream)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)]"
+          >Pedir por WhatsApp</a
+        >
+        <a
+          href={igOrder}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--color-pink)] px-7 py-3 font-semibold tracking-wide text-[var(--color-ink)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-pink)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)]"
+          >Pedir por Instagram</a
+        >
+      </div>
     </div>
   </section>
 </Layout>

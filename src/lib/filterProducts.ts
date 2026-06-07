@@ -17,3 +17,7 @@ export function parseTagsFromQuery(query: URLSearchParams): ProductTag[] {
 export function sortProducts(products: Product[]): Product[] {
   return [...products].sort((a, b) => a.data.title.localeCompare(b.data.title, 'es'));
 }
+
+export function sortByNewest(products: Product[]): Product[] {
+  return [...products].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}

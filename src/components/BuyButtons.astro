@@ -23,20 +23,14 @@ const ig = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
       <div class="flex flex-wrap gap-2">
         {fragrances.map((f, i) => (
           <label class="cursor-pointer">
-            <input
-              type="radio"
-              name="fragrance"
-              value={f}
-              checked={i === 0}
-              class="peer sr-only"
-            />
-            <span class="label inline-block rounded-full border-2 border-[var(--color-ink)] px-4 py-2 transition-colors hover:border-[var(--color-blush)] peer-checked:border-[var(--color-blush)] peer-checked:bg-[var(--color-blush)] peer-checked:text-[var(--color-ink)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--color-blush)] peer-focus-visible:ring-offset-2">
+            <input type="radio" name="fragrance" value={f} checked={i === 0} class="peer sr-only" />
+            <span class="label inline-flex min-h-[44px] items-center rounded-full border-2 border-[var(--color-ink)] px-4 transition-colors peer-checked:border-[var(--color-blush)] peer-checked:bg-[var(--color-blush)] peer-checked:text-[var(--color-ink)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--color-blush)] peer-focus-visible:ring-offset-2 hover:border-[var(--color-blush)]">
               {f}
             </span>
           </label>
         ))}
       </div>
-      <p data-fragrance-hint class="label mt-2 hidden text-[var(--color-pink)]">
+      <p data-fragrance-hint class="label mt-2 hidden text-[var(--color-ink)]">
         Elegí una fragancia para continuar
       </p>
     </fieldset>
@@ -53,7 +47,7 @@ const ig = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
     aria-disabled={disabled}
     rel="noopener"
     target="_blank"
-    class={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold tracking-wide
+    class={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-cream)]
       ${
         disabled
           ? 'bg-[var(--color-ink)]/30 text-[var(--color-cream)] cursor-not-allowed pointer-events-none'
@@ -69,14 +63,14 @@ const ig = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
     data-requires-fragrance={hasFragrances ? 'true' : 'false'}
     rel="noopener"
     target="_blank"
-    class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-pink)] px-6 py-3 font-semibold tracking-wide text-[var(--color-ink)] transition-opacity hover:opacity-90"
+    class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-pink)] px-6 py-3 font-semibold tracking-wide text-[var(--color-ink)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-cream)]"
   >
     Pedir por Instagram
   </a>
 </div>
 
 <p data-ig-copied class="label mt-3 hidden text-[var(--color-blue)]">
-  Mensaje copiado ✓ — pegalo en el chat de Instagram
+  Mensaje copiado ✓. Pegalo en el chat de Instagram
 </p>
 
 <script>

@@ -1,40 +1,43 @@
 ---
 export const prerender = true;
 
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import introImage from '../assets/images/vela-y-accesorios.webp';
 import studioImage from '../assets/images/vela-muffin-limon-y-aritos.webp';
 
-const steps = [
+const values = [
   {
-    num: '01',
     title: 'Color',
     body: 'Trabajamos con colores vibrantes, acabados brillantes y combinaciones que nacen de la experimentación.',
   },
   {
-    num: '02',
     title: 'Brillo',
     body: 'Forma parte de nuestra imagen, porque nos interesa cómo cambia un objeto cotidiano para hacerlo más vistoso.',
   },
   {
-    num: '03',
     title: 'Personalidad',
     body: 'Nos gustan las piezas con presencia, con menos miedo de ocupar espacio y no necesitan pasar desapercibidas.',
   },
 ];
+
+// Per-index variation so the three values read as a composed trio, not an
+// identical icon-card row: leading value larger + accented, the others offset
+// down the grid for rhythm.
+const valueTitle = ['display-2', 'h2', 'h2'];
+const valueAccent = ['text-[var(--color-blue)]', '', ''];
+const valueOffset = ['', 'md:mt-16', 'md:mt-8'];
 ---
 
 <Layout title="Sobre Lumika">
   <section class="relative overflow-hidden border-b-2 border-[var(--color-ink)]">
     <div class="grid items-stretch md:grid-cols-[minmax(0,5fr)_8fr]">
       <div
-        class="order-last flex flex-col justify-center px-5 py-12 md:order-first md:py-20 md:pr-10 md:pl-[max(1.25rem,calc((100vw-1400px)/2))]"
+        class="order-last flex flex-col justify-center px-5 py-12 md:order-first md:py-20 md:pr-10 md:gutter-l"
       >
-        <span class="label">Sobre Lumika</span>
-        <h1 class="display-2 mt-8">
-          Objetos de mano,<br />
-          <em class="text-[var(--color-blue)] italic">con tiempo.</em>
+        <h1 class="display-2">
+          Objetos que<br />
+          <em class="text-[var(--color-blue)] italic">dan alegría</em>
         </h1>
         <p class="mt-6 max-w-[40ch] text-base leading-relaxed">
           Creamos objetos que llaman la atención por sus detalles. Los colores, formas y
@@ -43,26 +46,29 @@ const steps = [
       </div>
 
       <div class="order-first md:order-last">
-        <Image
+        <Picture
           src={introImage}
           alt="Vela Lumika con accesorios de resina"
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
           width={1600}
           sizes="(min-width: 768px) 62vw, 100vw"
+          pictureAttributes={{ class: 'contents' }}
           class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[560px]"
           loading="eager"
+          fetchpriority="high"
         />
       </div>
     </div>
   </section>
 
   <section class="border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
-    <div class="mx-auto grid max-w-[1400px] gap-10 px-5 py-16 md:grid-cols-3">
+    <div class="section-y mx-auto grid max-w-[1400px] items-start gap-x-10 gap-y-12 px-5 md:grid-cols-3">
       {
-        steps.map((s) => (
-          <div>
-            <div class="label">{s.num}</div>
-            <h3 class="h2 mt-3">{s.title}</h3>
-            <p class="mt-3 leading-relaxed">{s.body}</p>
+        values.map((v, i) => (
+          <div class={valueOffset[i]}>
+            <h2 class={`${valueTitle[i]} ${valueAccent[i]}`}>{v.title}</h2>
+            <p class="mt-3 max-w-[34ch] leading-relaxed">{v.body}</p>
           </div>
         ))
       }
@@ -71,21 +77,24 @@ const steps = [
 
   <section class="border-b-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
     <div class="grid items-stretch md:grid-cols-[8fr_5fr]">
-      <Image
+      <Picture
         src={studioImage}
         alt="Vela Lumika de limón con aritos de resina"
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
         width={1600}
         sizes="(min-width: 768px) 62vw, 100vw"
+        pictureAttributes={{ class: 'contents' }}
         class="aspect-[4/3] h-full w-full border-x-2 border-[var(--color-ink)] object-cover md:aspect-auto md:min-h-[480px]"
       />
       <div
-        class="flex flex-col justify-center px-5 py-12 md:py-20 md:pr-[max(1.25rem,calc((100vw-1400px)/2))] md:pl-10"
+        class="flex flex-col justify-center px-5 py-12 md:py-20 md:gutter-r md:pl-10"
       >
         <h2 class="display-2">Quiénes somos.</h2>
         <p class="mt-4 max-w-[44ch] text-base leading-relaxed md:text-lg">
           Somos dos amigas que, después de casi dos décadas creando y experimentando juntas, le
-          dimos forma a Lumika. Cada vela y cada pieza de resina lleva esos años de oficio: crear con
-          las manos algo que valga la pena mirar dos veces.
+          dimos forma a Lumika. Cada vela y cada pieza de resina lleva esos años de oficio: crear
+          con las manos algo que valga la pena mirar dos veces.
         </p>
         <p class="mt-4 max-w-[44ch] text-base leading-relaxed md:text-lg">
           ¿Tenés una idea en mente? Hacemos piezas personalizadas pensadas para vos. Contanos qué
@@ -93,7 +102,7 @@ const steps = [
         </p>
         <a
           href="/contact"
-          class="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-blue)] px-6 py-3 font-semibold tracking-wide text-[var(--color-cream)]"
+          class="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--color-blue)] px-6 py-3 font-semibold tracking-wide text-[var(--color-cream)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-cream)]"
           >Hablemos →</a
         >
       </div>
@@ -101,12 +110,13 @@ const steps = [
   </section>
 
   <section>
-    <div class="mx-auto max-w-[1100px] px-5 py-16">
+    <div class="section-y mx-auto max-w-[1100px] px-5">
       <span class="label">Quien hace</span>
       <h2 class="display-2 mt-4">Las manos detrás.</h2>
       <div class="mt-6 max-w-[60ch] space-y-4 text-base leading-relaxed md:text-lg">
         <p>
-          Lumika nació de una amistad que lleva acompañándonos por casi dos décadas. Emprender juntas es algo que surgió naturalmente.
+          Lumika nació de una amistad que lleva acompañándonos por casi dos décadas. Emprender
+          juntas es algo que surgió naturalmente.
         </p>
       </div>
       <div class="mt-10 grid gap-10 md:grid-cols-2">
@@ -114,15 +124,19 @@ const steps = [
           <h3 class="h2 mt-5">Abril</h3>
           <p class="label mt-1 opacity-70">Velas & más</p>
           <p class="mt-4 leading-relaxed">
-            Abril lidera las velas: Suele prestar atención a los detalles y dedicar bastante tiempo a probar distintas posibilidades antes de quedarse con una. Disfruta el proceso de construir algo de a poco, desde una nueva pieza hasta cualquier idea que termine formando parte de Lumika.
-
+            Abril lidera las velas: Suele prestar atención a los detalles y dedicar bastante tiempo
+            a probar distintas posibilidades antes de quedarse con una. Disfruta el proceso de
+            construir algo de a poco, desde una nueva pieza hasta cualquier idea que termine
+            formando parte de Lumika.
           </p>
         </article>
         <article>
           <h3 class="h2 mt-5">Mailen</h3>
           <p class="label mt-1 opacity-70">Resina & más</p>
           <p class="mt-4 leading-relaxed">
-            Mailen lidera la resina: Tiene una forma más espontánea de encarar las cosas y una facilidad especial para pasar de la idea a la acción. Su entusiasmo por probar cosas nuevas sigue empujando a Lumika hacia lugares inesperados.
+            Mailen lidera la resina: Tiene una forma más espontánea de encarar las cosas y una
+            facilidad especial para pasar de la idea a la acción. Su entusiasmo por probar cosas
+            nuevas sigue empujando a Lumika hacia lugares inesperados.
           </p>
         </article>
       </div>

@@ -17,6 +17,7 @@ images:
   - ../../assets/products/img_3305.jpg
 date: 2026-06-05T01:24:00.000-03:00
 ---
+
 Cada una de estas velas marmoladas con flores tiene un patrón y una composición diferente, resultado del proceso manual con el que la elaboramos a mano en Mar del Plata, en lotes pequeños. No existen dos unidades iguales: cada pieza tiene su propia personalidad y su fragancia a Rosas y vainilla.
 
 Está hecha con cera de soja, con un efecto marmolado y detalles de flores trabajados a mano. Por ser una pieza artesanal, los colores y el dibujo pueden variar levemente de una unidad a otra.
