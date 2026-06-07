@@ -8,54 +8,24 @@ import {
   PUBLIC_CONTACT_EMAIL,
 } from 'astro:env/client';
 import { whatsappLink, instagramLink, emailLink } from '../lib/buyLinks';
+import { localBusinessSchema } from '../lib/businessSchema';
 
 const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 const mail = emailLink(PUBLIC_CONTACT_EMAIL);
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
-// Schema.org image must be raster (Google ignores SVG): use the brand OG card.
-const imageUrl = new URL('/og-image.png', Astro.site).toString();
-
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': ['Store', 'LocalBusiness'],
-  name: 'Lumika Objetos',
-  description: 'Velas de soja y accesorios de resina, hechos a mano en Mar del Plata.',
+const businessSchema = localBusinessSchema({
   url: canonicalUrl,
-  image: imageUrl,
-  telephone: `+${PUBLIC_WHATSAPP_NUMBER}`,
+  image: new URL('/og-image.png', Astro.site).toString(),
+  whatsapp: PUBLIC_WHATSAPP_NUMBER,
+  instagram: PUBLIC_INSTAGRAM_HANDLE,
   email: PUBLIC_CONTACT_EMAIL,
-  priceRange: '$$',
-  currenciesAccepted: 'ARS',
-  paymentAccepted: 'Efectivo, Transferencia',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Mar del Plata',
-    addressRegion: 'Buenos Aires',
-    addressCountry: 'AR',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: -38.0055,
-    longitude: -57.5426,
-  },
-  areaServed: 'AR',
-  knowsLanguage: 'es-AR',
-  makesOffer: {
-    '@type': 'OfferCatalog',
-    name: 'Catálogo Lumika Objetos',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Velas de soja artesanales' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Accesorios de resina' } },
-    ],
-  },
-  sameAs: [`https://instagram.com/${PUBLIC_INSTAGRAM_HANDLE}`],
-};
+});
 ---
 
 <Layout title="Contacto">
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
   <section class="mx-auto max-w-[1400px] px-5 py-16">
     <span class="label">Contacto</span>
     <h1 class="display-1 mt-6">Hablemos.</h1>

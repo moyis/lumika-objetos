@@ -8,17 +8,68 @@ import Hero from '../components/Hero.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import Star from '../assets/logos/star.svg';
 import { sortProducts } from '../lib/filterProducts';
+import { localBusinessSchema } from '../lib/businessSchema';
+import {
+  PUBLIC_INSTAGRAM_HANDLE,
+  PUBLIC_WHATSAPP_NUMBER,
+  PUBLIC_CONTACT_EMAIL,
+} from 'astro:env/client';
 import handmadeImage from '../assets/images/vela-postre.webp';
 
 const all = await getCollection('products');
 const sorted = sortProducts(all);
 const featured = sorted.filter((p) => p.data.featured);
+
+// LocalBusiness schema on the homepage — the page most likely to rank for
+// "velas en Mar del Plata" — to reinforce the local-search signal.
+const businessSchema = localBusinessSchema({
+  url: new URL('/', Astro.site).toString(),
+  image: new URL('/og-image.png', Astro.site).toString(),
+  whatsapp: PUBLIC_WHATSAPP_NUMBER,
+  instagram: PUBLIC_INSTAGRAM_HANDLE,
+  email: PUBLIC_CONTACT_EMAIL,
+});
+
+// Q&A targeting "dónde comprar velas / decoración en Mar del Plata". The same
+// list feeds the visible FAQ and the FAQPage schema, so they never drift —
+// and gives AI assistants a directly quotable "where to buy" answer.
+const faqs = [
+  {
+    q: '¿Dónde comprar velas artesanales y decoración en Mar del Plata?',
+    a: `En Lumika Objetos: hacemos velas de cera de soja y objetos de decoración en resina, a mano, en Mar del Plata. Hacés tu pedido por WhatsApp o Instagram (@${PUBLIC_INSTAGRAM_HANDLE}).`,
+  },
+  {
+    q: '¿Cómo hago un pedido?',
+    a: 'Escribinos por WhatsApp o Instagram con la pieza que querés. Te confirmamos disponibilidad y coordinamos la entrega.',
+  },
+  {
+    q: '¿Hacen piezas personalizadas?',
+    a: 'Sí. Contanos tu idea —colores, medidas, referencias— y creamos piezas únicas en resina pensadas para vos.',
+  },
+  {
+    q: '¿Cómo se paga?',
+    a: 'Aceptamos efectivo y transferencia. Coordinamos todo por WhatsApp antes de cerrar el pedido.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Layout
   title="Lumika Objetos"
-  description="Velas de soja artesanales y accesorios de resina hechos a mano en Mar del Plata. Piezas unicas en ediciones cortas. Compra por WhatsApp."
+  description="Velas artesanales y objetos de decoración en Mar del Plata. Velas de soja y piezas de resina hechas a mano, en ediciones cortas. Compra por WhatsApp."
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
   <Hero />
 
   <section class="bg-[var(--color-cream)]">
@@ -50,10 +101,26 @@ const featured = sorted.filter((p) => p.data.featured);
           <em class="text-[var(--color-blue)] italic">mucha personalidad.</em>
         </h2>
         <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
-          Creamos objetos que llaman la atención por sus detalles. Los colores, formas y combinaciones transforman objetos cotidianos en piezas que destacan.
+          Creamos objetos de decoración que llaman la atención por sus detalles. Los colores, formas y combinaciones transforman objetos cotidianos en piezas que destacan.
         </p>
         <a href="/about" class="label mt-6 inline-block underline">Sobre Lumika →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-[900px] px-5 py-16">
+      <h2 class="display-2 mb-8">Preguntas frecuentes</h2>
+      <dl class="space-y-8">
+        {
+          faqs.map((f) => (
+            <div>
+              <dt class="h2">{f.q}</dt>
+              <dd class="mt-2 max-w-[60ch] leading-relaxed">{f.a}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </section>
 </Layout>
