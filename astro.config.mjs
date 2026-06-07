@@ -44,7 +44,7 @@ const isDev = process.argv.includes('dev');
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://lumika-objetos.faustomoya-99.workers.dev',
+  site: 'https://www.lumikaobjetos.com.ar',
   // Prefetch internal links on hover/focus (tap on touch) for near-instant
   // navigation. Static assets get an ETag from Cloudflare, so prefetch works
   // across browsers.
