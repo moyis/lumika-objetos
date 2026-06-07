@@ -11,6 +11,7 @@ export default [
       '.wrangler/**',
       'public/admin/**',
       'worker-configuration.d.ts',
+      '.claude/**',
     ],
   },
   eslint.configs.recommended,
