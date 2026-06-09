@@ -10,7 +10,7 @@ tags:
   - resina
 images:
   - ../../assets/products/img_3235.jpg
-date: 2026-06-08T21:09:00.000-03:00
+date: 2026-06-08T21:42:00.000-03:00
 ---
 ✨ Aritos Mini Doble Círculo - Verde Metalizado ✨
 
