@@ -3,7 +3,7 @@ title: "Collar Gota "
 slug: Collar-Gota
 price: 7000
 currency: ARS
-stock: 0
+stock: 1
 featured: false
 fragrances: []
 tags:
