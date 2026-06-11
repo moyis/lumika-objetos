@@ -1,13 +1,13 @@
 ---
 title: Vela Cupcake de vainilla
 slug: vela-cupcake-vainilla
-subtitle: Vela de soja artesanal con forma de cupcake hecha a mano
 price: 9000
 currency: ARS
-stock: 4
+stock: 1
 featured: false
 fragrances:
   - Vainilla
+subtitle: Vela de soja artesanal con forma de cupcake hecha a mano
 tags:
   - velas
 images:
