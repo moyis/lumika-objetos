@@ -1,5 +1,5 @@
 ---
-title: Llaveros De Saturno Azul
+title: Llavero Saturno - Azul
 slug: Llaveros-SaturnoAzul
 price: 8000
 currency: ARS
