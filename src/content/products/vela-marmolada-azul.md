@@ -7,7 +7,8 @@ stock: 1
 featured: false
 fragrances:
   - Océano
-tags: []
+tags:
+  - velas
 images:
   - ../../assets/products/image00010.jpeg
   - ../../assets/products/image00011.jpeg
