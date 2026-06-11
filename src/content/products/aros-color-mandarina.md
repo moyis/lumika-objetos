@@ -4,7 +4,7 @@ slug: Aros-Mandarina
 sku: ""
 price: 5000
 currency: ARS
-stock: 1
+stock: 0
 featured: false
 fragrances: []
 subtitle: "Podes pedir opciones de colores "
