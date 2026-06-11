@@ -1,13 +1,13 @@
 ---
 title: Vela Marmolada con flores - Azul
 slug: vela-marmol-flores-azul
-subtitle: Vela de soja artesanal marmolada con flores - fragancia Rosas y vainilla
 price: 12000
 currency: ARS
-stock: 1
+stock: 0
 featured: false
 fragrances:
   - Rosas y vainilla
+subtitle: Vela de soja artesanal marmolada con flores - fragancia Rosas y vainilla
 tags:
   - velas
 images:
