@@ -1,7 +1,7 @@
 ---
 title: Vela marmolada - Azul
 slug: vela-marmol-azul
-price: 11999.99
+price: 12000
 currency: ARS
 stock: 1
 featured: false
