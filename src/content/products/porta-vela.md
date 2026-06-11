@@ -1,5 +1,5 @@
 ---
-title: Porta vela
+title: Plato - Porta vela
 slug: Porta-vela
 price: 5000
 currency: ARS
