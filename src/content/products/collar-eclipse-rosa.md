@@ -1,5 +1,5 @@
 ---
-title: "Collar Eclipse rosa "
+title: "Collar Eclipse - Rosa "
 slug: Collar-Eclipse
 price: 7000
 currency: ARS
