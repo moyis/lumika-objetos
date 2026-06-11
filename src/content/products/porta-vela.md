@@ -6,6 +6,7 @@ currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: 7.5 cm de diámetro
 tags:
   - resina
 images:
