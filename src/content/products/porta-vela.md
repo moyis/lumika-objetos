@@ -22,4 +22,4 @@ date: 2026-06-08T21:00:00.000-03:00
 > * Resiste el calor, es súper fácil de limpiar y no se rompe si se cae.
 > * Destellos mágicos que cambian con la luz del sol o de la vela.
 >
-> ✨ Dale a tu espacio la ondita que se merece. ¡Escribinos para reservar el tuyo!
+> ✨ Dale a tu espacio la onda que se merece. ¡Escribinos para reservar el tuyo!
