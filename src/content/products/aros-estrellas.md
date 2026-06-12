@@ -1,13 +1,14 @@
 ---
 title: Aros Estrellas
-slug: Aros-estrellas
+slug: aros-estrellas
 price: 5000
 currency: ARS
 stock: 2
 featured: false
 fragrances: []
+subtitle: Aros de resina hechos a mano, con colores, transparencias y brillos. Par único.
 tags:
-  - resina
+  - aros
 images:
   - ../../assets/products/img_3192.jpg
   - ../../assets/products/img_3189.jpg

@@ -5,8 +5,16 @@
       "label": "Velas"
     },
     {
-      "slug": "resina",
-      "label": "Resina"
+      "slug": "aros",
+      "label": "Aros"
+    },
+    {
+      "slug": "collares",
+      "label": "Collares"
+    },
+    {
+      "slug": "llaveros",
+      "label": "Llaveros"
     }
   ]
 }

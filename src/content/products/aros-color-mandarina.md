@@ -1,15 +1,15 @@
 ---
 title: Aros Color Mandarina
-slug: Aros-Mandarina
+slug: aros-mandarina
 sku: ""
 price: 5000
 currency: ARS
 stock: 0
 featured: false
 fragrances: []
-subtitle: "Podes pedir opciones de colores "
+subtitle: Aros de resina naranja pastel con microglitter. Pedí otras opciones de color.
 tags:
-  - resina
+  - aros
 images:
   - ../../assets/products/img_3236.jpg
 date: 2026-06-08T20:53:00.000-03:00

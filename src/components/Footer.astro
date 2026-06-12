@@ -28,7 +28,7 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
         {
           TAGS.map((t) => (
             <li>
-              <a href={`/shop?tag=${t.slug}`}>{t.label}</a>
+              <a href={`/tienda/${t.slug}`}>{t.label}</a>
             </li>
           ))
         }

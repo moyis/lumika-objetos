@@ -1,6 +1,6 @@
 ---
 title: Velas Bombones aromáticos - Wax melts
-slug: velas-bombones
+slug: velas
 price: 5000
 currency: ARS
 stock: 15

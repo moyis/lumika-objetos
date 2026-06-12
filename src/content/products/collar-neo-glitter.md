@@ -1,13 +1,14 @@
 ---
 title: Collar Neo Glitter
-slug: Collar-GlitterNeo
+slug: collar-neo-glitter
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina geométrico con mix de brillos premium. Pieza única hecha a mano.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3222.jpg
   - ../../assets/products/img_3218.jpg

@@ -1,13 +1,14 @@
 ---
 title: Collar Aura Circular
-slug: coolar-aura
+slug: collar-aura-circular
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina circular translúcido con glitter holográfico tipo eclipse. Pieza única.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3210.jpg
   - ../../assets/products/img_3205.jpg

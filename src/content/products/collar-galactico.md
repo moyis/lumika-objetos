@@ -1,13 +1,14 @@
 ---
-title: "Collar Galactico "
-slug: Collar-Glactico
+title: Collar Galáctico
+slug: collar-galactico
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina con dije ovalado y glitter holográfico cósmico. Pieza única hecha a mano.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3220.jpg
   - ../../assets/products/img_3218.jpg

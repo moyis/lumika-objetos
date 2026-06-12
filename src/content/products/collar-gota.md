@@ -1,13 +1,14 @@
 ---
-title: "Collar Gota "
-slug: Collar-Gota
+title: Collar Gota
+slug: collar-gota
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina con dije gota en degradé magenta y microglitter plateado. Pieza única.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3207.jpg
 date: 2026-06-08T21:45:00.000-03:00

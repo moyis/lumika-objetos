@@ -1,13 +1,14 @@
 ---
 title: Collar Rosa
-slug: Collar-Rosa
+slug: collar-rosa
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina con dije redondo rosa y destellos holográficos. Pieza única hecha a mano.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3208.jpg
   - ../../assets/products/img_3203.jpg

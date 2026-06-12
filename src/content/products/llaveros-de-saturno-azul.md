@@ -1,13 +1,14 @@
 ---
 title: Llavero Saturno - Azul
-slug: Llaveros-SaturnoAzul
+slug: llaveros-de-saturno-azul
 price: 8000
 currency: ARS
 stock: 2
 featured: false
 fragrances: []
+subtitle: Llavero de resina con forma de Saturno en azul cobalto metalizado. Pieza única.
 tags:
-  - resina
+  - llaveros
 images:
   - ../../assets/products/img_3214.jpg
   - ../../assets/products/img_3286.jpg

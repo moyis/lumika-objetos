@@ -25,7 +25,7 @@ export function localBusinessSchema({
     '@type': ['Store', 'HomeGoodsStore', 'LocalBusiness'],
     name: 'Lumika Objetos',
     description:
-      'Velas artesanales y objetos de decoración en Mar del Plata: velas de cera de soja y piezas de resina hechas a mano en ediciones cortas.',
+      'Velas artesanales y objetos de decoración en Mar del Plata: velas de cera de soja y piezas de resina hechas a mano.',
     url,
     image,
     telephone: `+${whatsapp}`,
@@ -48,12 +48,12 @@ export function localBusinessSchema({
       itemListElement: [
         {
           '@type': 'Offer',
-          itemOffered: { '@type': 'Product', name: 'Velas de soja artesanales' },
+          itemOffered: { '@type': 'Service', name: 'Velas de soja artesanales' },
         },
-        { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Accesorios de resina' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Accesorios de resina' } },
         {
           '@type': 'Offer',
-          itemOffered: { '@type': 'Product', name: 'Objetos de decoración artesanal' },
+          itemOffered: { '@type': 'Service', name: 'Objetos de decoración artesanal' },
         },
       ],
     },

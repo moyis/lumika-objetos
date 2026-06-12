@@ -1,0 +1,87 @@
+---
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import { sortProducts } from '../../lib/filterProducts';
+import { CATEGORIES } from '../../lib/categories';
+
+// One prerendered landing page per category, each targeting "{categoría} en
+// Mar del Plata". Unlike /shop (JS-filtered, single URL), these are distinct
+// crawlable URLs with one search intent — the pages that can actually rank.
+export const getStaticPaths = (async () => {
+  const all = await getCollection('products');
+  return CATEGORIES.map((category) => ({
+    params: { categoria: category.slug },
+    props: {
+      category,
+      products: sortProducts(all.filter((p) => p.data.tags.includes(category.slug))),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { category, products } = Astro.props;
+
+const canonicalUrl = new URL(`/tienda/${category.slug}`, Astro.site).toString();
+const shopUrl = new URL('/shop', Astro.site).toString();
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: category.title,
+  description: category.description,
+  url: canonicalUrl,
+  inLanguage: 'es-AR',
+  about: { '@type': 'Thing', name: category.heading },
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: products.length,
+    itemListElement: products.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(`/shop/${p.data.slug}`, Astro.site).toString(),
+      name: p.data.title,
+    })),
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tienda', item: shopUrl },
+    { '@type': 'ListItem', position: 2, name: category.label, item: canonicalUrl },
+  ],
+};
+---
+
+<Layout title={category.title} description={category.description}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+  <section class="mx-auto max-w-[1400px] px-5 pt-10 pb-2">
+    <nav aria-label="Migas de pan" class="label">
+      <a href="/shop" class="hover:text-[var(--color-blue)]">Tienda</a>
+      <span aria-hidden="true"> · </span>
+      <span>{category.label}</span>
+    </nav>
+    <h1 class="display-2 mt-4">{category.heading}</h1>
+    <p class="mt-4 max-w-[68ch] text-[var(--color-ink)]/80">{category.intro}</p>
+  </section>
+
+  <section class="mx-auto max-w-[1400px] px-5 py-10">
+    <h2 class="sr-only">Productos</h2>
+    {
+      products.length > 0 ? (
+        <ProductGrid products={products} cols={4} priority />
+      ) : (
+        <p class="text-[var(--color-ink)]/70">
+          Por ahora no hay piezas disponibles en esta categoría. Escribinos por WhatsApp y
+          coordinamos un pedido a medida.
+        </p>
+      )
+    }
+  </section>
+</Layout>

@@ -9,6 +9,7 @@ import ProductGrid from '../components/ProductGrid.astro';
 import Star from '../assets/logos/star.svg';
 import { sortProducts, sortByNewest } from '../lib/filterProducts';
 import { localBusinessSchema } from '../lib/businessSchema';
+import { CATEGORIES } from '../lib/categories';
 import { whatsappLink, instagramDmLink } from '../lib/buyLinks';
 import {
   PUBLIC_INSTAGRAM_HANDLE,
@@ -64,6 +65,11 @@ const faqs: { q: string; display?: string; a: string }[] = [
     a: `En Lumika Objetos: hacemos velas de cera de soja y objetos de decoración en resina, a mano, en Mar del Plata. Hacés tu pedido por WhatsApp o Instagram (@${PUBLIC_INSTAGRAM_HANDLE}).`,
   },
   {
+    q: '¿Dónde comprar aros y collares de resina artesanales en Mar del Plata?',
+    display: '¿Tienen aros y collares de resina?',
+    a: `Sí. Diseñamos aros y collares de resina a mano en Mar del Plata, en piezas únicas con colores y diseños propios. Mirá los modelos en la tienda y hacé tu pedido por WhatsApp o Instagram (@${PUBLIC_INSTAGRAM_HANDLE}).`,
+  },
+  {
     q: '¿Cómo hago un pedido?',
     a: 'Escribinos por WhatsApp o Instagram con la pieza que querés. Te confirmamos disponibilidad y coordinamos la entrega.',
   },
@@ -91,7 +97,7 @@ const faqSchema = {
 
 <Layout
   title="Lumika Objetos"
-  description="Velas artesanales y objetos de decoración en Mar del Plata. Velas de soja y piezas de resina hechas a mano, en ediciones cortas. Compra por WhatsApp."
+  description="Velas artesanales y objetos de decoración en Mar del Plata. Velas de soja y piezas de resina hechas a mano. Compra por WhatsApp."
   preloadImage={heroImage}
   preloadSizes={heroSizes}
 >
@@ -137,6 +143,27 @@ const faqSchema = {
         </p>
         <a href="/about" class="label mt-6 inline-block underline">Sobre Lumika →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
+    <div class="section-y mx-auto max-w-[1400px] px-5">
+      <h2 class="display-2 mb-8">Comprá por categoría</h2>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          CATEGORIES.map((c) => (
+            <li>
+              <a
+                href={`/tienda/${c.slug}`}
+                class="flex min-h-[120px] flex-col justify-between rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-blush)] p-5 transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]"
+              >
+                <span class="h2">{c.label}</span>
+                <span class="label mt-3 opacity-80">{c.heading} →</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 

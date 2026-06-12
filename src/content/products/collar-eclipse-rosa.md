@@ -1,13 +1,14 @@
 ---
-title: "Collar Eclipse - Rosa "
-slug: Collar-Eclipse
+title: Collar Eclipse - Rosa
+slug: collar-eclipse-rosa
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina con dije en verde y rosa translúcido con brillos. Pieza única hecha a mano.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3206.jpg
   - ../../assets/products/img_3205.jpg

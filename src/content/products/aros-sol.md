@@ -8,7 +8,7 @@ featured: false
 fragrances: []
 subtitle: ""
 tags:
-  - resina
+  - aros
 images:
   - ../../assets/products/img_3183.jpg
   - ../../assets/products/img_3186.jpg

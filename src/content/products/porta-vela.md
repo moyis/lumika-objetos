@@ -1,6 +1,6 @@
 ---
 title: Plato - Porta vela
-slug: Porta-vela
+slug: porta-vela
 price: 5000
 currency: ARS
 stock: 1
@@ -8,7 +8,7 @@ featured: false
 fragrances: []
 subtitle: 7.5 cm de diámetro
 tags:
-  - resina
+  - velas
 images:
   - ../../assets/products/img_3182.jpg
   - ../../assets/products/img_3109.jpg

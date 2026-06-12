@@ -18,7 +18,7 @@ images:
 date: 2026-06-04T22:34:00.000-03:00
 ---
 
-Creamos esta vela aromática en vaso de vidrio inspirándonos en los postres y las frutas que más nos gustan. Cada pieza está hecha a mano en Mar del Plata, en lotes pequeños, cuidando cada detalle para que sea tan linda de ver como de disfrutar, con su fragancia a Frutos del bosque.
+Creamos esta vela aromática en vaso de vidrio inspirándonos en los postres y las frutas que más nos gustan. Cada pieza está hecha a mano en Mar del Plata, cuidando cada detalle para que sea tan linda de ver como de disfrutar, con su fragancia a Frutos del bosque.
 
 Está elaborada con cera de soja en vaso de vidrio, lista para perfumar e iluminar cualquier ambiente. Al ser una pieza hecha a mano, cada unidad puede presentar pequeñas diferencias que la hacen única.
 

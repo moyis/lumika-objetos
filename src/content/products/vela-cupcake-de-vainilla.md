@@ -17,7 +17,7 @@ images:
 date: 2026-06-05T00:49:00.000-03:00
 ---
 
-Esta vela aromática con forma de cupcake está hecha a mano en Mar del Plata, en lotes pequeños. Trabajamos cada detalle para que parezca un pequeño postre y, al mismo tiempo, sea una pieza decorativa especial para cualquier espacio.
+Esta vela aromática con forma de cupcake está hecha a mano en Mar del Plata. Trabajamos cada detalle para que parezca un pequeño postre y, al mismo tiempo, sea una pieza decorativa especial para cualquier espacio.
 
 Está elaborada con cera de soja y pensada para disfrutar tanto encendida como de adorno. Por tratarse de una pieza hecha a mano, cada unidad puede presentar pequeñas diferencias que la hacen única.
 

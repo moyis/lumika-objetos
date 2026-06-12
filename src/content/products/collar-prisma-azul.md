@@ -1,13 +1,14 @@
 ---
 title: Collar Prisma Azul
-slug: Collar-prisma
+slug: collar-prisma-azul
 price: 7000
 currency: ARS
 stock: 1
 featured: false
 fragrances: []
+subtitle: Collar de resina con dije rectangular azul y microglitter holográfico. Pieza única.
 tags:
-  - resina
+  - collares
 images:
   - ../../assets/products/img_3221.jpg
   - ../../assets/products/img_3218.jpg
