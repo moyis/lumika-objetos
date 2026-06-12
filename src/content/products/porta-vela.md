@@ -8,6 +8,7 @@ featured: false
 fragrances: []
 subtitle: 7.5 cm de diámetro
 tags:
+  - resina
 images:
   - ../../assets/products/img_3182.jpg
   - ../../assets/products/img_3109.jpg
