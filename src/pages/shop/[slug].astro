@@ -47,7 +47,10 @@ const category = CATEGORY_BY_SLUG[primaryTag]?.label ?? 'Objetos artesanales';
 
 // Aros, collares and llaveros are resin pieces; velas are soy wax.
 const isResin =
-  primaryTag === 'aros' || primaryTag === 'collares' || primaryTag === 'llaveros';
+  primaryTag === 'aros' ||
+  primaryTag === 'collares' ||
+  primaryTag === 'llaveros' ||
+  primaryTag === 'resina';
 const material = isResin ? 'Resina' : 'Cera de soja';
 
 const priceValidUntil = new Date(new Date().setFullYear(new Date().getFullYear() + 1))

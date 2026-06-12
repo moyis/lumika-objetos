@@ -59,7 +59,7 @@ export const CATEGORIES: Category[] = [
     heading: 'Llaveros de resina artesanales',
     intro:
       'Hacemos llaveros de resina a mano en Mar del Plata, pieza por pieza, con formas divertidas como mariposas y planetas, llenos de brillos y color. Al ser un proceso artesanal, no hay dos iguales: cada llavero es único. Son livianos, resistentes y perfectos para tus llaves, la mochila o como charm de regalo. Elegí tu favorito y coordinamos el pedido por WhatsApp o Instagram.',
-  },
+  }
 ];
 
 export const CATEGORY_BY_SLUG: Record<string, Category> = Object.fromEntries(
