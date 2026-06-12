@@ -10,7 +10,6 @@ fragrances: []
 subtitle: Aros de resina naranja pastel con microglitter. Pedí otras opciones de color.
 tags:
   - aros
-  - resina
 images:
   - ../../assets/products/img_3236.jpg
 date: 2026-06-08T20:53:00.000-03:00
