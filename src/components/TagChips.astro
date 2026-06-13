@@ -30,6 +30,14 @@ import { TAGS } from '../lib/productTags';
 </div>
 
 <style>
+  /* Promo chip carries a blush fill so it reads as a promotion against the
+     row of cream chips. Ink text keeps it legible; selecting it falls through
+     to the shared ink-fill active state below. */
+  .chip[data-tag='promos'] {
+    background: var(--color-blush);
+    color: var(--color-ink);
+  }
+
   .chip[data-active='true'] {
     background: var(--color-ink);
     color: var(--color-cream);
@@ -56,7 +64,7 @@ import { TAGS } from '../lib/productTags';
     const cards = document.querySelectorAll<HTMLElement>('[data-product-tags]');
     cards.forEach((card) => {
       const cardTags = (card.dataset.productTags ?? '').split(',').filter(Boolean);
-      const visible = tags.size === 0 || [...tags].every((t) => cardTags.includes(t));
+      const visible = tags.size === 0 || [...tags].some((t) => cardTags.includes(t));
       card.style.display = visible ? '' : 'none';
     });
     const visibleCount = [...cards].filter((c) => c.style.display !== 'none').length;
@@ -82,11 +90,10 @@ import { TAGS } from '../lib/productTags';
     document.querySelectorAll<HTMLElement>('.chip').forEach((btn) => {
       btn.addEventListener('click', () => {
         const t = btn.dataset.tag ?? '';
-        if (t === '__all') {
+        if (t === '__all' || tags.has(t)) {
           tags.clear();
-        } else if (tags.has(t)) {
-          tags.delete(t);
         } else {
+          tags.clear();
           tags.add(t);
         }
         writeTagsToUrl(tags);

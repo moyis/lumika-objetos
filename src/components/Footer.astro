@@ -26,7 +26,7 @@ const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
       <ul class="flex flex-col text-sm [&_a]:flex [&_a]:min-h-[44px] [&_a]:items-center [&_a:hover]:underline">
         <li><a href="/shop">Todas las piezas</a></li>
         {
-          TAGS.map((t) => (
+          TAGS.filter((t) => t.slug !== 'promos').map((t) => (
             <li>
               <a href={`/tienda/${t.slug}`}>{t.label}</a>
             </li>

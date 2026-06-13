@@ -9,6 +9,8 @@ fragrances:
   - Vainilla
 tags:
   - velas
+  - resina
+  - promos
 images:
   - ../../assets/products/img_3109.jpg
   - ../../assets/products/img_3112.jpg
