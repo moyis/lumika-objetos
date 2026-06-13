@@ -1,13 +1,13 @@
 ---
 title: Vela Cupcake de limón
 slug: vela-cupcake-limon
-subtitle: Vela de soja artesanal con forma de cupcake - fragancia Limón
 price: 9000
 currency: ARS
-stock: 10
+stock: 0
 featured: false
 fragrances:
   - Limón
+subtitle: Vela de soja artesanal con forma de cupcake - fragancia Limón
 tags:
   - velas
 images:
