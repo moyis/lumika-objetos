@@ -30,6 +30,9 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    /* The brand is fixed cream/ink; opt out of dark mode so iOS Safari never
+       renders form controls, scrollbars or UA widgets dark on a dark phone. */
+    color-scheme: only light;
   }
   body {
     background: var(--color-cream);
