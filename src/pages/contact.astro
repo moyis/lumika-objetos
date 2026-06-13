@@ -3,7 +3,8 @@ export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
 import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_CONTACT_EMAIL } from 'astro:env/client';
-import { whatsappLink, instagramLink, emailLink, WHATSAPP_NUMBER } from '../lib/buyLinks';
+import { whatsappLink, instagramLink, emailLink } from '../lib/buyLinks';
+import { WHATSAPP_NUMBER } from '../lib/site';
 import { localBusinessSchema } from '../lib/businessSchema';
 
 const wa = whatsappLink(WHATSAPP_NUMBER, 'Hola!');

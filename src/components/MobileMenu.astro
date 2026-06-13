@@ -1,7 +1,8 @@
 ---
 import Wordmark from './Wordmark.astro';
 import { PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
-import { whatsappLink, instagramLink, WHATSAPP_NUMBER } from '../lib/buyLinks';
+import { whatsappLink, instagramLink } from '../lib/buyLinks';
+import { WHATSAPP_NUMBER } from '../lib/site';
 
 const wa = whatsappLink(WHATSAPP_NUMBER, 'Hola!');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);

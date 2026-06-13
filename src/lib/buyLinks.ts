@@ -1,7 +1,3 @@
-// Business WhatsApp number (international format, no +). Hardcoded so order
-// links work regardless of build-time env config.
-export const WHATSAPP_NUMBER = '5492233042700';
-
 export function whatsappLink(number: string, message: string): string {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
