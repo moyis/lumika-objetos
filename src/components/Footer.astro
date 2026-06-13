@@ -1,12 +1,12 @@
 ---
 import Marquee from './Marquee.astro';
-import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
-import { whatsappLink, instagramLink } from '../lib/buyLinks';
+import { PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
+import { whatsappLink, instagramLink, WHATSAPP_NUMBER } from '../lib/buyLinks';
 import { TAGS } from '../lib/productTags';
 import Wordmark from './Wordmark.astro';
 
 const year = new Date().getFullYear();
-const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
+const wa = whatsappLink(WHATSAPP_NUMBER, 'Hola!');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 ---
 

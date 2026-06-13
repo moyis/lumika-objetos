@@ -1,6 +1,6 @@
 ---
-import { PUBLIC_WHATSAPP_NUMBER, PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
-import { whatsappLink, instagramDmLink, orderMessage } from '../lib/buyLinks';
+import { PUBLIC_INSTAGRAM_HANDLE } from 'astro:env/client';
+import { whatsappLink, instagramDmLink, orderMessage, WHATSAPP_NUMBER } from '../lib/buyLinks';
 
 interface Props {
   productTitle: string;
@@ -10,7 +10,7 @@ interface Props {
 const { productTitle, disabled = false, fragrances = [] } = Astro.props;
 const hasFragrances = !disabled && fragrances.length > 0;
 const wa = whatsappLink(
-  PUBLIC_WHATSAPP_NUMBER,
+  WHATSAPP_NUMBER,
   orderMessage(productTitle, hasFragrances ? fragrances[0] : undefined),
 );
 const ig = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
@@ -41,7 +41,7 @@ const ig = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
   <a
     href={disabled ? undefined : wa}
     data-buy-wa
-    data-wa-number={PUBLIC_WHATSAPP_NUMBER}
+    data-wa-number={WHATSAPP_NUMBER}
     data-product-title={productTitle}
     data-requires-fragrance={hasFragrances ? 'true' : 'false'}
     aria-disabled={disabled}

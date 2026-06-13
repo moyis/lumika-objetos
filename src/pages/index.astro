@@ -10,12 +10,8 @@ import Star from '../assets/logos/star.svg';
 import { sortProducts, sortByNewest } from '../lib/filterProducts';
 import { localBusinessSchema } from '../lib/businessSchema';
 import { CATEGORIES } from '../lib/categories';
-import { whatsappLink, instagramDmLink } from '../lib/buyLinks';
-import {
-  PUBLIC_INSTAGRAM_HANDLE,
-  PUBLIC_WHATSAPP_NUMBER,
-  PUBLIC_CONTACT_EMAIL,
-} from 'astro:env/client';
+import { whatsappLink, instagramDmLink, WHATSAPP_NUMBER } from '../lib/buyLinks';
+import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_CONTACT_EMAIL } from 'astro:env/client';
 import handmadeImage from '../assets/images/vela-postre.webp';
 import heroImage from '../assets/images/vella-y-llaveros.webp';
 
@@ -39,7 +35,7 @@ const showcase =
 const showcaseHeading = usingFeatured ? 'Destacados' : 'Recién hechas';
 
 // Direct order paths for the closing call-to-action band.
-const waOrder = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola! Quiero hacer un pedido');
+const waOrder = whatsappLink(WHATSAPP_NUMBER, 'Hola! Quiero hacer un pedido');
 const igOrder = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
 
 // LocalBusiness schema on the homepage — the page most likely to rank for
@@ -47,7 +43,7 @@ const igOrder = instagramDmLink(PUBLIC_INSTAGRAM_HANDLE);
 const businessSchema = localBusinessSchema({
   url: new URL('/', Astro.site).toString(),
   image: new URL('/og-image.png', Astro.site).toString(),
-  whatsapp: PUBLIC_WHATSAPP_NUMBER,
+  whatsapp: WHATSAPP_NUMBER,
   instagram: PUBLIC_INSTAGRAM_HANDLE,
   email: PUBLIC_CONTACT_EMAIL,
 });

@@ -2,15 +2,11 @@
 export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
-import {
-  PUBLIC_INSTAGRAM_HANDLE,
-  PUBLIC_WHATSAPP_NUMBER,
-  PUBLIC_CONTACT_EMAIL,
-} from 'astro:env/client';
-import { whatsappLink, instagramLink, emailLink } from '../lib/buyLinks';
+import { PUBLIC_INSTAGRAM_HANDLE, PUBLIC_CONTACT_EMAIL } from 'astro:env/client';
+import { whatsappLink, instagramLink, emailLink, WHATSAPP_NUMBER } from '../lib/buyLinks';
 import { localBusinessSchema } from '../lib/businessSchema';
 
-const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola!');
+const wa = whatsappLink(WHATSAPP_NUMBER, 'Hola!');
 const ig = instagramLink(PUBLIC_INSTAGRAM_HANDLE);
 const mail = emailLink(PUBLIC_CONTACT_EMAIL);
 
@@ -18,7 +14,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const businessSchema = localBusinessSchema({
   url: canonicalUrl,
   image: new URL('/og-image.png', Astro.site).toString(),
-  whatsapp: PUBLIC_WHATSAPP_NUMBER,
+  whatsapp: WHATSAPP_NUMBER,
   instagram: PUBLIC_INSTAGRAM_HANDLE,
   email: PUBLIC_CONTACT_EMAIL,
 });

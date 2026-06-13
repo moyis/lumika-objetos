@@ -83,11 +83,6 @@ export default defineConfig({
   ],
   env: {
     schema: {
-      PUBLIC_WHATSAPP_NUMBER: envField.string({
-        context: 'client',
-        access: 'public',
-        default: '5491100000000',
-      }),
       PUBLIC_INSTAGRAM_HANDLE: envField.string({
         context: 'client',
         access: 'public',

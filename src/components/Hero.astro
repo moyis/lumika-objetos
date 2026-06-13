@@ -1,8 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { PUBLIC_WHATSAPP_NUMBER } from 'astro:env/client';
-import { whatsappLink } from '../lib/buyLinks';
+import { whatsappLink, WHATSAPP_NUMBER } from '../lib/buyLinks';
 
 interface Props {
   image: ImageMetadata;
@@ -12,7 +11,7 @@ interface Props {
 }
 const { image, sizes } = Astro.props;
 
-const wa = whatsappLink(PUBLIC_WHATSAPP_NUMBER, 'Hola! Quiero hacer un pedido');
+const wa = whatsappLink(WHATSAPP_NUMBER, 'Hola! Quiero hacer un pedido');
 
 // Build the hero variants here (instead of <Picture>) so the AVIF call is byte
 // -for-byte identical to Layout's preload getImage — same args, same hashed
