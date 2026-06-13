@@ -160,11 +160,11 @@ const breadcrumbJsonLd = {
       </h1>
       {subtitle && <p class="mt-3 text-lg opacity-80">{subtitle}</p>}
 
-      <div class="mt-6 flex items-baseline gap-3">
+      <div class="mt-6 flex items-center gap-3">
         <PriceDisplay value={price} size="lg" />
         {
           soldOut && (
-            <span class="label rounded bg-[var(--color-ink)] px-2 py-1 text-[var(--color-cream)]">
+            <span class="label rounded bg-[var(--color-ink)] px-2 py-1 text-[var(--color-cream)] [text-indent:0.2em]">
               Agotado
             </span>
           )

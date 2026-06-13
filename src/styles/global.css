@@ -25,14 +25,43 @@
 
   /* Ease-out for the tactile buy-button press (no bounce/elastic). */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* --- Theming ---------------------------------------------------------
+     cream + ink are ROLE tokens (paper + printed line), not literal hex:
+     in dark they invert (paper darkens, ink lightens) via the
+     html[data-theme='dark'] block below, so every structural surface,
+     border and body-text usage flips at once with no per-element edits.
+     The *-fixed tokens never flip — they carry the literal brand values
+     for text that sits ON a saturated accent fill (cream on blue/pink, ink
+     on pink/blush) and for media scrims, which must read the same in both
+     themes. surface-2 is the soft panel (blush in light, flush black
+     in dark) — footer, category cards, product frames. link is blue used as
+     text/ring; it lightens in dark to stay
+     legible on the dark field (the blue *fill* stays the brand electric blue). */
+  --color-cream-fixed: #fff8d9;
+  --color-ink-fixed: #0a0a0a;
+  --color-surface-2: #f6c7d1;
+  --color-link: #2f5bff;
+}
+
+/* Dark theme: invert the paper/ink roles and lift the soft panel. Applied by
+   the inline script in Layout before first paint (no flash), toggled in the
+   header. Unlayered so it always wins over the @theme :root defaults. */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --color-cream: #0a0a0a; /* paper → the brand ink black (same as hero/nav/marquee) */
+  --color-ink: #fff8d9; /* printed line + text → cream */
+  --color-surface-2: #0a0a0a; /* soft blush panel in light → flush black in dark */
+  --color-link: #8aa1ff; /* electric blue, lightened for the dark field */
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    /* The brand is fixed cream/ink; opt out of dark mode so iOS Safari never
-       renders form controls, scrollbars or UA widgets dark on a dark phone. */
-    color-scheme: only light;
+    /* Light is the default. The inline theme script in Layout sets data-theme
+       before paint and color-scheme follows (above), so UA widgets — form
+       controls, scrollbars — match the active theme instead of being forced. */
+    color-scheme: light;
   }
   body {
     background: var(--color-cream);
@@ -172,6 +201,14 @@
   }
   .btn-press:active {
     transform: translateY(0) scale(0.98);
+  }
+
+  /* Secondary buy button (Instagram): hot-pink fill, ink text, in both themes.
+     Pink carries the secondary buy path against cream (light) and the black
+     field (dark) alike. */
+  .btn-secondary {
+    background: var(--color-pink);
+    color: var(--color-ink-fixed);
   }
 }
 

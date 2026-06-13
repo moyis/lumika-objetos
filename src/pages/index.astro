@@ -112,7 +112,7 @@ const faqSchema = {
         <h2 class="display-2 inline-flex items-center gap-3">
           <Star class="h-[0.9em] w-auto shrink-0" aria-hidden="true" /> {showcaseHeading}
         </h2>
-        <a href="/shop" class="label hover:text-[var(--color-blue)]">Ver todo →</a>
+        <a href="/shop" class="label hover:text-[var(--color-link)]">Ver todo →</a>
       </div>
       <ProductGrid products={showcase} cols={3} />
     </div>
@@ -135,7 +135,7 @@ const faqSchema = {
       >
         <h2 class="display-2">
           Pequeñas piezas,<br />
-          <em class="text-[var(--color-blue)] italic">mucha personalidad</em>
+          <em class="text-[var(--color-link)] italic">mucha personalidad</em>
         </h2>
         <p class="mt-6 max-w-[44ch] text-base leading-relaxed md:text-lg">
           Creamos objetos de decoración que llaman la atención por sus detalles. Los colores, formas
@@ -155,7 +155,7 @@ const faqSchema = {
             <li>
               <a
                 href={`/tienda/${c.slug}`}
-                class="flex min-h-[120px] flex-col justify-between rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-blush)] p-5 transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]"
+                class="flex min-h-[120px] flex-col justify-between rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-surface-2)] p-5 transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-link)]"
               >
                 <span class="h2">{c.label}</span>
                 <span class="label mt-3 opacity-80">{c.heading} →</span>
@@ -174,7 +174,7 @@ const faqSchema = {
         {
           faqs.map((f) => (
             <details class="group">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-link)]">
                 <dt class="h2">{f.display ?? f.q}</dt>
                 <span
                   aria-hidden="true"
@@ -191,10 +191,10 @@ const faqSchema = {
     </div>
   </section>
 
-  <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-cream)]">
+  <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-ink-fixed)] text-[var(--color-cream-fixed)]">
     <div class="section-y mx-auto max-w-[820px] px-5 text-center">
       <h2 class="display-2">¿Te gustó algo? Escribinos</h2>
-      <p class="mx-auto mt-5 max-w-[46ch] text-base leading-relaxed text-[var(--color-cream)]/85 md:text-lg">
+      <p class="mx-auto mt-5 max-w-[46ch] text-base leading-relaxed text-[var(--color-cream-fixed)]/85 md:text-lg">
         Coordinamos tu pedido por WhatsApp o Instagram, directo desde Mar del Plata.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
@@ -202,14 +202,14 @@ const faqSchema = {
           href={waOrder}
           target="_blank"
           rel="noopener"
-          class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--color-blue)] px-7 py-3 font-semibold tracking-wide text-[var(--color-cream)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)]"
+          class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--color-blue)] px-7 py-3 font-semibold tracking-wide text-[var(--color-cream-fixed)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-link)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink-fixed)]"
           >Pedir por WhatsApp</a
         >
         <a
           href={igOrder}
           target="_blank"
           rel="noopener"
-          class="inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--color-pink)] px-7 py-3 font-semibold tracking-wide text-[var(--color-ink)] transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-pink)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)]"
+          class="inline-flex min-h-11 items-center gap-2 rounded-full btn-secondary px-7 py-3 font-semibold tracking-wide transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-link)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink-fixed)]"
           >Pedir por Instagram</a
         >
       </div>

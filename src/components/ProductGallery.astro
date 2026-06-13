@@ -60,14 +60,14 @@ const [hero, ...rest] = images;
       )}
 
       <div
-        class="lightbox fixed inset-0 z-overlay hidden items-center justify-center bg-[var(--color-ink)]/90 p-4"
+        class="lightbox fixed inset-0 z-overlay hidden items-center justify-center bg-[var(--color-ink-fixed)]/90 p-4"
         role="dialog"
         aria-modal="true"
         aria-label="Galería de imágenes"
       >
         <button
           type="button"
-          class="lightbox-close absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--color-cream)] text-2xl text-[var(--color-cream)]"
+          class="lightbox-close absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--color-cream-fixed)] text-2xl text-[var(--color-cream-fixed)]"
           aria-label="Cerrar"
         >
           ✕
@@ -75,7 +75,7 @@ const [hero, ...rest] = images;
         {images.length > 1 && (
           <button
             type="button"
-            class="lightbox-prev absolute top-1/2 left-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[var(--color-cream)] text-2xl text-[var(--color-cream)]"
+            class="lightbox-prev absolute top-1/2 left-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[var(--color-cream-fixed)] text-2xl text-[var(--color-cream-fixed)]"
             aria-label="Anterior"
           >
             ‹
@@ -99,7 +99,7 @@ const [hero, ...rest] = images;
         {images.length > 1 && (
           <button
             type="button"
-            class="lightbox-next absolute top-1/2 right-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[var(--color-cream)] text-2xl text-[var(--color-cream)]"
+            class="lightbox-next absolute top-1/2 right-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[var(--color-cream-fixed)] text-2xl text-[var(--color-cream-fixed)]"
             aria-label="Siguiente"
           >
             ›

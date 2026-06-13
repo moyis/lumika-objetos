@@ -1,6 +1,7 @@
 ---
 import Isotype from './Isotype.astro';
 import MobileMenu from './MobileMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const navLinks = [
   { href: '/', label: 'Inicio' },
@@ -18,37 +19,40 @@ const isActive = (href: string) =>
   <div class="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4">
     <Isotype size="lg" />
 
-    <nav class="hidden items-center gap-8 md:flex">
-      {
-        navLinks.map((link) => (
-          <a
-            href={link.href}
-            aria-current={isActive(link.href) ? 'page' : undefined}
-            class:list={[
-              'label py-2 transition-colors hover:text-[var(--color-blue)]',
-              isActive(link.href) && 'text-[var(--color-blue)]',
-            ]}
-          >
-            {link.label}
-          </a>
-        ))
-      }
-    </nav>
+    <div class="flex items-center gap-2 md:gap-8">
+      <nav class="hidden items-center gap-8 md:flex">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              class:list={[
+                'label py-2 transition-colors hover:text-[var(--color-link)]',
+                isActive(link.href) && 'text-[var(--color-link)]',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
 
-    <button
-      type="button"
-      class="inline-flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-1.5 md:hidden"
-      aria-label="Abrir menú"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      aria-haspopup="dialog"
-      data-mobile-menu-trigger
-    >
-      <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
-      <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
-      <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
-    </button>
-  </div>
+      <ThemeToggle />
+
+      <button
+        type="button"
+        class="inline-flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-1.5 md:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-haspopup="dialog"
+        data-mobile-menu-trigger
+      >
+        <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
+        <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
+        <span class="h-0.5 w-6 bg-[var(--color-ink)]"></span>
+      </button>
+    </div>
 </header>
 
 <MobileMenu />

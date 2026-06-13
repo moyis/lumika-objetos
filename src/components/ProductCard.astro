@@ -24,10 +24,10 @@ const soldOut = stock === 0;
 <a
   href={`/shop/${slug}`}
   data-product-tags={tags.join(',')}
-  class="group block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]"
+  class="group block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-link)]"
 >
   <div
-    class="relative aspect-[4/5] overflow-hidden rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-blush)]"
+    class="relative aspect-[4/5] overflow-hidden rounded-md border-2 border-[var(--color-ink)] bg-[var(--color-surface-2)]"
   >
     {
       cover && (
@@ -48,7 +48,7 @@ const soldOut = stock === 0;
     }
     {
       soldOut && (
-        <span class="label absolute top-3 left-3 rounded bg-[var(--color-ink)] px-2 py-1 text-[var(--color-cream)]">
+        <span class="label absolute top-3 left-3 rounded bg-[var(--color-ink)] px-2 py-1 text-[var(--color-cream)] [text-indent:0.2em]">
           Agotado
         </span>
       )
