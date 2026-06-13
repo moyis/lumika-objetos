@@ -1,10 +1,6 @@
 {
   "tags": [
     {
-      "slug": "promos",
-      "label": "Promos"
-    },
-    {
       "slug": "velas",
       "label": "Velas"
     },
@@ -23,6 +19,10 @@
     {
       "slug": "resina",
       "label": "Resina"
+    },
+    {
+      "slug": "promos",
+      "label": "Promos"
     }
   ]
 }
