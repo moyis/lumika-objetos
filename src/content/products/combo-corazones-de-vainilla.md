@@ -13,7 +13,7 @@ tags:
 images:
   - ../../assets/products/img_7396.jpg
   - ../../assets/products/img_7397.jpg
-date: 2026-06-16T17:45:00.000-03:00
+date: 2026-06-16T19:09:00.000-03:00
 ---
 Dos piezas de una misma colección, unidas por la fragancia de vainilla, los detalles brillantes y los colores vibrantes que aluden a una estética dulce.
 
