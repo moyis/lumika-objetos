@@ -3,7 +3,7 @@ title: Combo - Corazones de vainilla
 slug: combo-vainilla
 price: 20000
 currency: ARS
-stock: 0
+stock: 1
 featured: false
 fragrances:
   - Vainilla
