@@ -1,5 +1,5 @@
 ---
-title: Combo Plato porta vela + Cupcake - Rosa
+title: Combo Plato posavelas + Cupcake - Rosa
 slug: combo-platocupcake-rosa
 price: 12000
 currency: ARS
@@ -21,4 +21,4 @@ Diseñamos este combo para que las dos piezas se acompañen. La vela de vainilla
 Nos gusta pensar en estos objetos como pequeños detalles para alegrar un rincón de la casa, una mesa de luz, un escritorio y más. Están hechos a mano en Mar del Plata, en lotes pequeños, y cada combo conserva las pequeñas diferencias propias del trabajo artesanal.
 
 Incluye una vela de cera de soja y un plato de resina.\
-**Importante:** el porta vela está pensado para acompañar y exhibir la pieza. Debido al volumen de cera de la vela, recomendamos encender la vela sobre otra superficie amplia.
+**Importante:** el posavelas está pensado para acompañar y exhibir la pieza. Debido al volumen de cera de la vela, recomendamos encender la vela sobre otra superficie amplia.
