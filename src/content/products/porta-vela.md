@@ -1,6 +1,6 @@
 ---
-title: Plato - Porta vela
-slug: porta-vela
+title: Plato - Posavelas
+slug: posavelas
 price: 5000
 currency: ARS
 stock: 1
