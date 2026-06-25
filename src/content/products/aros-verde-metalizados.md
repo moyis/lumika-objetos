@@ -3,10 +3,11 @@ title: Aros Verde Metalizados
 slug: aros-verde-metalizados
 price: 5000
 currency: ARS
-stock: 1
+stock: 0
 featured: false
 fragrances: []
-subtitle: Aros de resina mini doble círculo en verde esmeralda metalizado. Par único hecho a mano.
+subtitle: Aros de resina mini doble círculo en verde esmeralda metalizado. Par
+  único hecho a mano.
 tags:
   - aros
 images:
