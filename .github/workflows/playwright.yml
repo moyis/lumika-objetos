@@ -49,7 +49,7 @@ jobs:
       # check run whose summary contains the version preview URL. Wait for
       # it instead of building here.
       - name: Wait for Cloudflare Workers build
-        uses: lewagon/wait-on-check-action@v1.4.0
+        uses: lewagon/wait-on-check-action@v1.8.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           check-regexp: '^Workers Builds'
