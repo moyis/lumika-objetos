@@ -12,6 +12,8 @@
     "astro": "astro",
     "generate-types": "wrangler types",
     "deploy": "bun run build && wrangler deploy",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -27,6 +29,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.61.1",
     "eslint": "^10.5.0",
     "eslint-plugin-astro": "^2.1.1",
     "prettier": "^3.8.4",
