@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 
+import { getImage } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
@@ -67,12 +68,24 @@ const related = all
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const shopUrl = new URL('/shop', Astro.site).toString();
 
+// Resized webp, not the raw 2048px jpg originals. Matches the lightbox
+// <Picture> variant (1600/q68/webp) so these reuse that cached file instead of
+// emitting a full-size jpg per image purely for structured data.
+const schemaImages = await Promise.all(
+  images.map(async (img) =>
+    new URL(
+      (await getImage({ src: img, format: 'webp', width: 1600, quality: 68 })).src,
+      Astro.site,
+    ).toString(),
+  ),
+);
+
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: title,
   description: ogDescription,
-  image: images.map((img) => new URL(img.src, Astro.site).toString()),
+  image: schemaImages,
   sku: product.data.sku ?? slug,
   brand: { '@type': 'Brand', name: 'Lumika Objetos' },
   itemCondition: 'https://schema.org/NewCondition',
