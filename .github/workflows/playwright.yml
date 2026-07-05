@@ -52,23 +52,16 @@ jobs:
 
       - name: Upload Cloudflare preview version
         id: preview
-        run: |
-          output=$(bunx wrangler versions upload)
-          echo "$output"
-          url=$(echo "$output" | grep -o 'https://[^ ]*\.workers\.dev' | head -1)
-          if [ -z "$url" ]; then
-            echo "Could not extract preview URL from wrangler output" >&2
-            exit 1
-          fi
-          echo "url=$url" >> "$GITHUB_OUTPUT"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload
 
       - name: Run Playwright tests against preview
         run: bunx playwright test
         env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ steps.preview.outputs.url }}
+          PLAYWRIGHT_TEST_BASE_URL: ${{ steps.preview.outputs.deployment-url }}
 
       - uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }}
