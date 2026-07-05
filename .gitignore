@@ -34,6 +34,10 @@ pnpm-debug.log*
 .gstack/
 .claude/
 
+# playwright
+test-results/
+playwright-report/
+
 # unlighthouse scan artifacts
 .unlighthouse*/
 .lhq/

@@ -6,6 +6,9 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
+    // Serve the prerendered 404.html (with 404 status) for unknown routes
+    // instead of falling through to the worker's bare 404 response.
+    "not_found_handling": "404-page",
   },
   "images": {
     "binding": "IMAGES",
