@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
 export const prerender = true;
@@ -10,7 +11,10 @@ export const prerender = true;
 const GOOGLE_NS = 'http://base.google.com/ns/1.0';
 
 const escapeXml = (s: string) =>
-  s.replace(/[<>&'"]/g, (c) => `&${{ '<': 'lt', '>': 'gt', '&': 'amp', "'": 'apos', '"': 'quot' }[c]};`);
+  s.replace(
+    /[<>&'"]/g,
+    (c) => `&${{ '<': 'lt', '>': 'gt', '&': 'amp', "'": 'apos', '"': 'quot' }[c]};`,
+  );
 
 // Strip markdown links/syntax and collapse whitespace into a plain-text blurb.
 const plainText = (md: string) =>
@@ -24,11 +28,23 @@ export const GET: APIRoute = async ({ site }) => {
   if (!site) throw new Error('astro.config `site` must be set to build the Google Shopping feed');
   const products = await getCollection('products');
 
-  const items = products
-    .map((p) => {
+  const itemBlocks = await Promise.all(
+    products.map(async (p) => {
       const d = p.data;
       const link = new URL(`/shop/${d.slug}`, site).toString();
-      const [primary, ...rest] = d.images.map((img) => new URL(img.src, site).toString());
+      // Resized webp, not the raw 2048px jpg original. Matches the lightbox
+      // <Picture> variant (1600/q68/webp) so this reuses that cached file
+      // instead of emitting a new one. webp (not avif) because Google Merchant
+      // accepts JPEG/PNG/WebP but not avif.
+      const urls = await Promise.all(
+        d.images.map(async (img) =>
+          new URL(
+            (await getImage({ src: img, format: 'webp', width: 1600, quality: 68 })).src,
+            site,
+          ).toString(),
+        ),
+      );
+      const [primary, ...rest] = urls;
       const description = plainText(p.body ?? '') || d.subtitle || d.title;
       const availability = d.stock === 0 ? 'out_of_stock' : 'in_stock';
 
@@ -39,7 +55,9 @@ export const GET: APIRoute = async ({ site }) => {
         `      <g:description>${escapeXml(description)}</g:description>`,
         `      <g:link>${escapeXml(link)}</g:link>`,
         primary && `      <g:image_link>${escapeXml(primary)}</g:image_link>`,
-        ...rest.slice(0, 10).map((u) => `      <g:additional_image_link>${escapeXml(u)}</g:additional_image_link>`),
+        ...rest
+          .slice(0, 10)
+          .map((u) => `      <g:additional_image_link>${escapeXml(u)}</g:additional_image_link>`),
         `      <g:availability>${availability}</g:availability>`,
         `      <g:price>${d.price.toFixed(2)} ${d.currency}</g:price>`,
         `      <g:condition>new</g:condition>`,
@@ -50,8 +68,9 @@ export const GET: APIRoute = async ({ site }) => {
       ]
         .filter(Boolean)
         .join('\n');
-    })
-    .join('\n');
+    }),
+  );
+  const items = itemBlocks.join('\n');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="${GOOGLE_NS}">

@@ -8,8 +8,46 @@ import cloudflare from '@astrojs/cloudflare';
 
 import sitemap from '@astrojs/sitemap';
 
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync, unlinkSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+
+// Astro emits the full-size original of every content-collection image() — even
+// when pages only use the resized <Picture>/getImage variants — and nothing
+// links to them. This integration deletes those orphans after build so the
+// deploy ships only webp/avif (plus the referenced og:image JPEGs).
+const pruneOrphanImages = () => ({
+  name: 'prune-orphan-images',
+  hooks: {
+    /** @param {{ dir: URL, logger: { info: (msg: string) => void } }} ctx */
+    'astro:build:done': ({ dir, logger }) => {
+      const root = fileURLToPath(dir);
+      const referenced = new Set();
+      /** @type {string[]} */
+      const raster = [];
+      const assetRe = /[A-Za-z0-9_.-]+\.(?:jpe?g|png|webp|avif)/g;
+      /** @param {string} d */
+      const walk = (d) => {
+        for (const e of readdirSync(d, { withFileTypes: true })) {
+          const p = `${d}/${e.name}`;
+          if (e.isDirectory()) walk(p);
+          else if (/\.(html|xml)$/.test(e.name))
+            for (const m of readFileSync(p, 'utf8').matchAll(assetRe)) referenced.add(m[0]);
+          else if (/\.(jpe?g|png)$/.test(e.name) && p.includes('/_astro/')) raster.push(p);
+        }
+      };
+      walk(root);
+      let freed = 0;
+      let n = 0;
+      for (const p of raster) {
+        if (referenced.has(p.split('/').pop())) continue;
+        freed += statSync(p).size;
+        unlinkSync(p);
+        n++;
+      }
+      logger.info(`pruned ${n} orphan original(s), freed ${(freed / 1048576).toFixed(1)} MB`);
+    },
+  },
+});
 
 // Build a slug -> last-modified map from product frontmatter so the sitemap
 // emits an accurate <lastmod> per product (Astro's sitemap omits it otherwise).
@@ -117,5 +155,6 @@ export default defineConfig({
       filter: (page) => !page.includes('/admin'),
       serialize: (item) => ({ ...item, lastmod: lastmodFor(item.url) }),
     }),
+    pruneOrphanImages(),
   ],
 });
