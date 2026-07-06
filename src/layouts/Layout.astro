@@ -9,7 +9,7 @@ interface Props {
   title: string;
   description?: string;
   image?: ImageMetadata;
-  // LCP hero image to preload in <head>. Resolved to its AVIF srcset so the
+  // LCP hero image to preload in <head>. Resolved to its webp srcset so the
   // browser starts fetching it during HTML parse instead of after discovering
   // the <img> in the body.
   preloadImage?: ImageMetadata;
@@ -25,10 +25,10 @@ const {
 } = Astro.props;
 
 // Same format/width/layout as the hero <Picture>, so getImage produces the
-// identical hashed AVIF variants — the preload is a cache hit, not a 2nd fetch.
+// identical hashed webp variants — the preload is a cache hit, not a 2nd fetch.
 const heroPreload =
   preloadImage && preloadSizes
-    ? await getImage({ src: preloadImage, format: 'avif', width: 1600, sizes: preloadSizes })
+    ? await getImage({ src: preloadImage, format: 'webp', width: 1600, sizes: preloadSizes })
     : null;
 const fullTitle =
   title === 'Lumika Objetos'
@@ -83,7 +83,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
         <link
           rel="preload"
           as="image"
-          type="image/avif"
+          type="image/webp"
           imagesrcset={heroPreload.srcSet.attribute}
           imagesizes={preloadSizes}
           fetchpriority="high"
