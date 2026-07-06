@@ -6,7 +6,7 @@ import { WHATSAPP_NUMBER } from '../lib/site';
 
 interface Props {
   image: ImageMetadata;
-  // Must match the preload `imagesizes` in Layout so the preloaded AVIF and the
+  // Must match the preload `imagesizes` in Layout so the preloaded webp and the
   // rendered <source> resolve to the same file (single fetch, no waste).
   sizes: string;
 }
@@ -14,11 +14,10 @@ const { image, sizes } = Astro.props;
 
 const wa = whatsappLink(WHATSAPP_NUMBER, 'Hola! Quiero hacer un pedido');
 
-// Build the hero variants here (instead of <Picture>) so the AVIF call is byte
+// Build the hero variant here (instead of <Picture>) so the webp call is byte
 // -for-byte identical to Layout's preload getImage — same args, same hashed
 // files, so the preload is a guaranteed cache hit. <Picture> processes its
 // sources differently and would emit different hashes than the preload.
-const avif = await getImage({ src: image, format: 'avif', width: 1600, sizes });
 const webp = await getImage({ src: image, format: 'webp', width: 1600, sizes });
 const height = Math.round((1600 * image.height) / image.width);
 ---
@@ -60,7 +59,6 @@ const height = Math.round((1600 * image.height) / image.width);
 
     <div class="order-first md:order-last">
       <picture class="contents">
-        <source type="image/avif" srcset={avif.srcSet.attribute} sizes={sizes} />
         <source type="image/webp" srcset={webp.srcSet.attribute} sizes={sizes} />
         <img
           src={webp.src}
