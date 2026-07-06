@@ -3,11 +3,17 @@ updates:
   - package-ecosystem: bun
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
       time: "04:00"
+    groups:
+      all-deps:
+        patterns: ["*"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
       time: "04:00"
+    groups:
+      all-actions:
+        patterns: ["*"]
