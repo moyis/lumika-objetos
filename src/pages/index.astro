@@ -167,12 +167,12 @@ const faqSchema = {
   <section class="border-t-2 border-[var(--color-ink)] bg-[var(--color-cream)]">
     <div class="section-y mx-auto max-w-[900px] px-5">
       <h2 class="display-2 mb-8">Preguntas frecuentes</h2>
-      <dl class="divide-y-2 divide-[var(--color-ink)] border-y-2 border-[var(--color-ink)]">
+      <div class="divide-y-2 divide-[var(--color-ink)] border-y-2 border-[var(--color-ink)]">
         {
           faqs.map((f) => (
             <details class="group">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-link)]">
-                <dt class="h2">{f.display ?? f.q}</dt>
+                <span class="h2">{f.display ?? f.q}</span>
                 <span
                   aria-hidden="true"
                   class="shrink-0 text-2xl leading-none transition-transform duration-200 group-open:rotate-45"
@@ -180,11 +180,11 @@ const faqSchema = {
                   +
                 </span>
               </summary>
-              <dd class="max-w-[60ch] pb-5 leading-relaxed">{f.a}</dd>
+              <div class="max-w-[60ch] pb-5 leading-relaxed">{f.a}</div>
             </details>
           ))
         }
-      </dl>
+      </div>
     </div>
   </section>
 
