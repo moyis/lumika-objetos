@@ -144,7 +144,11 @@ export default defineConfig({
     // Curated breakpoints matching the site's real render widths. Astro's
     // default list adds 750/828/1668/2048/2560, which would generate many
     // unused variants (and slow the build) for our small render sizes.
-    breakpoints: [640, 1080, 1600],
+    // 450 covers the product-card slot on 1x desktop (sizes caps it at 450px),
+    // which otherwise falls through to the oversized 640 variant. 828 covers
+    // full-bleed hero/carousel images on ~2x phones (375–414px viewports),
+    // which otherwise jump from 640 straight to 1080.
+    breakpoints: [450, 640, 828, 1080, 1600],
     // Tailwind (object-cover, w-full, aspect-*) handles visual sizing, so skip
     // Astro's own responsive styles (they'd out-specify Tailwind via :where()).
     responsiveStyles: false,
