@@ -83,6 +83,10 @@ const isDev = process.argv.includes('dev');
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.lumikaobjetos.com.ar',
+  // The site is fully prerendered and never touches Astro.session. Without
+  // this, the Cloudflare adapter wires its default KV session driver and the
+  // deploy declares a SESSION KV binding the worker never reads.
+  session: false,
   // Prefetch internal links on hover/focus (tap on touch) for near-instant
   // navigation. Static assets get an ETag from Cloudflare, so prefetch works
   // across browsers.
