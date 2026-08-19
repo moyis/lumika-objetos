@@ -17,6 +17,9 @@ export const getStaticPaths = (async () => {
   return all.map((p) => ({
     params: { slug: p.data.slug },
     props: { product: p },
+    cacheKey: [p, ...all.filter((o) => o.data.tags[0] === p.data.tags[0])]
+      .map((o) => o.digest)
+      .join(),
   }));
 }) satisfies GetStaticPaths;
 

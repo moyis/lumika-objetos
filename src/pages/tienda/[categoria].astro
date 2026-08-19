@@ -13,13 +13,14 @@ import { CATEGORIES } from '../../lib/categories';
 // crawlable URLs with one search intent — the pages that can actually rank.
 export const getStaticPaths = (async () => {
   const all = await getCollection('products');
-  return CATEGORIES.map((category) => ({
-    params: { categoria: category.slug },
-    props: {
-      category,
-      products: sortProducts(all.filter((p) => p.data.tags.includes(category.slug))),
-    },
-  }));
+  return CATEGORIES.map((category) => {
+    const products = sortProducts(all.filter((p) => p.data.tags.includes(category.slug)));
+    return {
+      params: { categoria: category.slug },
+      props: { category, products },
+      cacheKey: products.map((p) => p.digest).join(),
+    };
+  });
 }) satisfies GetStaticPaths;
 
 const { category, products } = Astro.props;
