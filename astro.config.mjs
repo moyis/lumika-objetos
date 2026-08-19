@@ -83,6 +83,17 @@ const isDev = process.argv.includes('dev');
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.lumikaobjetos.com.ar',
+  // The site is fully prerendered and never touches Astro.session. Without
+  // this, the Cloudflare adapter wires its default KV session driver and the
+  // deploy declares a SESSION KV binding the worker never reads.
+  session: false,
+  experimental: {
+    // Skip re-rendering prerendered pages whose data hasn't changed. Each
+    // dynamic route returns a cacheKey covering every entry it reads, not just
+    // its own — product pages embed related cards and category pages embed the
+    // whole grid, so a sibling's price edit has to bust them too.
+    incrementalBuild: true,
+  },
   // Prefetch internal links on hover/focus (tap on touch) for near-instant
   // navigation. Static assets get an ETag from Cloudflare, so prefetch works
   // across browsers.
