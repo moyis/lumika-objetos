@@ -20,10 +20,10 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.4.2",
+    "@astrojs/cloudflare": "^14.4.3",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.4.2",
+    "astro": "^7.4.4",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
@@ -33,11 +33,11 @@
     "eslint": "^10.13.0",
     "eslint-plugin-astro": "^3.2.1",
     "prettier": "^3.9.10",
-    "prettier-plugin-astro": "^1.1.1",
+    "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.0",
-    "wrangler": "~4.151.3"
+    "typescript-eslint": "^8.72.1",
+    "wrangler": "~4.155.0"
   },
   "overrides": {
     "vite": "^8"
